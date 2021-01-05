@@ -1,21 +1,23 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import App from '@/App.vue'
-import {router} from '@/router/index'
+import router from '@/router/index'
 import store from '@/store/index'
 import Request from '@/utils/Request'
 import 'element-ui/lib/theme-chalk/index.css'
 import ElTablePagination from 'el-table-pagination'
-import '@/utils/filters' // 自定义过滤器
 import 'promise-polyfill'  //兼容低版本浏览器  
 import 'babel-polyfill' //兼容低版本浏览器  
 import Cookies from 'js-cookie'
+
+import './icons' // icon
+import './permission' // permission control
 
 //加载全局组件
 import './components/Global/index.js'
 import '@/utils/Directive'  //自定义指令
 
-import '@/assets/css/index.less'
+// import '@/assets/css/index.less'
 
 // 将API方法绑定到全局
 Vue.prototype.$api = Request

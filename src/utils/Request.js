@@ -1,10 +1,10 @@
 import axios from "axios";
 import { Message,Loading,Notification } from 'element-ui'
-import {router} from '@/router/index'
+import router from '@/router/index'
 import store from '@/store/index'
 let loadingService=null;
 let service = axios.create({
-	baseURL: store.getters.AjaxUrl,
+	baseURL: "",
 	timeout: 5000 // 请求超时时间
 });
 // request拦截器

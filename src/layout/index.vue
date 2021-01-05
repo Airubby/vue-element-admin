@@ -30,7 +30,6 @@ export default {
     ...mapState({
       sidebar: state => state.app.sidebar,
       device: state => state.app.device,
-      showSettings: state => state.settings.showSettings,
       needTagsView: state => state.settings.tagsView,
       fixedHeader: state => state.settings.fixedHeader
     }),
@@ -52,9 +51,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-//   @import "~@/styles/mixin.scss";
     @import "~@/assets/css/sidebar.less";
-
   .app-wrapper {
     @include clearfix;
     position: relative;
@@ -82,7 +79,6 @@ export default {
     top: 0;
     right: 0;
     z-index: 9;
-    // width: 100%;
     width: calc(100% - @sideBarWidth);
     transition: width 0.28s;
   }

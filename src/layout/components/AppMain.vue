@@ -45,9 +45,6 @@ export default {
     padding-top: 84px;
   }
 }
-</style>
-
-<style lang="less">
 // fix css style bug in open el-dialog
 .el-popup-parent--hidden {
   .fixed-header {
@@ -55,3 +52,4 @@ export default {
   }
 }
 </style>
+

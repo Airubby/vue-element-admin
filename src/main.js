@@ -14,7 +14,7 @@ import './icons' // icon
 import './permission' // permission control
 
 //加载全局组件
-import './components/Global/index.js'
+// import './components/Global/index.js'
 import '@/utils/Directive'  //自定义指令
 
 import '@/assets/css/basic.less'

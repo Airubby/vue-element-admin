@@ -1,16 +1,16 @@
 import { asyncRoutes, syncRouter } from '@/router'
-
+import { getToken, setToken, removeToken } from '@/utils/auth'
 /**
  * Use meta.role to determine if the current user has permission
  * @param roles
  * @param route
  */
 function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
-  } else {
-    return true
-  }
+	if (route.meta && route.meta.roles) {
+		return roles.some(role => route.meta.roles.includes(role))
+	} else {
+		return true
+	}
 }
 
 /**
@@ -19,51 +19,81 @@ function hasPermission(roles, route) {
  * @param roles
  */
 export function filterAsyncRoutes(routes, roles) {
-  const res = []
+	const res = []
 
-  routes.forEach(route => {
-    const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
-      }
-      res.push(tmp)
-    }
-  })
+	routes.forEach(route => {
+		const tmp = { ...route }
+		if (hasPermission(roles, tmp)) {
+			if (tmp.children) {
+				tmp.children = filterAsyncRoutes(tmp.children, roles)
+			}
+			res.push(tmp)
+		}
+	})
 
-  return res
+	return res
 }
 
 const state = {
-  routes: [],
-  addRoutes: []
+	token: getToken(),
+	roles: [],
+	routes: [],
+	addRoutes: []
 }
 
 const mutations = {
-  SET_ROUTES: (state, routes) => {
-    state.addRoutes = routes
-    state.routes = syncRouter.concat(routes)
-  }
+	SET_TOKEN: (state, token) => {
+		state.token = token
+	},
+	SET_ROLES: (state, roles) => {
+		state.roles = roles
+	},
+	SET_ROUTES: (state, routes) => {
+		state.addRoutes = routes
+		state.routes = syncRouter.concat(routes)
+	}
 }
 
 const actions = {
-  generateRoutes({ commit }, roles) {
-    return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes || []
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
-    })
-  }
+	setToken({ commit }, token) {
+		setToken(token)
+		commit('SET_TOKEN', token)
+	},
+	setRoutes({ commit }, routes) {
+		commit('SET_ROUTES', routes)
+	},
+	resetToken({ commit }) {
+		return new Promise(resolve => {
+			commit('SET_TOKEN', '')
+			commit('SET_ROLES', [])
+			removeToken()
+			resolve()
+		})
+	},
+	generateRoutes({ commit }, roles) {
+		return new Promise(resolve => {
+			let accessedRoutes
+			if (roles.includes('admin')) {
+				accessedRoutes = asyncRoutes || []
+			} else {
+				accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+			}
+			commit('SET_ROUTES', accessedRoutes)
+			resolve(accessedRoutes)
+		})
+	},
+	getInfo({ commit }) {
+		return new Promise(resolve => {
+			//这个地方请求角色信息
+			commit('SET_ROLES', ['admin'])
+			resolve(['admin'])
+		})
+	}
 }
 
 export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions
+	namespaced: true,
+	state,
+	mutations,
+	actions
 }

@@ -53,7 +53,7 @@ export default {
 
 <style lang="less" scoped>
 //   @import "~@/styles/mixin.scss";
-  @import "~@/assets/css/variables.less";
+    @import "~@/assets/css/sidebar.less";
 
   .app-wrapper {
     @include clearfix;

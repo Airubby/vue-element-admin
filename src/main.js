@@ -17,7 +17,7 @@ import './permission' // permission control
 import './components/Global/index.js'
 import '@/utils/Directive'  //自定义指令
 
-// import '@/assets/css/index.less'
+import '@/assets/css/basic.less'
 
 // 将API方法绑定到全局
 Vue.prototype.$api = Request

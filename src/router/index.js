@@ -2,7 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 import Layout from '@/layout'
+import nestedRouter from './modules/nested'
 export const syncRouter=[
+    {
+        path: '/login',
+        component: () => import('@/views/login/index'),
+        hidden: true
+    },
     {
         path: '/',
         component: Layout,
@@ -17,22 +23,19 @@ export const syncRouter=[
         ]
     },
     {
-        path: '/login',
-        component: () => import('@/views/login/index'),
-        hidden: true
+        path: '/guide',
+        component: Layout,
+        redirect: '/guide/index',
+        children: [
+          {
+            path: 'index',
+            component: () => import('@/views/guide/index'),
+            name: 'Guide',
+            meta: { title: 'Guide', icon: 'guide', noCache: true }
+          }
+        ]
     },
-    // {
-    //     path: '/icon',
-    //     component: Layout,
-    //     children: [
-    //       {
-    //         path: 'index',
-    //         component: () => import('@/views/icons/index'),
-    //         name: 'Icons',
-    //         meta: { title: 'Icons', icon: 'icon', noCache: true }
-    //       }
-    //     ]
-    // },
+    nestedRouter,
     { path: '*', component: () => import('@/views/errorPage/Loading') }, //这个不要给meta的键值对
 ];
 

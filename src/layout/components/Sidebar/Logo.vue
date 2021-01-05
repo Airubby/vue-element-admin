@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import settings from '@/settings'
 export default {
   name: 'SidebarLogo',
   props: {
@@ -21,6 +22,9 @@ export default {
       type: Boolean,
       required: true
     }
+  },
+  created(){
+      this.title=settings.title||'Vue Element Admin'
   },
   data() {
     return {

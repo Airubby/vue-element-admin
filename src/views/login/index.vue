@@ -9,7 +9,7 @@
 			label-position="left"
 		>
 			<div class="title-container">
-				<h3 class="title">数据平台配置管理系统</h3>
+				<h3 class="title">{{settings.title}}</h3>
 			</div>
 
 			<el-form-item prop="username">
@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import settings from '@/settings'
 import { validUsername } from '@/utils/validate'
 export default {
 	name: 'Login',

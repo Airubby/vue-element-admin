@@ -5,7 +5,7 @@ import Layout from '@/layout'
 const nestedRouter = {
   path: '/nested',
   component: Layout,
-  redirect: '/nested/menu1/menu1-1',
+  redirect: '/nested/menu1',
   name: 'Nested',
   meta: {
     title: 'Nested Routes',
@@ -13,14 +13,14 @@ const nestedRouter = {
   },
   children: [
     {
-      path: 'menu1',
+      path: '/nested/menu1',
       component: () => import('@/views/nested/menu1/index'), // Parent router-view
       name: 'Menu1',
       meta: { title: 'Menu 1' },
       redirect: '/nested/menu1/menu1-1',
       children: [
         {
-          path: 'menu1-1',
+          path: '/nested/menu1/menu1-1',
           component: () => import('@/views/nested/menu1/menu1-1'),
           name: 'Menu1-1',
           meta: { title: 'Menu 1-1' }

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    34535
+    ffffff
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
         }
     },
     mounted() {
-        console.log("nocach")
+        console.log("fffff")
     },
     methods: {
         

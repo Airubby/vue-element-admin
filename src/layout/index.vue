@@ -51,7 +51,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-    @import "~@/assets/css/sidebar.less";
   .app-wrapper {
     @include clearfix;
     position: relative;

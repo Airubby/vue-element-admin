@@ -22,7 +22,8 @@ import Layout from '@/layout'
     activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
   }
  */
-import nestedRouter from './modules/nested'
+import sysconfigRouter from './modules/sysconfig'
+import projectconfigRouter from './modules/projectconfig'
 export const syncRouter=[
     {
         path: '/redirect',
@@ -53,37 +54,10 @@ export const syncRouter=[
     {
         path: '/',
         component: Layout,
-        redirect: '/dashboard',
-        children: [
-          {
-            path: 'dashboard',
-            component: () => import('@/views/dashboard/index'),
-            name: 'Dashboard',
-            meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-          }
-        ]
+        redirect: '/sysconfig',
     },
-    {
-        path: '/guide',
-        component: Layout,
-        redirect: '/guide/index',
-        children: [
-          {
-            path: '/guide/index',
-            component: () => import('@/views/guide/index'),
-            name: 'Guide',
-            meta: { title: 'Guide', icon: 'guide', noCache: true }
-          },
-          {
-            path: '/guide/index/:id(\\d+)',
-            component: () => import('@/views/guide/detail'),
-            name: 'EditArticle',
-            meta: { title: 'Edit Article', activeMenu: '/guide/index' },
-            hidden: true
-          },
-        ]
-    },
-    nestedRouter,
+    sysconfigRouter,
+    projectconfigRouter,
     { path: '*', redirect: '/404', hidden: true }, 
 ];
 

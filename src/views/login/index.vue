@@ -9,7 +9,7 @@
 			label-position="left"
 		>
 			<div class="title-container">
-				<h3 class="title">{{settings.title}}</h3>
+				<h3 class="title">{{title}}</h3>
 			</div>
 
 			<el-form-item prop="username">
@@ -93,6 +93,7 @@ export default {
 			}
 		}
 		return {
+            title:'',
 			loginForm: {
 				username: 'admin',
 				password: '111111'
@@ -134,7 +135,8 @@ export default {
 		}
 	},
 	created() {
-		// window.addEventListener('storage', this.afterQRScan)
+        this.title=settings.title;
+        console.log(WebSocket)
 	},
 	mounted() {
 		if (this.loginForm.username === '') {
@@ -144,7 +146,6 @@ export default {
 		}
 	},
 	destroyed() {
-		// window.removeEventListener('storage', this.afterQRScan)
 	},
 	methods: {
 		checkCapslock(e) {

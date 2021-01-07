@@ -34,8 +34,8 @@ export default {
 .hamburger {
   display: inline-block;
   vertical-align: middle;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 .hamburger.is-active {

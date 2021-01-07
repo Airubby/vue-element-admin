@@ -3,11 +3,13 @@
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" />
     <div :class="{hasTagsView:needTagsView}" class="main-container">
-      <div :class="{'fixed-header':fixedHeader}">
-        <navbar />
-        <tags-view v-if="needTagsView" />
-      </div>
-      <app-main />
+        <el-scrollbar class="app-scrollbar">
+        <div :class="{'fixed-header':fixedHeader}">
+            <navbar />
+            <tags-view v-if="needTagsView" />
+        </div>
+        <app-main />
+        </el-scrollbar>
     </div>
   </div>
 </template>
@@ -51,6 +53,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '~@/assets/css/variables.less';
   .app-wrapper {
     @include clearfix;
     position: relative;

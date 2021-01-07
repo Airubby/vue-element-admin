@@ -3,7 +3,7 @@ module.exports = {
      * @type {String} 
      * @description 网站title
      */
-    title: '数据平台配置管理系统',
+    title: '配置管理系统',
     /**
      * @type {boolean} true | false
      * @description Whether need tagsView

@@ -2,7 +2,9 @@
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
       <keep-alive :include="cachedViews">
-        <router-view :key="key" />
+        <el-scrollbar class="app-scrollbar">
+            <router-view :key="key" />
+        </el-scrollbar>
       </keep-alive>
     </transition>
   </section>
@@ -24,11 +26,15 @@ export default {
 
 <style lang="less" scoped>
 .app-main {
-  /* 50= navbar  50  */
-  min-height: calc(100vh - 50px);
-  width: 100%;
-  position: relative;
-  overflow: hidden;
+    /* 50= navbar  50  */
+    //   min-height: calc(100% - 50px);
+    width: 100%;
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+    .app-scrollbar.el-scrollbar{
+        min-height: 100%;
+    }
 }
 
 .fixed-header+.app-main {
@@ -51,5 +57,6 @@ export default {
     padding-right: 15px;
   }
 }
+
 </style>
 

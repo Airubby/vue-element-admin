@@ -24,6 +24,7 @@ import Layout from '@/layout'
  */
 import sysconfigRouter from './modules/sysconfig'
 import projectconfigRouter from './modules/projectconfig'
+import projectdebug from './modules/projectdebug'
 export const syncRouter=[
     {
         path: '/redirect',
@@ -38,12 +39,12 @@ export const syncRouter=[
     },
     {
         path: '/404',
-        component: () => import('@/views/errorPage/404'),
+        component: () => import('@/views/error/404'),
         hidden: true
     },
     {
         path: '/401',
-        component: () => import('@/views/errorPage/401'),
+        component: () => import('@/views/error/401'),
         hidden: true
     },
     {
@@ -54,10 +55,19 @@ export const syncRouter=[
     {
         path: '/',
         component: Layout,
-        redirect: '/sysconfig',
+        redirect: '/dashboard',
+        children: [
+        {
+            path: 'dashboard',
+            component: () => import('@/views/dashboard/index'),
+            name: 'Dashboard',
+            meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        }
+        ]
     },
     sysconfigRouter,
     projectconfigRouter,
+    projectdebug,
     { path: '*', redirect: '/404', hidden: true }, 
 ];
 

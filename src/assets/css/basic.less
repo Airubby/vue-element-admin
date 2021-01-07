@@ -5,50 +5,75 @@ body {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
-  }
+}
   
-  label {
-    font-weight: 700;
-  }
-  
-  html {
-    height: 100%;
-    box-sizing: border-box;
-  }
-  
-  #app {
-    height: 100%;
-  }
-  
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
-  
-  .no-padding {
-    padding: 0px !important;
-  }
-  
-  .padding-content {
-    padding: 4px 0;
-  }
-  
-  a:focus,
-  a:active {
-    outline: none;
-  }
-  
-  a,
-  a:focus,
-  a:hover {
-    cursor: pointer;
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  div:focus {
-    outline: none;
-  }
+label {
+font-weight: 700;
+}
 
-  @import '~@/assets/css/sidebar.less';
+html {
+height: 100%;
+box-sizing: border-box;
+}
+
+#app {
+height: 100%;
+}
+
+*,
+*:before,
+*:after {
+box-sizing: inherit;
+}
+
+.no-padding {
+padding: 0px !important;
+}
+
+.padding-content {
+padding: 4px 0;
+}
+
+a:focus,
+a:active {
+outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+cursor: pointer;
+color: inherit;
+text-decoration: none;
+}
+
+div:focus {
+outline: none;
+}
+.el-scrollbar{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.el-scrollbar__wrap { //给外层class不然element组件自己的会有问题比如下拉选项
+    overflow-x: hidden !important;
+}
+.el-scrollbar__view{
+    height: 100%;
+    min-height: 100%;
+}
+.el-form--label-top .el-form-item__label{
+    padding: 0;
+}
+.app-container{
+    padding: 15px;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+.align-right{
+    text-align: right;
+}
+@import '~@/assets/css/variables.less';
+@import '~@/assets/css/sidebar.less';

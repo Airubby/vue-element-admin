@@ -37,6 +37,7 @@
             </el-row>
         </el-form>
         <el-table-pagination
+            v-scrollBar="'table'"
             :url="'/getTable'"
             list-field="data" 
             total-field="total"

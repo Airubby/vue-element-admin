@@ -22,4 +22,10 @@ module.exports = {
      */
     sidebarLogo: true,
 
+    /**
+     * @type {String} mini | small | medium | default
+     * @description Whether show the logo in sidebar
+     */
+    themeSize: 'mini',
+
 }

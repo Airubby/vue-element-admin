@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
-import Layout from '@/layout'
+import Layout from '@/views/layout'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -59,7 +59,7 @@ export const syncRouter=[
         children: [
         {
             path: 'dashboard',
-            component: () => import('@/views/dashboard/index'),
+            component: () => import('@/views/pages/dashboard/index'),
             name: 'Dashboard',
             meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
         }

@@ -9,7 +9,7 @@ import ElTablePagination from 'el-table-pagination'
 import 'promise-polyfill'  //兼容低版本浏览器  
 import 'babel-polyfill' //兼容低版本浏览器  
 import Cookies from 'js-cookie'
-
+import settings from './settings'
 import './icons' // icon
 import './permission' // permission control
 
@@ -26,7 +26,7 @@ Vue.prototype.$store = store
 Vue.prototype.publicPath=process.env.BASE_URL
 
 Vue.use(ElementUI, {
-    size: Cookies.get('size') || 'mini', // set element-ui default size
+    size: Cookies.get('themSize') || settings.themeSize, // set element-ui default size
 })
 Vue.use(ElTablePagination)
 

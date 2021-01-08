@@ -60,7 +60,7 @@ import add from './component/add'
 export default {
     components: { add },
     created() {
-
+        console.log('!!!!!!!!!!!!!!!!!!!')
     },
     mounted(){
 

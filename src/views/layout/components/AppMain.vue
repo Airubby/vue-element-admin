@@ -2,7 +2,7 @@
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
       <keep-alive :include="cachedViews">
-        <el-scrollbar class="app-scrollbar">
+        <el-scrollbar class="app-scrollbar" ref="appScrollbar">
             <router-view :key="key" />
         </el-scrollbar>
       </keep-alive>
@@ -12,24 +12,34 @@
 
 <script>
 export default {
-  name: 'AppMain',
-  computed: {
-    cachedViews() {
-      return this.$store.state.tagsView.cachedViews
+    name: 'AppMain',
+    computed: {
+        cachedViews() {
+        return this.$store.state.tagsView.cachedViews
+        },
+        key() {
+        return this.$route.path
+        }
     },
-    key() {
-      return this.$route.path
+    watch:{
+        '$route.path'(newValue, oldValue) {
+            const scrollbar = this.$refs.appScrollbar
+            // scrollbar 的实例对象相当于在 el-scrollbar 组件里面的 this
+            console.log(scrollbar)
+            scrollbar.sizeHeight=""
+            const wrap = scrollbar.$refs.wrap
+            console.log(wrap)
+        }
+
     }
-  }
 }
 </script>
 
 <style lang="less" scoped>
 .app-main {
     /* 50= navbar  50  */
-    //   min-height: calc(100% - 50px);
+    min-height: calc(100% - 50px);
     width: 100%;
-    min-height: 100%;
     position: relative;
     overflow: hidden;
     .app-scrollbar.el-scrollbar{
@@ -38,7 +48,8 @@ export default {
 }
 
 .fixed-header+.app-main {
-  padding-top: 50px;
+    padding-top: 50px;
+    height: 100%;  
 }
 
 .hasTagsView {

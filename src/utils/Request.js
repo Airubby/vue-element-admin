@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Loading, Notification } from 'element-ui'
+import { Loading, Notification,MessageBox } from 'element-ui'
 import router from '@/router/index'
 import store from '@/store/index'
 let loadingService = null
@@ -27,12 +27,21 @@ service.interceptors.response.use(
 		loadingService && loadingService.close()
 		const res = response.data
 		if (res.err_code && res.err_code == '-1') {
-			if (store.getters.infoFlag) {
-				store.dispatch('setInfoFlag', false)
-				Notification.warning('请登录系统')
-				router.push({ path: '/login' })
-			}
-			return Promise.reject('请登录系统')
+            MessageBox.confirm('长时间未操作，请重新登录', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+              }).then(() => {
+                store.dispatch('permission/resetToken').then(() => {
+                  location.reload()
+                })
+              })
+			// if (store.getters.infoFlag) {
+			// 	store.dispatch('setInfoFlag', false)
+			// 	Notification.warning('请登录系统')
+			// 	router.push({ path: '/login' })
+			// }
+			return Promise.reject(new Error(res.message || 'Error'))
 		}
 		return response.data
 	},

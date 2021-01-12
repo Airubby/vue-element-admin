@@ -83,103 +83,6 @@ function listToTree(data,option){
         return [];
     }
 }
-//全屏切换
-let isFullScreen=false;//是否是全屏状态
-function switcFullScreen(){
-    if(isFullScreen){//是全屏就退出全屏
-        if(document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if(document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        } else if(document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        }
-    }else{//不是就全屏
-        var element=document.documentElement;
-        if(element.requestFullscreen) {
-            element.requestFullscreen();
-        } else if(element.mozRequestFullScreen) {
-            element.mozRequestFullScreen();
-        } else if(element.webkitRequestFullscreen) {
-            element.webkitRequestFullscreen();
-        } else if(element.msRequestFullscreen) {
-            element.msRequestFullscreen();
-        }
-    }
-    isFullScreen=!isFullScreen;
-}
-function echartfn(ID,xData,yData){
-    // 基于准备好的dom，初始化echarts实例
-    let myChart = echarts.init(document.getElementById(ID))
-    // 绘制图表
-    myChart.setOption({
-        title: { text: '在Vue中使用echarts' },
-        tooltip: {},
-        xAxis: {
-            data: xData
-        },
-        yAxis: {},
-        series: [{
-            name: '销量',
-            type: 'bar',
-            data: yData
-        }]
-    });
-    window.addEventListener("resize", () => { 
-        setTimeout(function(){
-            myChart.resize();
-        },0)
-    });
-    return myChart;
-}
-
-function exportFile(fileUrl,params,filename){
-    //fileUrl 是给的流文件接口地址；"/export/hisalarm?level="+level;
-
-    // let link = document.createElement('a')
-    // link.style.display = 'none'
-    // link.href = fileUrl
-    // link.setAttribute('download', filename)
-
-    // document.body.appendChild(link)
-    // link.click();
-    // window.URL.revokeObjectURL(link.href); // 释放URL 对象
-    // document.body.removeChild(link);
-
-    //以上是GET请求导出,以下POST导出
-    //responseType:blob或者arraybuffer
-    axios.post(fileUrl,params,{responseType:"blob"}).then(function(res){
-        let blob=new Blob([response.data],{type: "application/vnd.ms-excel;charset=utf-8"})
-        let objectUrl = window.URL.createObjectURL(blob);
-        let link = document.createElement('a');
-        let name= filename + ".csv";
-        link.href=objectUrl;
-        link.download=name;
-        document.body.appendChild(link);
-        link.click();
-        window.URL.revokeObjectURL(link.href); // 释放URL 对象
-        document.body.removeChild(link);// 下载完成移除元素
-    })
-    
-
-
-}
-function downFile(fileUrl){
-    //fileUrl:/static/test.pdf
-    axios.post(fileUrl, {
-        responseType: 'blob', //重要
-    }).then(response => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        let fname = fileUrl.split("/").length>1?fileUrl.split("/")[fileUrl.split("/").length-1]:fileUrl;
-        link.href = url;
-        link.setAttribute('download', fname);
-        document.body.appendChild(link);
-        link.click();
-        window.URL.revokeObjectURL(link.href); // 释放URL 对象
-        document.body.removeChild(link);
-    })
-}
 //判断两个对象是否相等
 function equalsObj(objOne,objTwo){
     if(Object.keys(objOne).length!=Object.keys(objTwo).length){
@@ -192,14 +95,20 @@ function equalsObj(objOne,objTwo){
     }
     return true;
 }
+// arr[{key:'CN',value:'China'}] to obj, such as { CN : "China", US : "USA" }
+function arrToObj(arr){
+    const obj = arr.reduce((acc, cur) => {
+        acc[cur.key] = cur.value
+        return acc
+    }, {})
+    return obj
+}
+
 export default {
     arrayContains,
     FormatDate,
     GetBeforeDate,
     listToTree,
-    switcFullScreen,
-    echartfn,
-    exportFile,
-    downFile,
-    equalsObj
+    equalsObj,
+    arrToObj
 }

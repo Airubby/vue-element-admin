@@ -7,6 +7,8 @@
         :size="themeSize"
         :type="type"
         :data="data"
+        :webSocketInfo="tableData"
+        @resultData="resultData"
         :method='method' 
         :params="params"
         :columns="columns" ref="tableRef">   
@@ -78,11 +80,13 @@ export default {
     },
     data() {
         return {
-            
+            tableData:[]
         }
     },
     methods:{
-        
+        resultData:function(info){
+            console.log(info)
+        }
     },
 }
 </script>

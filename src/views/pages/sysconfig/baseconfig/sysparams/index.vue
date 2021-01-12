@@ -36,22 +36,21 @@
                 </el-col>
             </el-row>
         </el-form>
-        <el-table-pagination
-            v-scrollBar="'table'"
+        <table-pagination
             :url="'/getTable'"
-            list-field="data" 
-            total-field="total"
-            size="mini"
             type="local"
             :data="tableData"
-            method='get' 
+            :soltList="['preview-handle','preview-h']"
             :params="initParams"
-            :columns="tableColumns" ref="tableRef">   
-            <template v-slot:preview-handle="scope">
-                <el-button type="text" @click="handleAdd(scope.row)">编辑</el-button>
-                <el-button type="text">删除</el-button>
-            </template>
-        </el-table-pagination>
+            :columns="tableColumns" ref="tableRef">  
+                <template slot="preview-handle" slot-scope="{scope}">
+                    <el-button type="text" @click="handleAdd(scope.row)">编辑</el-button>
+                    <el-button type="text">删除</el-button>
+                </template>
+                <template v-slot:preview-h="{scope}">
+                    {{scope.row.h=='1'?"收到两份":"3333"}}
+                </template>
+        </table-pagination>
         <add v-if="addInfo.visible" :dialogInfo="addInfo" @back="flushTable"></add>
     </div>
 </template>
@@ -60,7 +59,6 @@ import add from './component/add'
 export default {
     components: { add },
     created() {
-        console.log('!!!!!!!!!!!!!!!!!!!')
     },
     mounted(){
 
@@ -73,8 +71,8 @@ export default {
             },
             rules:{},
             tableData:[
-                {'a':'admin',b:'管理员','c':'tetert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'WEB'},
-                {'a':'admin',b:'管理员','c':'rtert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'WEB'}
+                {'a':'admin',b:'管理员','c':'tetert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'1'},
+                {'a':'admin',b:'管理员','c':'rtert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'2'}
             ],
             tableColumns:[
                 { prop: 'a', label: '参数编码',minWidth:10},
@@ -85,7 +83,7 @@ export default {
                 { prop: 'f', label: '设定范围',minWidth:10},
                 { prop: 'g', label: '扩展参数1',minWidth:10},
                 { prop: 'h', label: '扩展参数2',minWidth:10},
-                { prop: 'h', label: '备注',minWidth:10},
+                { prop: 'h', label: '备注',slotName:'preview-h',minWidth:10},
                 { prop: 'handle', label: '操作',slotName:'preview-handle',width:90},
             ],
             addInfo:{
@@ -96,6 +94,7 @@ export default {
     },
     methods:{
         handleAdd:function(info){
+            console.log(info)
             if(info){
                 this.addInfo.data=info
             }else{

@@ -6,12 +6,12 @@
                     <el-row :gutter="30">
                         <el-col :span="12">
                             <el-form-item label='参数编码' prop="name">
-                                <el-input v-model="initParams.name"></el-input>
+                                <el-input v-model="initParams.a"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :span="12">
                             <el-form-item label='参数名称' prop="name">
-                                <el-input v-model="initParams.name"></el-input>
+                                <el-input v-model="initParams.b"></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :span="12">
@@ -60,7 +60,7 @@
 <script>
 export default {
     created() {
-        
+        Object.assign(this.initParams,this.dialogInfo.data);
     },
     mounted() {
         
@@ -69,7 +69,8 @@ export default {
         return{
             initParams:{
                 name:'',
-                
+                a:'',
+                b:''
             },
             rules: {
                 

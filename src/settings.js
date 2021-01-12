@@ -4,6 +4,13 @@ module.exports = {
      * @description 网站title
      */
     title: '配置管理系统',
+
+    /**
+     * @type {String} 
+     * @description 网站http地址
+     */
+    baseURL: '',
+
     /**
      * @type {boolean} true | false
      * @description Whether need tagsView

@@ -1,11 +1,12 @@
 import defaultSettings from '@/settings'
 import Cookies from 'js-cookie'
-const { tagsView, fixedHeader, sidebarLogo, themeSize } = defaultSettings
+const { tagsView, fixedHeader, sidebarLogo, themeSize, baseURL } = defaultSettings
 const state = {
     tagsView: tagsView,
     fixedHeader: fixedHeader,
     sidebarLogo: sidebarLogo,
-    themeSize : Cookies.get('themSize') || themeSize
+    themeSize : Cookies.get('themSize') || themeSize,
+    baseURL :baseURL 
 }
 
 const mutations = {

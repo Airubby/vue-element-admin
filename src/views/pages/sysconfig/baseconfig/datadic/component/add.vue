@@ -15,39 +15,7 @@
                             </el-form-item>
                         </el-col>
                         <el-col :span="12">
-                            <el-form-item label='参数等级' prop="name">
-                                <el-select v-model="initParams.name" placeholder="等级">
-                                    <el-option
-                                    v-for="item in options"
-                                    :key="item.key"
-                                    :label="item.value"
-                                    :value="item.key">
-                                    </el-option>
-                                </el-select>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="12">
                             <el-form-item label='数据类型' prop="name">
-                                <el-input v-model="initParams.name"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="12">
-                            <el-form-item label='参数值' prop="name">
-                                <el-input v-model="initParams.name"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="12">
-                            <el-form-item label='设定范围' prop="name">
-                                <el-input v-model="initParams.name"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="12">
-                            <el-form-item label='扩展参数1' prop="name">
-                                <el-input v-model="initParams.name"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="12">
-                            <el-form-item label='扩展参数2' prop="name">
                                 <el-input v-model="initParams.name"></el-input>
                             </el-form-item>
                         </el-col>
@@ -74,7 +42,6 @@ export default {
     },
     data(){
         return{
-            options:[{key:'1',value:'12'},{key:'2',value:'12地方'}],
             initParams:{
                 name:'',
                 a:'',

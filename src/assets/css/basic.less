@@ -9,7 +9,7 @@ body {
 }
   
 label {
-    font-weight: 700;
+    font-weight: normal;
 }
 
 html {
@@ -24,9 +24,10 @@ html {
 *,
 *:before,
 *:after {
-    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
 .no-padding {
     padding: 0px !important;
 }
@@ -51,20 +52,55 @@ a:hover {
 div:focus {
     outline: none;
 }
-.el-scrollbar{
+.scrollbar{
+    width: 100%;
+    height: 100%;
+}
+.app-scrollbar.el-scrollbar,.scrollbar.el-scrollbar{
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
-.el-scrollbar__wrap { //给外层class不然element组件自己的会有问题比如下拉选项
+.app-scrollbar .el-scrollbar__wrap ,.scrollbar .el-scrollbar__wrap { //给外层class不然element组件自己的会有问题比如下拉选项
     overflow-x: hidden !important;
 }
-.el-scrollbar__view{
+.app-scrollbar .el-scrollbar__view,.scrollbar .el-scrollbar__view{
     height: 100%;
     min-height: 100%;
 }
+.el-table--scrollable-x .el-table__body-wrapper{
+    overflow: hidden !important;
+}
+.el-table__body-wrapper:hover > .ps__rail-x,
+.el-table__body-wrapper:hover > .ps__rail-y {
+opacity: 0.6;
+}
+.el-table--scrollable-x .el-table__body-wrapper > .ps__rail-x,
+.el-table--scrollable-y .el-table__body-wrapper > .ps__rail-y {
+    display: block !important;
+    background-color: transparent !important;
+}
+.ps .ps__rail-x:hover,.ps .ps__rail-x.ps--clicking,
+.ps .ps__rail-y:hover,.ps .ps__rail-y.ps--clicking{
+    background-color: transparent !important;
+}
+.el-dropdown-menu--small .el-dropdown-menu__item{
+    padding: 0;
+    .el-button{
+        margin: 3px 10px;
+        span{
+            padding: 0;
+        }
+    }
+    span{
+        padding: 0 15px;
+    }
+}
 .el-form--label-top .el-form-item__label{
     padding: 0;
+}
+.el-range-input{
+    background: transparent;
 }
 .app-container{
     padding: 15px;

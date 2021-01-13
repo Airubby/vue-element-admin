@@ -23,7 +23,7 @@ import '@/assets/css/basic.less'
 Vue.prototype.$api = Request
 Vue.prototype.$store = store
 
-Vue.prototype.publicPath=process.env.BASE_URL
+Vue.prototype.$baseURL=settings.baseURL
 
 Vue.use(ElementUI, {
     size: Cookies.get('themSize') || settings.themeSize, // set element-ui default size

@@ -37,7 +37,8 @@
             </el-row>
         </el-form>
         <el-table-pagination
-            :url="$baseURL+'/getTable'"
+            :url="baseURL+'/getTable'"
+            :size="themeSize"
             type="local"
             :data="tableData"
             :params="initParams"

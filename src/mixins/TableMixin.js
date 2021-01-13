@@ -5,6 +5,18 @@ export default function(config) {
             console.log(deleteApi);
             
         },
+        computed:{
+            baseURL:{
+                get(){
+                    return this.$store.state.settings.baseURL
+                }
+            },
+            themeSize:{
+                get(){
+                    return this.$store.state.settings.themeSize
+                }
+            }
+        },
         data(){
             return{
                 handleInfo:{
@@ -14,6 +26,9 @@ export default function(config) {
             }
         },
         methods:{
+            sortChange:function(info){
+                console.log(info)
+            },
             handleSearch:function(tableRef='tableRef',ValidateForm='ValidateForm'){
                 // let next=this.searchTableBefore?this.searchTableBefore:true;
                 // if(next){

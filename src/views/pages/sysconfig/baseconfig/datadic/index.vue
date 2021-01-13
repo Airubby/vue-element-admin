@@ -12,7 +12,8 @@
             </div>
             <el-table-pagination
                 v-scrollBar="'table'"
-                :url="'/getTable'"
+                :url="baseURL+'/getTable'"
+                :size="themeSize"
                 :params="params"
                 type="local"
                 :data="data"
@@ -63,10 +64,13 @@
             </el-form>
             <el-table-pagination
                 v-scrollBar="'table'"
-                :url="'/getTable'"
-                type="local"
+                :url="baseURL+'/testpostTable'"
+                :size="themeSize"
                 :data="tableData"
+                list-field="data" 
+                total-field="total"
                 method='get' 
+                @sort-change="sortChange"
                 :params="initParams"
                 :columns="tableColumns" ref="tableR">   
                 <el-table-column slot="prepend" type="selection"></el-table-column>
@@ -114,11 +118,11 @@ export default {
                 name:''
             },
             tableData:[
-                {'a':'admin',b:'管理员','c':'345345',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'WEB'},
-                {'a':'admin',b:'管理员','c':'345345',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'WEB'}
+                {'a':'admin',b:'管理员','c':'345345',d:'玩儿',e:'123@qq.com',f:'1',g:'1',h:'WEB'},
+                {'a':'admin1',b:'管理员','c':'345345',d:'手动阀',e:'123@qq.com',f:'1',g:'2',h:'WEB23'}
             ],
             tableColumns:[
-                { prop: 'a', label: '参数编码',sortable:true,minWidth:100},
+                { prop: 'a', label: '参数编码',sortable:'custom',minWidth:100},
                 { prop: 'b', label: '参数名称',minWidth:100},
                 { prop: 'c', label: '参数等级',minWidth:100},
                 { prop: 'd', label: '数据类型',minWidth:100},

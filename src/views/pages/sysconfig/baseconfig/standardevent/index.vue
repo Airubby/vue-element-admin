@@ -4,7 +4,7 @@
             <el-row>
                 <el-col :span="16">
                     <el-row :gutter="10">
-                        <el-col :span="4">
+                        <el-col :span="6">
                             <el-form-item prop="name">
                                 <el-input placeholder="关键字" v-model.trim="initParams.name" clearable></el-input>
                             </el-form-item>

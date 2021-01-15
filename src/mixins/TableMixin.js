@@ -1,5 +1,5 @@
 export default function(config) {
-	let { deleteApi = '', addApi = '' } = config;
+	let { deleteApi = '', addApi = '' } = config||{};
 	return {
 		created() {
             console.log(deleteApi);

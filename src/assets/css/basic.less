@@ -1,4 +1,4 @@
-
+@import './mixins.less';
 body {
     height: 100%;
     font-size: 12px;
@@ -52,13 +52,11 @@ a:hover {
 div:focus {
     outline: none;
 }
-.scrollbar{
-    width: 100%;
-    height: 100%;
+.scrollbar,.content{
+    .content;
 }
 .app-scrollbar.el-scrollbar,.scrollbar.el-scrollbar{
-    width: 100%;
-    height: 100%;
+    .content;
     overflow: hidden;
 }
 .app-scrollbar .el-scrollbar__wrap ,.scrollbar .el-scrollbar__wrap { //给外层class不然element组件自己的会有问题比如下拉选项
@@ -68,17 +66,23 @@ div:focus {
     height: 100%;
     min-height: 100%;
 }
+.el-table__fixed,
+.el-table__fixed-right {
+  height: auto !important; // 让固定列的高自适应，且设置!important覆盖ele-ui的默认样式
+  bottom: 0px !important; // 固定列默认设置了定位，    position: absolute;top: 0;left: 0;只需要再设置一下bottom的值，让固定列和父元素的底部出现距离即可
+}
 .el-table--scrollable-x .el-table__body-wrapper{
     overflow: hidden !important;
 }
 .el-table__body-wrapper:hover > .ps__rail-x,
 .el-table__body-wrapper:hover > .ps__rail-y {
-opacity: 0.6;
+    opacity: 0.6;
 }
 .el-table--scrollable-x .el-table__body-wrapper > .ps__rail-x,
 .el-table--scrollable-y .el-table__body-wrapper > .ps__rail-y {
     display: block !important;
     background-color: transparent !important;
+    z-index: 9;
 }
 .ps .ps__rail-x:hover,.ps .ps__rail-x.ps--clicking,
 .ps .ps__rail-y:hover,.ps .ps__rail-y.ps--clicking{
@@ -103,6 +107,19 @@ opacity: 0.6;
     background: transparent;
 }
 .app-container{
+    padding: 15px;
+}
+.scrollbar-container{
+    padding: 15px 15px 0;
+    .content;
+}
+.tab-content{
+    .content;
+    .el-tabs__content{
+        height: calc(100% - 55px);
+    }
+}
+.pd15{
     padding: 15px;
 }
 .flex{

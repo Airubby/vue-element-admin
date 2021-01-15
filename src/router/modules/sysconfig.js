@@ -73,19 +73,7 @@ export default {
 					component: () => import('@/views/pages/sysconfig/typeconfig/typemanager'),
                     name: 'SysconfigTypeconfigTypemanager',
 					meta: { title: '类型管理' }
-                },
-                {
-					path: 'typeindicator',
-					component: () => import('@/views/pages/sysconfig/typeconfig/typeindicator'),
-                    name: 'SysconfigTypeconfigTypeindicator',
-					meta: { title: '类型指标' }
-                },
-                {
-					path: 'staticattributedef',
-					component: () => import('@/views/pages/sysconfig/typeconfig/staticattributedef'),
-                    name: 'SysconfigTypeconfigStaticattributedef',
-					meta: { title: '静态属性定义' }
-				}
+                }
 			]
 		},
 	]

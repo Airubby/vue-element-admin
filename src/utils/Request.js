@@ -43,7 +43,7 @@ service.interceptors.response.use(
 			// }
 			return Promise.reject(new Error(res.message || 'Error'))
 		}
-		return response.data
+		return response
 	},
 	error => {
 		console.log(error.response)
@@ -71,7 +71,7 @@ export default {
 			service
 				.get(url, { params: params })
 				.then(response => {
-					resolve(response)
+					resolve(response.data)
 				})
 				.catch(error => {
 					reject(error)
@@ -87,7 +87,7 @@ export default {
 			service
 				.post(url, params)
 				.then(response => {
-					resolve(response)
+					resolve(response.data)
 				})
 				.catch(error => {
 					reject(error)
@@ -104,7 +104,7 @@ export default {
 			service
 				.post(url, null, { params: params })
 				.then(response => {
-					resolve(response)
+					resolve(response.data)
 				})
 				.catch(error => {
 					reject(error)
@@ -120,15 +120,20 @@ export default {
 			service
 				.post(url, params, { responseType: 'blob' })
 				.then(response => {
+                    console.log(response.headers)//响应头信息
+                    //content-file:"aaaa;filename=文件名称.xls"; 截取= 和 .  之间的字符串
+                    let filename=response.headers['content-file'].match(/=(\S*)\./)[1];
+                    
 					let blob = new Blob([response.data], {
 						type: 'application/vnd.ms-excel;charset=utf-8'
 					})
 					let link = document.createElement('a')
-					link.href = window.URL.createObjectURL(blob)
-					if (params.filename) {
-						// link.download= params.filename + ".csv";  //修改后缀
-						link.download = params.filename
-					}
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download=decodeURIComponent(filename);  //中文解码
+					// if (params.filename) {
+					// 	// link.download= params.filename + ".csv";  //修改后缀
+					// 	link.download = params.filename
+					// }
 					document.body.appendChild(link)
 					link.click()
 					window.URL.revokeObjectURL(link.href) // 释放URL 对象

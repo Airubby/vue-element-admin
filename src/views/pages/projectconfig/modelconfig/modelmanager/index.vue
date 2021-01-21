@@ -1,9 +1,9 @@
 <template>
-    <div class="scrollbar-container flex">
-        <div class="container-left">
+    <lr-layout>
+        <template slot="left">
             <div class="container-left-top">
                 <el-input placeholder="关键字" v-model.trim="filterTree" clearable>
-                    <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                    <i slot="suffix" class="el-input__icon el-icon-search"></i>
                 </el-input>
             </div>
             <div class="container-left-btn">
@@ -23,8 +23,8 @@
                     ref="tree">
                 </el-tree>
             </el-scrollbar>
-        </div>
-        <div class="container-right">
+        </template>
+        <template slot="right">
             <el-tabs v-model="activeName" class="tab-content">
                 <el-tab-pane label='监控指标' name="first" class="content">
                     <el-scrollbar class="scrollbar">
@@ -47,8 +47,8 @@
                     </el-scrollbar>
                 </el-tab-pane>
             </el-tabs>
-        </div>
-    </div>
+        </template>
+    </lr-layout>
 </template>
 
 <script>
@@ -103,7 +103,7 @@ export default {
                     label: '二级 3-2'
                 }]
             }],
-            activeName:'first'
+            activeName:'third'
         }
     },
     methods:{

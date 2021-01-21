@@ -72,18 +72,18 @@ export default {
         },
         {
 			path: 'modelconfig',
-			component: () => import('@/views/pages/projectconfig/modelconfig/index'), // Parent router-view
+			component: () => import('@/views/pages/projectconfig/modelconfig/modelmanager'), 
 			name: 'ProjectconfigModelconfig',
 			meta: { title: '型号配置' },
-			redirect: '/projectconfig/modelconfig/modelmanager',
-			children: [
-				{
-					path: 'modelmanager',
-					component: () => import('@/views/pages/projectconfig/modelconfig/modelmanager'),
-                    name: 'ProjectconfigModelconfigModelmanager',
-					meta: { title: '型号管理' }
-                }
-			]
+			// redirect: '/projectconfig/modelconfig/modelmanager',
+			// children: [
+			// 	{
+			// 		path: 'modelmanager',
+			// 		component: () => import('@/views/pages/projectconfig/modelconfig/modelmanager'),
+            //         name: 'ProjectconfigModelconfigModelmanager',
+			// 		meta: { title: '型号管理' }
+            //     }
+			// ]
         },
         {
 			path: 'objectconfig',

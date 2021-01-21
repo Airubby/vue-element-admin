@@ -68,7 +68,9 @@
                     <el-form-item class="align-right">
                         <el-button type="primary" @click="handleAddEdit">添加</el-button>
                         <el-button type="primary" plain @click="handleRemove">删除</el-button>
-                        <el-button type="primary" plain @click="handleImport">Excel导入</el-button>
+                        <upload action="/upload">
+                            <el-button type="primary" plain>Excel导入</el-button>
+                        </upload>
                         <el-button type="primary" plain @click="handleExport">Excel导出</el-button>
                     </el-form-item>
                 </el-col>

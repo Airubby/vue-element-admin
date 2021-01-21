@@ -53,6 +53,12 @@ export const syncRouter=[
         hidden: true
     },
     {
+        path: '/test',
+        component: () => import('@/views/test/index'),
+        name:'test',
+        meta: { title: 'test', icon: 'dashboard', affix: true }
+    },
+    {
         path: '/',
         component: Layout,
         redirect: '/dashboard',

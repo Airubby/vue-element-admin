@@ -8,6 +8,14 @@ export default {
             },
         }
     },
+    mounted(){
+        // console.log(this.$el.querySelector('.container-left-top'))
+    },
+    computed:{
+        treeHeight: function() {
+            
+        }
+    },
     methods:{
         filterNode(value, data) {
             if (!value) return true;

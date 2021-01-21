@@ -3,7 +3,7 @@
         <div class="container-left">
             <div class="container-left-top">
                 <el-input placeholder="关键字" v-model.trim="params.name" clearable class="container-left-input">
-                    <i slot="prefix" class="el-input__icon el-icon-search" @click="handleSearch"></i>
+                    <i slot="suffix" class="el-input__icon el-icon-search" @click="handleSearch"></i>
                 </el-input>
                 <div class="container-left-btn">
                     <el-button type="primary" @click="handleAddEdit">添加</el-button>

@@ -1,9 +1,9 @@
 <template>
-    <div class="scrollbar-container flex">
-        <div class="container-left">
+    <lr-layout>
+        <template slot="left">
             <div class="container-left-top">
                 <el-input placeholder="关键字" v-model.trim="filterTree" clearable>
-                    <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                    <i slot="suffix" class="el-input__icon el-icon-search"></i>
                 </el-input>
             </div>
             <div class="container-left-btn">
@@ -23,8 +23,8 @@
                     ref="tree">
                 </el-tree>
             </el-scrollbar>
-        </div>
-        <div class="container-right">
+        </template>
+        <template slot="right">
             <el-tabs v-model="activeName" class="tab-content">
                 <el-tab-pane label='监控指标' name="first" class="content">
                     <el-scrollbar class="scrollbar">
@@ -37,8 +37,8 @@
                     </el-scrollbar>
                 </el-tab-pane>
             </el-tabs>
-        </div>
-    </div>
+        </template>
+    </lr-layout>
 </template>
 
 <script>
@@ -111,23 +111,16 @@ export default {
 </script>
 <style lang="less" scoped>
 .module-theme(...){
-    .container-left{
-        width: 320px;
-        .container-left-top{
-            width: 100%;
-            margin-bottom: 10px;
-        }
-        .container-left-btn{
-            text-align: right;
-        }
-        .app-scrollbar{
-            width: 100%;
-            height: calc(100% - 75px);
-        }
+    .container-left-top{
+        width: 100%;
+        margin-bottom: 10px;
     }
-    .container-right{
-        padding-left: 20px;
-        width: calc(100% - 320px);
+    .container-left-btn{
+        text-align: right;
+    }
+    .app-scrollbar{
+        width: 100%;
+        height: calc(100% - 75px);
     }
 }
 </style>

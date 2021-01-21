@@ -1,6 +1,7 @@
 @boxMargin:15px;  //设置box的上下左右距离用
 @btnMargin:10px;  //按钮组的间距用
 @itemMargin:5px;  //设置item的上下左右的距离用 小的间距
+@import './mixins.less';
 @import '~@/assets/css/partysuTheme.less';
 /****/
 .module-theme(...){
@@ -123,7 +124,8 @@
         background-color:@activeBg;
         color: @activeColor;
     }
-    .el-button--primary,.el-button--primary:focus,.el-button--primary:hover{
+    .el-button--primary,.el-button--primary:focus,.el-button--primary:hover,
+    .el-radio-button__orig-radio:checked+.el-radio-button__inner{
         background-color: @activeColor;
         border-color: @activeColor;
         color: @bgColor;
@@ -195,6 +197,7 @@
         color: @color;
         padding: 0 @boxMargin;
     }
+    .el-radio-button__inner:hover,
     .el-button--text,
     .el-tabs__item.is-active,.el-tabs__item:hover,
     .el-time-spinner__item.active:not(.disabled),.el-time-panel__btn.confirm,.el-year-table td .cell:hover, .el-year-table td.current:not(.disabled) .cell,.el-month-table td .cell:hover{

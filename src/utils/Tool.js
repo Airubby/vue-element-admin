@@ -1,7 +1,3 @@
-import echarts from 'echarts'
-import Vue from 'vue'
-import axios from 'axios'
-
 //时间格式化
 function FormatDate(fmt,value){
   let date=value?new Date(value):new Date();

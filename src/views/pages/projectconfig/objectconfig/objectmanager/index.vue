@@ -37,6 +37,23 @@
                             <el-row :gutter="10">
                                 <el-col :span="6">
                                     <el-form-item prop="name">
+                                        <tree-select :treeData="treeData" @change="changeTree" v-model="initParams.test"></tree-select>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-form-item prop="name">
+                                        
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-form-item prop="name">
+                                        <el-select v-model="initParams.name" clearable placeholder="接入端选择">
+                                            <el-option key="1" label="1" value="1"> </el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-form-item prop="name">
                                         <el-input placeholder="设备编码" v-model.trim="initParams.name" clearable></el-input>
                                     </el-form-item>
                                 </el-col>
@@ -60,27 +77,7 @@
                                         <el-input placeholder="日志使能" v-model.trim="initParams.name" clearable></el-input>
                                     </el-form-item>
                                 </el-col>
-                                <el-col :span="6">
-                                    <el-form-item prop="name">
-                                        <el-select v-model="initParams.name" clearable placeholder="型号选择">
-                                            <el-option key="1" label="1" value="1"> </el-option>
-                                        </el-select>
-                                    </el-form-item>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-form-item prop="name">
-                                        <el-select v-model="initParams.name" clearable placeholder="位置选择">
-                                            <el-option key="1" label="1" value="1"> </el-option>
-                                        </el-select>
-                                    </el-form-item>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-form-item prop="name">
-                                        <el-select v-model="initParams.name" clearable placeholder="接入端选择">
-                                            <el-option key="1" label="1" value="1"> </el-option>
-                                        </el-select>
-                                    </el-form-item>
-                                </el-col>
+                                
                                 <el-col :span="6">
                                     <el-form-item prop="name">
                                         <el-select v-model="initParams.name" clearable placeholder="是否iot对象">
@@ -177,10 +174,12 @@ export default {
                     label: '二级 1-1',
                     children: [{
                     id: 9,
-                    label: '三级 1-1-1'
+                    label: '三级 1-1-1',
+                    type1:'o'
                     }, {
-                    id: 10,
-                    label: '三级 1-1-2'
+                        id: 10,
+                        label: '三级 1-1-2',
+                        type:'M',
                     }]
                 }]
                 }, {
@@ -206,7 +205,8 @@ export default {
             }],
             type:'1',
             initParams:{
-                name:''
+                name:'',
+                test:''
             },
             rules:{},
             tableData:[
@@ -230,6 +230,47 @@ export default {
             editShow:false,
             showNext:false,
             activeName:'first',
+            data: [{
+                label: '一级 1',
+                children: [{
+                label: '二级 1-1',
+                children: [{
+                    label: '三级 1-1-1'
+                }]
+                }]
+                }, {
+                    label: '一级 2',
+                    children: [{
+                    label: '二级 2-1',
+                    children: [{
+                        label: '三级 2-1-1'
+                    }]
+                    }, {
+                    label: '二级 2-2',
+                    children: [{
+                        label: '三级 2-2-1'
+                    }]
+                    }]
+                }, {
+                    label: '一级 3',
+                    children: [{
+                    label: '二级 3-1',
+                    children: [{
+                        label: '三级 3-1-1'
+                    }]
+                    }, {
+                    label: '二级 3-2',
+                    children: [{
+                        label: '三级 3-2-1'
+                    }]
+                }]
+            }],
+            value7:'',
+            filterText:'',
+            defaultProps: {
+                children: 'children',
+                label: 'label'
+            },
         }
     },
     methods:{
@@ -253,6 +294,9 @@ export default {
         },
         handleRemove:function(){
 
+        },
+        changeTree:function(info){
+            console.log(info,'!!!!!!!!!!!!!!!!',this.initParams.test)
         },
         
     },
@@ -290,6 +334,9 @@ export default {
         position: absolute;
         top: -50px;
         right: 0;
+    }
+    .el-select-dropdown__item{
+        height:auto;
     }
 }
 </style>

@@ -13,11 +13,13 @@ export default function(config) {
         computed:{
             showDicItem(){
                 return function(item,code){
-                    this.DicItem[item].forEach(element => {
-                        if(element.code==code){
-                            return this.DicItem[item].name;
-                        }
-                    });
+                    if(this.DicItem[item]&&this.DicItem[item].length>0){
+                        this.DicItem[item].forEach(element => {
+                            if(element.code==code){
+                                return this.DicItem[item].name;
+                            }
+                        });
+                    }
                     return '';
                 }
             }

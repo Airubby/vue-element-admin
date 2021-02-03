@@ -55,7 +55,8 @@ service.interceptors.response.use(
 
 // export default service;
 const Info = {
-	isLoading: true,
+    isLoading: true,  //是否展示loading
+    isHint:true,  //请求是否展示返回信息
 	lock: true,
 	text: '数据加载中...',
 	spinner: 'el-icon-loading',
@@ -123,17 +124,15 @@ export default {
                     console.log(response.headers)//响应头信息
                     //content-file:"aaaa;filename=文件名称.xls"; 截取= 和 .  之间的字符串
                     let filename=response.headers['content-file'].match(/=(\S*)\./)[1];
-                    
+                    let file=response.headers['content-file'].split('filename=')[1];
 					let blob = new Blob([response.data], {
-						type: 'application/vnd.ms-excel;charset=utf-8'
+						// type: 'application/vnd.ms-excel;charset=utf-8'
+						type: 'application/octet-stream;charset=utf-8'
 					})
 					let link = document.createElement('a')
                     link.href = window.URL.createObjectURL(blob)
-                    link.download=decodeURIComponent(filename);  //中文解码
-					// if (params.filename) {
-					// 	// link.download= params.filename + ".csv";  //修改后缀
-					// 	link.download = params.filename
-					// }
+                    link.download=decodeURIComponent(file);  // 默认给什么后缀就是什么后缀
+                    link.download=decodeURIComponent(filename)+'.csv';  //自定义后缀
 					document.body.appendChild(link)
 					link.click()
 					window.URL.revokeObjectURL(link.href) // 释放URL 对象

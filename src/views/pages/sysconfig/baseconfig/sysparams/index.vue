@@ -37,6 +37,7 @@
             </el-row>
         </el-form>
         <el-table-pagination
+            v-scrollBar="'table'"
             :url="baseURL+'/getTable'"
             :size="themeSize"
             type="local"
@@ -87,20 +88,19 @@ export default {
                 }
             },
             tableData:[
-                {'id':1,'a':'admin','name':'管理员','c':'tetert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'1'},
+                {'id':1,'a':'admin','name':'管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员','c':'tetert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'1'},
                 {'id':2,'a':'admin','name':'管理员','c':'rtert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'2'}
             ],
             tableColumns:[
-                { prop: 'a', label: '参数编码',minWidth:100},
-                { prop: 'name', label: '参数名称',minWidth:100},
-                { prop: 'c', label: '参数等级',minWidth:100},
-                { prop: 'd', label: '数据类型',minWidth:100},
-                { prop: 'e', label: '参数值',minWidth:100},
-                { prop: 'f', label: '设定范围',minWidth:100},
-                { prop: 'g', label: '扩展参数1',minWidth:100},
-                { prop: 'h', label: '扩展参数2',minWidth:100},
-                { prop: 'h', label: '备注',slotName:'preview-h',minWidth:100},
-                { prop: 'handle', label: '操作',slotName:'preview-handle',width:90},
+                { prop: 'a', label: '参数编码',minWidth:'100px'},
+                { prop: 'name', label: '参数名称',minWidth:'100px'},
+                { prop: 'c', label: '参数等级',minWidth:'100px'},
+                { prop: 'd', label: '数据类型',minWidth:'100px'},
+                { prop: 'e', label: '参数值',minWidth:'100px'},
+                { prop: 'f', label: '设定范围',minWidth:'100px'},
+                { prop: 'g', label: '扩展参数1',minWidth:'100px'},
+                { prop: 'h', label: '备注',slotName:'preview-h',minWidth:'100px'},
+                { prop: 'handle', label: '操作',fixed:'right',slotName:'preview-handle',width:90},
             ],
             backSelect:{}
         }

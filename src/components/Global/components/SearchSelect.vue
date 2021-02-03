@@ -1,12 +1,14 @@
 <template>
-    <el-select v-model="selectValue" filterable clearable 
+    <el-select v-model="selectValue" filterable 
+        @focus="getList"
+        :clearable="clearable" 
         :loading="loading" 
         :remote="remote" 
         :remote-method="remoteMethod" 
         @change="change"
         @visible-change="visibleChange"
         @clear="clear"
-        placeholder="请选择">
+        :placeholder="placeholder">
         <el-option
         v-for="item in options"
         :key="item[optionValue]"
@@ -38,19 +40,33 @@ export default {
             type: Boolean,
             default: true
         },
+        clearable:{
+            type:Boolean,
+            default:true
+        },
         optionValue: {
             type: String,
-            default: 'id'
+            default: 'id'  //选择的key值
         },
         optionLabel: {
             type: String,
-            default: 'name'
+            default: 'name'  //展示key值
         },
         queryKey:{
             type: String,
-            default: 'query'
+            default: 'query'  //根据这个key值查询
+        },
+        placeholder:{
+            type: String,
+            default: '请选择'
         },
         params:{
+            type:Object,
+            default:()=>{
+                return{}
+            }
+        },
+        pagination:{
             type:Object,
             default:()=>{
                 return{
@@ -71,9 +87,9 @@ export default {
     computed:{
         initParams:{
             get(){
-                let params={}
-                params[this.params.pageSize]=this.pageSize;
-                params[this.params.pageIndex]=this.pageIndex;
+                let params=Object.assign({},this.params);
+                params[this.pagination.pageSize]=this.pageSize;
+                params[this.pagination.pageIndex]=this.pageIndex;
                 params[this.queryKey]=this.query;
                 return params;
             }
@@ -99,8 +115,13 @@ export default {
         }
     },
     methods:{
-        change:function(){
-
+        change:function(key){
+            this.options.forEach(element => {
+                if(element[this.optionValue]==key){
+                    this.$emit('change',element);
+                    return;
+                }
+            });
         },
         visibleChange:function(flag){
             if(!flag){
@@ -116,28 +137,31 @@ export default {
             this.getList();
         },
         getList:function(){
-            this.$api.post(this.url,this.initParams,{isLoading:false}).then(res=>{
-                let result=res;
-                if (this.params.data && this.params.data.indexOf('.') !== -1) {
-                    this.params.data.split('.').forEach(vv => {
-                        result = result[vv]
-                    })
-                } else {
-                    result=res[this.params.data];
-                }
-                this.options=result;
+            if(this.remote){
+                this.$api.post(this.url,this.initParams,{isLoading:false}).then(res=>{
+                    let result=res;
+                    if (this.pagination.data && this.pagination.data.indexOf('.') !== -1) {
+                        this.pagination.data.split('.').forEach(vv => {
+                            result = result[vv]
+                        })
+                    } else {
+                        result=res[this.pagination.data];
+                    }
+                    this.options=result;
 
-                let total=res;
-                if (this.params.total && this.params.total.indexOf('.') !== -1) {
-                    this.params.total.split('.').forEach(vv => {
-                        total = total[vv]
-                    })
-                } else {
-                    total=res[this.params.total];
-                }
-                this.total=total;
-                
-            })
+                    let total=res;
+                    if (this.pagination.total && this.pagination.total.indexOf('.') !== -1) {
+                        this.pagination.total.split('.').forEach(vv => {
+                            total = total[vv]
+                        })
+                    } else {
+                        total=res[this.pagination.total];
+                    }
+                    this.total=total;
+                    
+                })
+            }
+            
         },
         handleCurrentChange(val) {
             this.pageIndex = val;

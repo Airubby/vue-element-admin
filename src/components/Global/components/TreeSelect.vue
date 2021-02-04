@@ -1,18 +1,21 @@
 <template>
-    <el-select v-model="selectValue" ref="select"
+    <el-select v-model="selectValue" 
         @focus="filterMethod('')"
-        filterable 
         @clear="clear"
+        filterable 
+        :clearable="clearable"
         :filter-method="filterMethod"
-        clearable :placeholder="placeholder">
-        <el-option :value="selectValue" :label="label">
+        ref="select"
+        :placeholder="placeholder">
+        <el-option :label="selectLabel" value="" style="display:none"></el-option>
+        <el-option :label="selectLabel" :value="selectValue">
             <el-tree ref="treeSelect" :node-key="treeValue"
             :data="treeData" 
             :filter-node-method="filterNode"
             :props="treeProps" 
             @node-click="clickTree">
                 <span class="custom-tree-node" slot-scope="{ node, data }">
-                    <span :class="{'active':data[treeValue]==selectValue}">{{ data[treeProps.label] }}</span>
+                    <span :class="{'active':data[treeValue]==selectValue,'disabled':showDisabled(data)}">{{ data[treeProps.label] }}</span>
                 </span>
             </el-tree>
         </el-option>
@@ -49,7 +52,13 @@ export default {
         filterObject:{
             type:Object,
             default:()=>{
-                return {} //{type:'M'}
+                return {} //{type:'M'} 展示类型type为M的
+            }
+        },
+        disabledObject:{
+            type:Object,
+            default:()=>{
+                return {}  // { type: 'T'} 禁用type为T的
             }
         },
         treeData:{
@@ -64,54 +73,65 @@ export default {
     },
     mounted(){
         this.$nextTick(()=>{
-            if(JSON.stringify(this.filterObject)!='{}'){
+            if(Object.prototype.toString.call(this.disabledObject) === '[object Object]'&&JSON.stringify(this.filterObject)!='{}'){
                 this.$refs.treeSelect.filter();
             }
         })
     },
-    computed:{
-        selectValue:{
-            get:function(){
-                //如果给过来的是对象，取对象中的值
-                this.getNode(this.value);
-                return this.value
-            },
-            set:function(newValue){
-                this.$emit('input',newValue)
-            }
-        }
-    },
     data() {
         return {
-            label:''
+            selectValue:'',
+            selectLabel:'',
+            emitChange:true,
         }
     },
     methods:{
         clear:function(){
+            this.selectLabel='';
+            this.emitChange=true;
             this.$emit('input','');
-            this.$emit('change',{});
+            this.$emit('change',null);
         },
         getNode:function(key){
-            console.log('!!!!!!!!!!!!!!!!',key)
             this.$nextTick(()=>{
                 this.$refs.treeSelect.setCurrentKey(key)
                 this.$nextTick(()=>{
                     let node=this.$refs.treeSelect.getCurrentNode();
                     if(node){
-                        this.label=node[this.treeProps.label];
+                        this.selectLabel=node[this.treeProps.label];
+                        this.$emit('change',node);
                     }
                 })
             })
         },
+        showDisabled:function(data){
+            if(Object.prototype.toString.call(this.disabledObject) === '[object Object]'&&JSON.stringify(this.disabledObject)!='{}'){
+                for(let item in this.disabledObject){
+                    if(data[item]==this.disabledObject[item]){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        },
         clickTree:function(data,node){
-            this.label=data[this.treeProps.label];
+            if(Object.prototype.toString.call(this.disabledObject) === '[object Object]'&&JSON.stringify(this.disabledObject)!='{}'){
+                for(let item in this.disabledObject){
+                    if(data[item]==this.disabledObject[item]){
+                        return;
+                    }
+                }
+            }
+            this.selectLabel=data[this.treeProps.label];
+            this.selectValue=data[this.treeValue];
             this.$refs.select.blur();
-            this.$emit('input',data[this.treeValue])
+            this.$emit('input',this.selectValue)
             this.$emit('change',data);
+            this.emitChange=false;
         },
         filterNode(value, data) {
             let flag =true;  //默认展示
-            if(Object.prototype.toString.call(this.filterObject) === '[object Object]'){
+            if(Object.prototype.toString.call(this.filterObject) === '[object Object]'&&JSON.stringify(this.filterObject)!='{}'){
                 for(let item in this.filterObject){
                     if(data[item]!==this.filterObject[item]){
                         flag=false;
@@ -126,6 +146,14 @@ export default {
             this.$refs.treeSelect.filter(val);
         }
     },
+    watch:{
+        value:function(val){
+            if(this.emitChange){
+                this.selectLabel=val;
+                this.getNode();
+            }
+        }
+    }
     
 }
 </script>
@@ -135,6 +163,7 @@ export default {
     .el-select-dropdown__item.selected,
     .el-select-dropdown__item:hover {
         background:transparent !important;
+        font-weight: normal !important;
     }
     .el-select-dropdown__item{
         height:auto;
@@ -142,6 +171,9 @@ export default {
     .custom-tree-node{
         .active{
             color: @activeColor;
+        }
+        .disabled{
+            color: @disabledColor;
         }
     }
 }

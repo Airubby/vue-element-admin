@@ -169,25 +169,29 @@ export default {
             treeData: [{
                 id: 1,
                 label: '一级 1',
+                type:'T',
                 children: [{
                     id: 4,
                     label: '二级 1-1',
+                    type:'M',
                     children: [{
                     id: 9,
                     label: '三级 1-1-1',
-                    type1:'o'
+                    type:'O'
                     }, {
                         id: 10,
                         label: '三级 1-1-2',
-                        type:'M',
+                        type:'O'
                     }]
                 }]
                 }, {
                 id: 2,
                 label: '一级 2',
+                type:'T',
                 children: [{
                     id: 5,
-                    label: '二级 2-1'
+                    label: '二级 2-1',
+                    type:'M',
                 }, {
                     id: 6,
                     label: '二级 2-2'
@@ -195,9 +199,11 @@ export default {
                 }, {
                 id: 3,
                 label: '一级 3',
+                type:'T',
                 children: [{
                     id: 7,
-                    label: '二级 3-1'
+                    label: '二级 3-1',
+                    type:'M',
                 }, {
                     id: 8,
                     label: '二级 3-2'

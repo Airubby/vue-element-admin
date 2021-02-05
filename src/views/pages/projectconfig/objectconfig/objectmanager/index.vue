@@ -23,9 +23,13 @@
                     :data="treeData"
                     :props="treeProps"
                     default-expand-all
+                    show-checkbox
                     highlight-current
                     :filter-node-method="filterNode"
                     ref="tree">
+                    <span class="custom-tree-node" slot-scope="{ node, data }">
+                        <span :class="{'active':data.type=='T'}">{{ data.label }}</span>
+                    </span>
                 </el-tree>
             </el-scrollbar>
         </template>
@@ -159,7 +163,7 @@ export default {
     components: { collectEvent,baseInfo },
     mixins:[TreeMixin,tableMixin],
     created() {
-
+        this.treeData=this.disableHandle(this.treeData,{type:'O'})
     },
     mounted(){
         
@@ -194,7 +198,8 @@ export default {
                     type:'M',
                 }, {
                     id: 6,
-                    label: '二级 2-2'
+                    label: '二级 2-2',
+                    type:'O'
                 }]
                 }, {
                 id: 3,
@@ -206,7 +211,8 @@ export default {
                     type:'M',
                 }, {
                     id: 8,
-                    label: '二级 3-2'
+                    label: '二级 3-2',
+                    type:'O'
                 }]
             }],
             type:'1',
@@ -331,6 +337,11 @@ export default {
     .align-right{
         .el-button{
             margin-bottom: 10px;
+        }
+    }
+    .custom-tree-node{
+        .active{
+            color: @activeColor;
         }
     }
     /deep/ .el-tabs__content{

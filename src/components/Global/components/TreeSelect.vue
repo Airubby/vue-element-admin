@@ -82,13 +82,11 @@ export default {
         return {
             selectValue:'',
             selectLabel:'',
-            emitChange:true,
         }
     },
     methods:{
         clear:function(){
             this.selectLabel='';
-            this.emitChange=true;
             this.$emit('input','');
             this.$emit('change',null);
         },
@@ -127,7 +125,6 @@ export default {
             this.$refs.select.blur();
             this.$emit('input',this.selectValue)
             this.$emit('change',data);
-            this.emitChange=false;
         },
         filterNode(value, data) {
             let flag =true;  //默认展示
@@ -147,11 +144,12 @@ export default {
         }
     },
     watch:{
-        value:function(val){
-            if(this.emitChange){
-                this.selectLabel=val;
-                this.getNode();
-            }
+        value:{
+            handler:function(val){
+                this.selectValue=val; //为空的时候
+                this.getNode(val);
+            },
+            immediate:true
         }
     }
     

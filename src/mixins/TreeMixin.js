@@ -12,6 +12,11 @@ export default {
         
     },
     methods:{
+        getSelect:function(){
+            //需设置node-key="id"
+            this.$refs.tree.getCheckedKeys(); //禁用的checkbox的id也存在
+            this.$refs.tree.getCheckedNodes(); //这样排除禁用的
+        },
         //递归设置可选项{type:'O'}可选，其它禁用 this.treeData=this.disableHandle(this.treeData,{type:'O'})
         disableHandle:function(treeData,filter){
             if (!(treeData instanceof Array)) {
@@ -28,8 +33,8 @@ export default {
                         }
                     }
                 }
-                if(null != item.children && item.children instanceof Array){
-                    item.children=this.disableHandle(item.children,filter);
+                if(null != item[this.treeProps.children] && item[this.treeProps.children] instanceof Array){
+                    item[this.treeProps.children]=this.disableHandle(item[this.treeProps.children],filter);
                 }
             })
             return treeData

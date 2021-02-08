@@ -1,14 +1,14 @@
 <template>
     <el-select v-model="selectValue" filterable 
-        @focus="getList"
+        @focus="focus"
         :clearable="clearable" 
         :loading="loading" 
         :remote="remote" 
         :remote-method="remoteMethod" 
         @change="change"
-        @visible-change="visibleChange"
         @clear="clear"
         :placeholder="placeholder">
+        <el-option :label="showName" :value="selectValue" v-if="remote&&firstShow&&selectValue&&showName"></el-option>
         <el-option
         v-for="item in options"
         :key="item[optionValue]"
@@ -16,6 +16,7 @@
         :value="item[optionValue]">
         </el-option>
         <el-pagination
+            v-if="remote"
             @current-change="handleCurrentChange"
             :current-page="pageIndex"
             :page-size="pageSize"
@@ -32,6 +33,11 @@ export default {
     components: {  },
     props:{
         value:[String,Boolean,Number,Object],
+        //异步拉取的时候回填的信息展示
+        showName:{
+            type:String,
+            default:''
+        },
         url:{
             type:String,
             default:''
@@ -39,6 +45,13 @@ export default {
         remote:{
             type: Boolean,
             default: true
+        },
+        //本地信息的数据
+        data:{
+            type: Array,
+            default:()=>{
+                return []
+            }
         },
         clearable:{
             type:Boolean,
@@ -79,7 +92,7 @@ export default {
         }
     },
     created() {
-        console.log(this.value)
+        console.log(this.data)
     },
     mounted(){
 
@@ -106,6 +119,7 @@ export default {
     },
     data() {
         return {
+            firstShow:true, //初始化的时候传id和name过来展示
             loading:false,
             options: [],  //总数据
             total:0, //总条数
@@ -115,6 +129,9 @@ export default {
         }
     },
     methods:{
+        remoteFn:function(){
+            return String(this.remote) !== 'false'
+        },
         change:function(key){
             this.options.forEach(element => {
                 if(element[this.optionValue]==key){
@@ -123,18 +140,19 @@ export default {
                 }
             });
         },
-        visibleChange:function(flag){
-            if(!flag){
-                this.remoteMethod('')
-            }
+        focus:function(){
+            this.firstShow=false;
+            this.remoteMethod('')
         },
         clear:function(){
             
         },
         remoteMethod:function(query){
-            this.query=query;
-            this.pageIndex=1;
-            this.getList();
+            if(this.remote){
+                this.query=query;
+                this.pageIndex=1;
+                this.getList();
+            }
         },
         getList:function(){
             if(this.remote){
@@ -169,7 +187,12 @@ export default {
         },
     },
     watch: {
-        
+        data:{
+            handler:function(val){
+                this.options=val
+            },
+            immediate:true
+        }
     },
     
 }

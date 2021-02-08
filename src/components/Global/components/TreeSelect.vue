@@ -87,20 +87,25 @@ export default {
     methods:{
         clear:function(){
             this.selectLabel='';
+            this.selectValue='';
             this.$emit('input','');
             this.$emit('change',null);
         },
         getNode:function(key){
-            this.$nextTick(()=>{
+            if(key){
                 this.$refs.treeSelect.setCurrentKey(key)
                 this.$nextTick(()=>{
                     let node=this.$refs.treeSelect.getCurrentNode();
                     if(node){
+                        this.selectValue=node[this.treeValue];
                         this.selectLabel=node[this.treeProps.label];
                         this.$emit('change',node);
                     }
                 })
-            })
+            }else{
+                this.selectLabel='';
+                this.selectValue='';
+            }
         },
         showDisabled:function(data){
             if(Object.prototype.toString.call(this.disabledObject) === '[object Object]'&&JSON.stringify(this.disabledObject)!='{}'){
@@ -146,7 +151,6 @@ export default {
     watch:{
         value:{
             handler:function(val){
-                this.selectValue=val; //为空的时候
                 this.getNode(val);
             },
             immediate:true

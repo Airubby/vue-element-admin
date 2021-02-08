@@ -28,12 +28,12 @@
             <el-tabs v-model="activeName" class="tab-content">
                 <el-tab-pane label='监控指标' name="first" class="content">
                     <el-scrollbar class="scrollbar">
-                        <indicator v-if="activeName=='first'"></indicator>
+                        <indicator></indicator>
                     </el-scrollbar>
                 </el-tab-pane>
                 <el-tab-pane label='静态属性' name="second" class="content">
                     <el-scrollbar class="scrollbar">
-                        <attributedef v-if="activeName=='second'"></attributedef>
+                        <attributedef ></attributedef>
                     </el-scrollbar>
                 </el-tab-pane>
                 <el-tab-pane label='事件规则' name="third" class="content">

@@ -78,7 +78,7 @@ export default {
                 { prop: 'g', label: '是否设备告警点',minWidth:120},
                 { prop: 'h', label: '指标类型',minWidth:100},
                 { prop: 'i', label: '指标分组码',minWidth:100},
-                { prop: 'i', label: '单位',minWidth:100},
+                { prop: 'i', label: '单位',minWidth:80},
                 { prop: 'i', label: '采集值是否回写DB',minWidth:130},
                 { prop: 'handle', label: '操作' ,fixed:'right',slotName:'preview-handle',width:90},
             ],

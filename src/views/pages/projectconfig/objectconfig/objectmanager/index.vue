@@ -24,6 +24,7 @@
                     :props="treeProps"
                     default-expand-all
                     show-checkbox
+                    node-key="id"
                     highlight-current
                     :filter-node-method="filterNode"
                     ref="tree">
@@ -46,14 +47,9 @@
                                 </el-col>
                                 <el-col :span="6">
                                     <el-form-item prop="name">
-                                        
-                                    </el-form-item>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-form-item prop="name">
-                                        <el-select v-model="initParams.name" clearable placeholder="接入端选择">
-                                            <el-option key="1" label="1" value="1"> </el-option>
-                                        </el-select>
+                                        <search-select v-model="initParams.test" :remote="false" :data="options">
+
+                                        </search-select>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="6">
@@ -283,6 +279,12 @@ export default {
                 children: 'children',
                 label: 'label'
             },
+            options:[
+                {id:'1',name:'aaaa'},
+                {id:'2',name:'bbbb'},
+                {id:'3',name:'cccc'},
+                {id:'4',name:'dddd'}
+            ]
         }
     },
     methods:{
@@ -313,7 +315,9 @@ export default {
         
     },
     watch: {
-        
+        'initParams.test':function(val){
+            console.log(val,'!!!!!!!!!!!!!!!!!')
+        }
     },
     
 }

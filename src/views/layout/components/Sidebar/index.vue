@@ -24,14 +24,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Logo from "./Logo";
-import SidebarItem from "./SidebarItem";
-import variables from "@/assets/css/variables.less";
+import { mapGetters } from 'vuex';
+import Logo from './Logo';
+import SidebarItem from './SidebarItem';
+import variables from '@/assets/css/variables.less';
 export default {
     components: { SidebarItem, Logo },
     computed: {
-        ...mapGetters(["permission_routes", "sidebar"]),
+        ...mapGetters(['permission_routes', 'sidebar']),
         activeMenu() {
         const route = this.$route;
         const { meta, path } = route;
@@ -48,7 +48,6 @@ export default {
         return !this.sidebar.opened;
         },
         variables() {
-            console.log(variables,"!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         return variables;
         },
     },

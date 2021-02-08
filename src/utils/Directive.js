@@ -172,6 +172,7 @@ Vue.directive('scrollBar', {
 					'未发现className为el-table__body-wrapper的dom'
 				);
 			} else {
+                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 				el.classList.add('ps');
 			}
 		}

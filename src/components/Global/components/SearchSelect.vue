@@ -4,6 +4,7 @@
         :clearable="clearable" 
         :loading="loading" 
         :remote="remote" 
+        :disabled="disabled"
         :remote-method="remoteMethod" 
         @change="change"
         @clear="clear"
@@ -56,6 +57,10 @@ export default {
         clearable:{
             type:Boolean,
             default:true
+        },
+        disabled:{
+            type:Boolean,
+            default:false
         },
         optionValue: {
             type: String,

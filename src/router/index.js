@@ -25,6 +25,8 @@ import Layout from '@/views/layout'
 import sysconfigRouter from './modules/sysconfig'
 import projectconfigRouter from './modules/projectconfig'
 import projectdebug from './modules/projectdebug'
+import realtimecontrol from './modules/realtimecontrol'
+import querycount from './modules/querycount'
 export const syncRouter=[
     {
         path: '/redirect',
@@ -74,6 +76,8 @@ export const syncRouter=[
     sysconfigRouter,
     projectconfigRouter,
     projectdebug,
+    realtimecontrol,
+    querycount,
     { path: '*', redirect: '/404', hidden: true }, 
 ];
 

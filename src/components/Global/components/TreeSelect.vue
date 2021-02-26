@@ -1,5 +1,6 @@
 <template>
     <el-select v-model="selectValue" 
+        :disabled="disabled"
         @focus="filterMethod('')"
         @clear="clear"
         filterable 
@@ -29,6 +30,10 @@ export default {
     props:{
         value:[String,Boolean,Number,Object],
         clearable:{
+            type:Boolean,
+            default:true
+        },
+        disabled:{
             type:Boolean,
             default:true
         },

@@ -45,7 +45,7 @@
             @selection-change="selectionChange"
             :params="initParams"
             :columns="tableColumns" ref="tableRef">  
-                <el-table-column slot="prepend" type="selection" align="center"></el-table-column>
+                <el-table-column slot="prepend" type="selection" align="center" :selectable="checkSelectable"></el-table-column>
                 <template v-slot:preview-handle="scope">
                     <el-button type="text" @click="handleAddEdit(scope.row)">编辑</el-button>
                     <el-button type="text" @click="handleRemove(scope.row)">删除</el-button>
@@ -88,8 +88,9 @@ export default {
                 }
             },
             tableData:[
-                {'id':1,'a':'admin','name':'管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员管理员','c':'tetert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'1'},
-                {'id':2,'a':'admin','name':'管理员','c':'rtert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'2'}
+                {'id':1,'a':'admin','name':'管理员管理员','c':'tetert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'1',check:true},
+                {'id':2,'a':'admin','name':'管理员','c':'rtert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'2',check:true},
+                {'id':3,'a':'admin','name':'管理员','c':'rtert',d:'15225252525',e:'123@qq.com',f:'1',g:'2',h:'2',check:false}
             ],
             tableColumns:[
                 { prop: 'a', label: '参数编码',minWidth:'100px'},
@@ -106,6 +107,10 @@ export default {
         }
     },
     methods:{
+        checkSelectable:function(row,index){
+            console.log(row,index)
+            return row.check
+        },
         selectionChange:function(selection){
             console.log(selection)
             if(selection.length>0){

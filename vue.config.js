@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 const isProduction = process.env.NODE_ENV === 'production';
 const TerserPlugin = require('terser-webpack-plugin')
 module.exports = {
@@ -49,18 +49,18 @@ module.exports = {
                 splitChunks: {
                     cacheGroups: {
                         vendor:{
-                            chunks:"all",
+                            chunks:'all',
                             test: /node_modules/,
-                            name:"vendor",
+                            name:'vendor',
                             minChunks: 1,
                             maxInitialRequests: 5,
                             minSize: 0,
                             priority:100,
                         },
                         common: {
-                            chunks:"all",
+                            chunks:'all',
                             test:/[\\/]src[\\/]js[\\/]/,
-                            name: "common",
+                            name: 'common',
                             minChunks: 2,
                             maxInitialRequests: 5,
                             minSize: 0,
@@ -124,7 +124,7 @@ module.exports = {
             //vue-cli4中使用less全局变量 为每个css引入公共需要引入的样式 无需安装style-resources-loader
             less:{
                 globalVars: {
-                    hack: `true; @import '~@/assets/css/common.less';`
+                    hack: 'true; @import \'~@/assets/css/common.less\';'
                 }
             }
         },
@@ -149,12 +149,12 @@ module.exports = {
         // 设置代理
         proxy: {
             '/api': {
-            target: 'http://192.168.16.6:8090', // 你接口的域名
+                target: 'http://127.0.0.1:8090', // 你接口的域名
                 secure: false, // 如果是https接口，需要配置这个参数
                 changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
                 ws:false,
                 pathRewrite:{
-                '^/api':'/api'
+                    '^/api':'/api'
                 }
 		    }
         },

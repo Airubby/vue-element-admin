@@ -37,20 +37,27 @@ export default function(config) {
             sortChange:function(info){
                 console.log(info)
             },
+            // <el-table-column slot="prepend" type="selection" align="center" :selectable="checkSelectable"></el-table-column>
+            checkSelectable:function(row,index){
+                console.log(row,index)
+                //true可勾选；false不可勾选
+                return row.check
+            },
             handleSearch:function(tableRef='tableRef',ValidateForm='ValidateForm'){
-                // let next=this.searchTableBefore?this.searchTableBefore:true;
-                // if(next){
-                //     this.$refs[ValidateForm].validate((valid) => {
-                //         if(valid){ //验证通过
-                //             this.$refs[tableRef].searchHandler();
-                //         }
-                //     })
-                // }
-                this.$refs[ValidateForm].validate((valid) => {
-                    if(valid){ //验证通过
-                        this.$refs[tableRef].searchHandler();
-                    }
-                })
+                console.log(this.$refs.tableRef.getSelect())
+                let next=this.searchTableBefore?this.searchTableBefore:true;
+                if(next){
+                    this.$refs[ValidateForm].validate((valid) => {
+                        if(valid){ //验证通过
+                            this.$refs[tableRef].searchHandler();
+                        }
+                    })
+                }
+                // this.$refs[ValidateForm].validate((valid) => {
+                //     if(valid){ //验证通过
+                //         this.$refs[tableRef].searchHandler();
+                //     }
+                // })
             },
             handleAddEdit:function(row,info='handleInfo'){
                 if(row){

@@ -5,6 +5,9 @@
 @import '~@/assets/css/partysuTheme.less';
 /****/
 .module-theme(...){
+    .el-radio{
+        margin-right: @btnMargin
+    }
     .el-input__prefix{
         display: flex;
         align-items: center;
@@ -58,7 +61,7 @@
     .el-select-dropdown__item,
     .el-date-editor .el-range-separator,.el-date-editor .el-range-input,.el-date-table th,.el-time-spinner__item,.el-time-panel__btn,.el-picker-panel__icon-btn,.el-date-picker__header-label,.el-month-table td .cell,.el-year-table td .cell,
     .el-checkbox,
-    .el-radio,.el-radio__input.is-checked+.el-radio__label,
+    .el-radio,
     .el-dialog__headerbtn .el-dialog__close,
     .el-message-box__content,
     .el-tree__empty-text{
@@ -82,7 +85,8 @@
         color: @activeColor;
         border: 1px solid @activeColor;
     }
-    .el-input__inner:hover{
+    .el-input__inner:hover,
+    .el-radio.is-bordered.is-checked{
         border-color: @activeColor;
     }
     .el-dropdown-menu,
@@ -93,7 +97,7 @@
     .el-checkbox__inner,
     .el-radio__inner,.el-radio.is-bordered{
         background-color: transparent;
-        border-color: @color;
+        border-color: @lineColor;
     }
     .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner,
     .el-radio__input.is-checked .el-radio__inner{
@@ -200,7 +204,8 @@
     .el-radio-button__inner:hover,
     .el-button--text,
     .el-tabs__item.is-active,.el-tabs__item:hover,
-    .el-time-spinner__item.active:not(.disabled),.el-time-panel__btn.confirm,.el-year-table td .cell:hover, .el-year-table td.current:not(.disabled) .cell,.el-month-table td .cell:hover{
+    .el-time-spinner__item.active:not(.disabled),.el-time-panel__btn.confirm,.el-year-table td .cell:hover, .el-year-table td.current:not(.disabled) .cell,.el-month-table td .cell:hover,
+    .el-radio__input.is-checked+.el-radio__label{
         color: @activeColor;
     }
     .el-message-box,

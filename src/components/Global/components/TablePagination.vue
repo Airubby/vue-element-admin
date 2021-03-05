@@ -14,7 +14,7 @@
         :method='method' 
         :params="params"
         :columns="columns" ref="tableRef">   
-            <el-table-column slot="prepend" type="selection" align="center" :reserve-selection="true" :selectable="selectableFn"></el-table-column>
+            <el-table-column slot="prepend" type="selection" align="center" :reserve-selection="true" :selectable="checkSelectable"></el-table-column>
             <!-- <template v-slot:preview-handle="scope">
                 <slot name="preview-handle" :scope="scope"></slot>
             </template> -->
@@ -92,7 +92,7 @@ export default {
             return row.id
         },
         //是否可勾选
-        selectableFn:function(row){
+        checkSelectable:function(row){
             return this.selectTable.indexOf(row)==-1;
         },
         selectionChange:function(){

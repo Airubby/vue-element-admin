@@ -30,7 +30,7 @@ export default function(config) {
             }
         },
         methods:{
-            //重新加载数据高亮展示问题
+            //重新加载数据高亮展示问题 //或者直接row-key="id"
             rowKey:function(row){
                 return row.id;
             },

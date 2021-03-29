@@ -15,6 +15,13 @@ export default function(config) {
                 get(){
                     return this.$store.state.settings.themeSize
                 }
+            },
+            //计算传参过来
+            fn(){
+                return function(info){
+                    console.log('info是传过来的计算参数')
+                    return info
+                }
             }
         },
         data(){
@@ -30,10 +37,11 @@ export default function(config) {
             }
         },
         methods:{
-            //重新加载数据高亮展示问题
+            //重新加载数据高亮展示问题 //或者直接row-key="id"
             rowKey:function(row){
                 return row.id;
             },
+            //column 绑定sortable:true  //column, prop, order
             sortChange:function(info){
                 console.log(info)
             },

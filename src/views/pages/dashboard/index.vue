@@ -1,25 +1,36 @@
 <template>
     <div class="app-container">
-        <p v-for="item in 100" :key="item">大盘{{item}}</p>
+        <div @click="dialog">测试</div>
     </div>
 </template>
 
 <script>
+import DialogFullScreen from '@/components/DialogFullScreen/index'
 export default {
-    components: {  },
+    components: { DialogFullScreen },
     created() {
 
     },
     mounted(){
-
+        
+        document.onkeydown=function(ev){
+            var event=ev ||event
+            if(event.keyCode==13){
+                alert('按了enter键')
+            }
+        }
     },
     data() {
         return {
-            
+            dialogInfo:{
+                visible:false
+            }
         }
     },
     methods:{
-
+        dialog:function(){
+            this.dialogInfo.visible=true;
+        }
     }
     
 }

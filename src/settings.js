@@ -3,7 +3,7 @@ module.exports = {
      * @type {String} 
      * @description 网站title
      */
-    title: '配置管理系统',
+    title: '',
 
     /**
      * @type {String} 

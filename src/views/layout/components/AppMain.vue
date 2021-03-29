@@ -1,24 +1,19 @@
 <template>
-  <section class="app-main">
-    <transition name="fade-transform" mode="out-in">
-      <keep-alive :include="cachedViews">
-        <el-scrollbar class="app-scrollbar" ref="appScrollbar">
-            <router-view :key="key" />
-        </el-scrollbar>
-      </keep-alive>
-    </transition>
-  </section>
+    <section class="app-main">
+        <transition name="fade-transform" mode="out-in">
+            <el-scrollbar class="app-scrollbar" ref="appScrollbar">
+                <router-view :key="key" />
+            </el-scrollbar>
+        </transition>
+    </section>
 </template>
 
 <script>
 export default {
     name: 'AppMain',
     computed: {
-        cachedViews() {
-        return this.$store.state.tagsView.cachedViews
-        },
         key() {
-        return this.$route.path
+            return this.$route.path
         }
     },
     watch:{
@@ -26,7 +21,7 @@ export default {
             const scrollbar = this.$refs.appScrollbar
             // scrollbar 的实例对象相当于在 el-scrollbar 组件里面的 this
             console.log(scrollbar)
-            scrollbar.sizeHeight=""
+            scrollbar.sizeHeight=''
             const wrap = scrollbar.$refs.wrap
             console.log(wrap)
         }

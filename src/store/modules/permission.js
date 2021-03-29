@@ -49,8 +49,14 @@ const mutations = {
 		state.roles = roles
 	},
 	SET_ROUTES: (state, routes) => {
-		state.addRoutes = routes
-		state.routes = syncRouter.concat(routes)
+        state.addRoutes = routes
+        syncRouter.forEach(element => {
+            console.log(element)
+            if(element.access){
+                state.routes=element.children;
+            }
+        });
+		// state.routes = syncRouter.concat(routes)
 	}
 }
 

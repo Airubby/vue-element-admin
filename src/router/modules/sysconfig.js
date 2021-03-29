@@ -1,8 +1,7 @@
 
-import Layout from '@/views/layout';
 export default {
 	path: '/sysconfig',
-	component: Layout,
+	component: () => import('@/views/pages/sysconfig/index'), 
 	redirect: '/sysconfig/baseconfig',
 	name: 'Sysconfig',
 	meta: {

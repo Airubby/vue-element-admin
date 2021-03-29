@@ -23,22 +23,7 @@ import Layout from '@/views/layout'
   }
  */
 import sysconfigRouter from './modules/sysconfig'
-import projectconfigRouter from './modules/projectconfig'
-import projectdebug from './modules/projectdebug'
-import realtimecontrol from './modules/realtimecontrol'
-import querycount from './modules/querycount'
 export const syncRouter=[
-    {
-        path: '/redirect',
-        component: Layout,
-        hidden: true,
-        children: [
-          {
-            path: '/redirect/:path(.*)',
-            component: () => import('@/views/redirect/index')
-          }
-        ]
-    },
     {
         path: '/404',
         component: () => import('@/views/error/404'),
@@ -55,29 +40,26 @@ export const syncRouter=[
         hidden: true
     },
     {
-        path: '/test',
-        component: () => import('@/views/test/index'),
-        name:'test',
-        meta: { title: 'test', icon: 'dashboard', affix: true }
-    },
-    {
         path: '/',
         component: Layout,
         redirect: '/dashboard',
-        children: [
-        {
-            path: 'dashboard',
-            component: () => import('@/views/pages/dashboard/index'),
-            name: 'Dashboard',
-            meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-        }
+        meta: { title: '首页' },
+        access:true,
+        children:[
+            {
+                path: '/redirect/:path(.*)',
+                component: () => import('@/views/redirect/index'),
+                hidden: true,
+            },
+            {
+                path: '/dashboard',
+                component: () => import('@/views/pages/dashboard/index'),
+                name: 'Dashboard',
+                meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+            },
+            sysconfigRouter,
         ]
     },
-    sysconfigRouter,
-    projectconfigRouter,
-    projectdebug,
-    realtimecontrol,
-    querycount,
     { path: '*', redirect: '/404', hidden: true }, 
 ];
 

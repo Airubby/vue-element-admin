@@ -1,8 +1,12 @@
 // sidebar
-@menuText:#bfcbd9;
-@menuActiveText:#409EFF;
-@subMenuActiveText:#ffffff; // https://github.com/ElemeFE/element/issues/12951
-@menuBg:#304156;
+@logoBg:#0B1E2F;
+@menuHeight:46px;
+@topBg:rgba(11, 34, 55, 0.85);
+@menuText:#7AA6FF;
+@menuActiveText:#ffffff;
+@menuActiveBg:#335AAB;
+@subMenuActiveText:#ffffff; 
+@menuBg:transparent;
 @menuHover:#263445;
 @subMenuBg:#1f2d3d;
 @subMenuHover:#001528;
@@ -10,7 +14,11 @@
 // the :export directive is the magic sauce for webpack
 // CSS Module 有一个:export关键字，它在功能上等同于 ES6 的关键字export，即导出一个 js 对象。
 :export {
+    logoBg:@logoBg;
+    menuHeight:@menuHeight;
+    topBg:@topBg;
     menuText: @menuText;
+    menuActiveBg:@menuActiveBg;
     menuActiveText: @menuActiveText;
     subMenuActiveText: @subMenuActiveText;
     menuBg: @menuBg;

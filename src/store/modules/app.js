@@ -1,12 +1,13 @@
 import Cookies from 'js-cookie'
 
 const state = {
-  sidebar: {
-    opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
-    withoutAnimation: false
-  },
-  device: 'desktop',
-  size: Cookies.get('size') || 'medium'
+    sidebar: {
+        opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
+        withoutAnimation: false
+    },
+    device: 'desktop',
+    size: Cookies.get('size') || 'medium',
+    theme:"blueTheme"
 }
 
 const mutations = {
@@ -34,18 +35,18 @@ const mutations = {
 }
 
 const actions = {
-  toggleSideBar({ commit }) {
+    toggleSideBar({ commit }) {
     commit('TOGGLE_SIDEBAR')
-  },
-  closeSideBar({ commit }, { withoutAnimation }) {
+    },
+    closeSideBar({ commit }, { withoutAnimation }) {
     commit('CLOSE_SIDEBAR', withoutAnimation)
-  },
-  toggleDevice({ commit }, device) {
+    },
+    toggleDevice({ commit }, device) {
     commit('TOGGLE_DEVICE', device)
-  },
-  setSize({ commit }, size) {
+    },
+    setSize({ commit }, size) {
     commit('SET_SIZE', size)
-  }
+    }
 }
 
 export default {

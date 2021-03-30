@@ -23,6 +23,10 @@ import Layout from '@/views/layout'
   }
  */
 import sysconfigRouter from './modules/sysconfig'
+import projectconfigRouter from './modules/projectconfig'
+import projectdebug from './modules/projectdebug'
+import realtimecontrol from './modules/realtimecontrol'
+import querycount from './modules/querycount'
 export const syncRouter=[
     {
         path: '/404',
@@ -58,6 +62,10 @@ export const syncRouter=[
                 meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
             },
             sysconfigRouter,
+            projectconfigRouter,
+            projectdebug,
+            realtimecontrol,
+            querycount,
         ]
     },
     { path: '*', redirect: '/404', hidden: true }, 

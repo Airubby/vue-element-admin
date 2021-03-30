@@ -93,13 +93,3 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
-// @import '~@/assets/css/variables.less';
-//     .menu{
-//         /deep/ 
-//         .el-menu-item, .el-submenu__title{
-//             height: @menuHeight;
-//             line-height: @menuHeight;
-//         }
-//     }
-</style>

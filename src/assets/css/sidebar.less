@@ -5,6 +5,7 @@
         height: @menuHeight;
         padding: 4px 4px 0 4px;
         display: flex;
+        white-space: nowrap;
         background: @topBg;
         border-bottom: 4px solid @menuActiveBg;
         .sidebar-logo-container{
@@ -41,9 +42,10 @@
             background: transparent;
             border-bottom: none;
         }
-        .el-menu-item{
-            padding: 0 10px;
-            margin: 0 20px;
+        .el-menu-item,.el-submenu{
+            padding: 0 5px;
+            margin: 0 10px;
+            transition: 0s background-color ease-in-out;
         }
         .el-menu-item, .el-submenu__title{
             height: 100%;
@@ -89,7 +91,6 @@
         .el-menu-item:hover,.el-submenu:hover{
             background-color: @menuActiveBg;
             color: @menuActiveText;
-            transition: 0s background-color ease-in-out;
             &::before{
                 content: "";
                 width: 0;
@@ -137,7 +138,37 @@
             }
         }
 
+
+        .right-menu{
+            display: flex;
+            color: @menuText;
+            font-size: 24px;
+            .right-menu-box{
+                display: flex;
+                align-items: center;
+                margin: 0 10px 0 15px;
+                cursor: pointer;
+                span{
+                    font-size: 16px;
+                }
+            }
+        }
     }
+}
+
+.el-menu{
+    background-color: @topBg
+}
+.el-menu--horizontal .el-menu .el-menu-item,
+.el-menu--horizontal .el-menu .el-submenu__title{
+    background-color: transparent;
+}
+.el-menu--horizontal .el-menu .el-menu-item.is-active, .el-menu--horizontal .el-menu .el-submenu.is-active>.el-submenu__title{
+    color: @menuActiveText;
+    background-color: @menuActiveBg;
+}
+.el-submenu__title i{
+    color: @menuText;
 }
 // #app {
 //     .main-container {

@@ -1,8 +1,7 @@
 
-import Layout from '@/views/layout';
 export default {
 	path: '/projectconfig',
-	component: Layout,
+	component: () => import('@/views/pages/projectconfig/index'), 
 	redirect: '/projectconfig/baseconfig',
 	name: 'Projectconfig',
 	meta: {

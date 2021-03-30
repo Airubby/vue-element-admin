@@ -1,8 +1,6 @@
-
-import Layout from '@/views/layout';
 export default {
 	path: '/projectdebug',
-	component: Layout,
+	component: () => import('@/views/pages/projectdebug/index'), 
 	redirect: '/projectdebug/syscheck',
 	name: 'Projectdebug',
 	meta: {

@@ -1,5 +1,26 @@
 <template>
-  <div style="padding:30px;">
-    233333
-  </div>
+    <div class="app-container">
+        ABC
+    </div>
 </template>
+
+<script>
+export default {
+    components: {  },
+    created() {
+
+    },
+    mounted(){
+
+    },
+    data() {
+        return {
+            
+        }
+    },
+    methods:{
+
+    }
+    
+}
+</script>

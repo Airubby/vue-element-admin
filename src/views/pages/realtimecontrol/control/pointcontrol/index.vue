@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        指标监控
+        ABC
     </div>
 </template>
 

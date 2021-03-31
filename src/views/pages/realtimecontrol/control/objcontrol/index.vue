@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        对象监控
+        ABC
     </div>
 </template>
 

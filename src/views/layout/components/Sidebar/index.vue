@@ -1,21 +1,21 @@
 <template>
-  <div :class="{ 'has-logo': showLogo }" class="bar-container" >
-    <logo v-if="showLogo" :collapse="isCollapse" />
-    <el-menu
-        class="menu-container"
-        :default-active="activeMenu"
-        :text-color="variables.menuText"
-        mode="horizontal">
-        <sidebar-item
-          v-for="route in permission_routes"
-          :key="route.path"
-          :item="route"
-          :base-path="route.path"
-        />
-      </el-menu>
-    </el-menu>
-    <tagbar />
-  </div>
+    <div :class="{ 'has-logo': showLogo }" class="bar-container" >
+        <logo v-if="showLogo" :collapse="isCollapse" />
+        <el-scrollbar class="menu-scrollbar">
+            <el-menu
+                class="menu-container"
+                :default-active="activeMenu"
+                mode="horizontal">
+                <sidebar-item
+                v-for="route in permission_routes"
+                :key="route.path"
+                :item="route"
+                :base-path="route.path"
+                />
+            </el-menu>
+        </el-scrollbar>
+        <tagbar />
+    </div>
 </template>
 
 <script>

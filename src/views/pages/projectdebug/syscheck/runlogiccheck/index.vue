@@ -1,8 +1,26 @@
 <template>
-  <div style="padding:30px;">
-    <!-- <el-alert :closable="false" title="menu 1-2" type="success">
-      <router-view />
-    </el-alert> -->
-    33333
-  </div>
+    <div class="app-container">
+        ABC
+    </div>
 </template>
+
+<script>
+export default {
+    components: {  },
+    created() {
+
+    },
+    mounted(){
+
+    },
+    data() {
+        return {
+            
+        }
+    },
+    methods:{
+
+    }
+    
+}
+</script>

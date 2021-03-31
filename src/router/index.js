@@ -46,7 +46,7 @@ export const syncRouter=[
     {
         path: '/',
         component: Layout,
-        redirect: '/dashboard',
+        redirect: '/home',
         meta: { title: '首页' },
         access:true,
         children:[
@@ -56,7 +56,7 @@ export const syncRouter=[
                 hidden: true,
             },
             {
-                path: '/dashboard',
+                path: '/home',
                 component: () => import('@/views/pages/dashboard/index'),
                 name: 'Dashboard',
                 meta: { title: 'Dashboard', icon: 'dashboard', affix: true }

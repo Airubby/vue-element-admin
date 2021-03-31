@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        连接监控
+        ABC
     </div>
 </template>
 

@@ -23,7 +23,6 @@ import { mapGetters } from 'vuex';
 import Logo from './Logo';
 import SidebarItem from './SidebarItem';
 import Tagbar from './Tagbar'
-import variables from '@/assets/css/variables.less';
 export default {
     components: { SidebarItem, Logo ,Tagbar},
     computed: {
@@ -42,9 +41,6 @@ export default {
         },
         isCollapse() {
         return !this.sidebar.opened;
-        },
-        variables() {
-        return variables;
         },
     },
 };

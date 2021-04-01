@@ -3,11 +3,8 @@ import Router from 'vue-router'
 Vue.use(Router)
 import Layout from '@/views/layout'
 /**
- * Note: sub-menu only appear when route children.length >= 1
- * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
  *
  * hidden: true                   if set true, item will not show in the sidebar(default is false)
- * alwaysShow: true               if set true, will always show the root menu
  *                                if not set alwaysShow, when item has more than one children route,
  *                                it will becomes nested mode, otherwise not show the root menu
  * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
@@ -52,6 +49,7 @@ export const syncRouter=[
         children:[
             {
                 path: '/redirect/:path(.*)',
+                name:"redirect",
                 component: () => import('@/views/redirect/index'),
                 hidden: true,
             },
@@ -61,11 +59,11 @@ export const syncRouter=[
                 name: 'Dashboard',
                 meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
             },
-            sysconfigRouter,
+            querycount,
             projectconfigRouter,
             projectdebug,
             realtimecontrol,
-            querycount,
+            sysconfigRouter,
         ]
     },
     { path: '*', redirect: '/404', hidden: true }, 

@@ -1,4 +1,7 @@
 @import '~@/assets/css/variables.less';
+
+
+
 .app-wrapper {
     .bar-container{
         width:100%;
@@ -128,7 +131,6 @@
             }
         }
 
-        .nest-menu .el-submenu>.el-submenu__title,
         .el-submenu .el-menu-item {
             min-width: @sideBarWidth !important;
             background-color: @subMenuBg !important;
@@ -177,7 +179,8 @@
     color: @menuText;
     background-color: transparent;
 }
-.el-menu--horizontal .el-menu .el-menu-item.is-active, .el-menu--horizontal .el-menu .el-submenu.is-active>.el-submenu__title{
+.el-menu--horizontal .el-menu .el-menu-item.is-active, .el-menu--horizontal .el-menu .el-submenu.is-active>.el-submenu__title,
+.el-menu--horizontal .el-menu .el-menu-item:hover,.el-menu--horizontal .el-menu .el-submenu:hover>.el-submenu__title{
     color: @menuActiveText;
     background-color: @menuActiveBg;
 }

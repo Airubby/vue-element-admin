@@ -137,7 +137,38 @@ export function gatherHandle(arrA,arrB,type){
 export function removeArritem(array,element){
     array.splice(array.findIndex(item => item === element), 1);
 }
+//tree 子节点全部勾选了获取父节点，子节点没有全部勾选或者子节点；store:this.$refs.tree.store
+export function getSimpleCheckedNodes(store) {
+    const checkedNodes = [];
+    const traverse = function(node) {
+        const childNodes = node.root ? node.root.childNodes : node.childNodes;
 
+        childNodes.forEach(child => {
+            if (child.checked) {
+                checkedNodes.push(child.data);
+            }
+            if (child.indeterminate) {
+                traverse(child);
+            }
+        });
+    };
+    traverse(store)
+    return checkedNodes;
+}
+//tree异步树时（即添加了lazy）局部刷新；
+export function refreshNodeTree(id){
+    let node = this.$refs.asyncTree.getNode(id); // 通过节点id找到对应树节点对象
+    node.loaded = false;
+    node.expand(); // 主动调用展开节点方法，重新查询该节点下的所有子节点
+}
+//tree设置半选 异步数回显绑定default-checked-keys=arr;  
+//arr默认先给一级请求的全部勾选的key；半选的单独设置半选；拉取下一级的时候判断半勾选下的勾选的key添加到arr中 this.$nextTick()中添加到arr
+export function setHalfCheckedNodes (key) {
+    const node = this.$refs.asyncTree.getNode(key)
+    if (node) { 
+        node.indeterminate = true
+    }
+}
 export default {
     arrayContains,
     FormatDate,

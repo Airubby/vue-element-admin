@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
-import Layout from '@/views/layout'
 /**
  *
  * hidden: true                   if set true, item will not show in the sidebar(default is false)
@@ -19,51 +18,53 @@ import Layout from '@/views/layout'
     activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
   }
  */
-import sysconfigRouter from './modules/sysconfig'
-import projectconfigRouter from './modules/projectconfig'
-import projectdebug from './modules/projectdebug'
-import realtimecontrol from './modules/realtimecontrol'
-import querycount from './modules/querycount'
+// import sysconfigRouter from './modules/sysconfig'
+// import projectconfigRouter from './modules/projectconfig'
+// import projectdebug from './modules/projectdebug'
+// import realtimecontrol from './modules/realtimecontrol'
+// import querycount from './modules/querycount'
+import objconfig from './modules/objconfig'
 export const syncRouter=[
     {
         path: '/404',
-        component: () => import('@/views/error/404'),
+        component: () => import(/* webpackChunkName: "404" */ '@/views/error/404'),
         hidden: true
     },
     {
         path: '/401',
-        component: () => import('@/views/error/401'),
+        component: () => import(/* webpackChunkName: "401" */ '@/views/error/401'),
         hidden: true
     },
     {
         path: '/login',
-        component: () => import('@/views/login/index'),
+        component: () => import(/* webpackChunkName: "login", webpackPrefetch: true */ '@/views/login/index'),
         hidden: true
     },
     {
         path: '/',
-        component: Layout,
+        component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),
         redirect: '/home',
         meta: { title: '首页' },
         access:true,
         children:[
             {
                 path: '/redirect/:path(.*)',
-                name:"redirect",
-                component: () => import('@/views/redirect/index'),
+                name:'redirect',
+                component: () => import(/* webpackChunkName: "redirect", webpackPrefetch: true */ '@/views/redirect/index'),
                 hidden: true,
             },
             {
                 path: '/home',
-                component: () => import('@/views/pages/dashboard/index'),
+                component: () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '@/views/pages/dashboard/index'),
                 name: 'Dashboard',
                 meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
             },
-            querycount,
-            projectconfigRouter,
-            projectdebug,
-            realtimecontrol,
-            sysconfigRouter,
+            // querycount,
+            // projectconfigRouter,
+            // projectdebug,
+            // realtimecontrol,
+            // sysconfigRouter,
+            objconfig,
         ]
     },
     { path: '*', redirect: '/404', hidden: true }, 

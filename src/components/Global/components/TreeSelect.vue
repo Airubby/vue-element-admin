@@ -156,7 +156,9 @@ export default {
     watch:{
         value:{
             handler:function(val){
-                this.getNode(val);
+                this.$nextTick(()=>{
+                    this.getNode(val);
+                })
             },
             immediate:true
         }

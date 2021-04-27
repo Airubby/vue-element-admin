@@ -7,6 +7,7 @@ export default function(config) {
                 for(let item in params){
                     this.$set(this.DicItem,item,[]);
                     this.handleDicItem(item,params[item])
+                    //如果向数组中set：this.$set(this.items,2,{name: 'xiao4!'})
                 }
             }
         },

@@ -43,11 +43,11 @@ export const syncRouter=[
     // {
     //     path: '/',
     //     component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),
-    //     redirect: '/loncom',
-    //     hidden: true
-    // },
+    //     redirect: '/pages',
+    //     meta: { title: 'layout' },
+    // }
     // {
-    //     path: '/loncom',
+    //     path: '/',
     //     component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),
     //     redirect: '/home',
     //     meta: { title: '首页' },
@@ -78,7 +78,7 @@ export const syncRouter=[
 
 export const asyncRoutes=[
     {
-        path: '/home',
+        path: '/dashboard',
         component: () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '@/views/pages/dashboard/index'),
         name: 'Dashboard',
         meta: { title: 'Dashboard', icon: 'dashboard', affix: true }

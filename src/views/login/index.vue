@@ -64,7 +64,7 @@
 				type="primary"
 				style="width:100%;margin-bottom:30px;"
 				@click.native.prevent="handleLogin"
-                @keydown="keyLogin($event)"
+                @keyup.enter.native="handleLogin"
 				>Login</el-button
 			>
 		</el-form>
@@ -184,9 +184,6 @@ export default {
                         query: this.otherQuery
                     })
                     this.loading = false
-				} else {
-					console.log('error submit!!')
-					return false
 				}
 			})
 		},

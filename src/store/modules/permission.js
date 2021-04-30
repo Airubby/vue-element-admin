@@ -9,11 +9,26 @@ export function filterAsyncRoutes(routes) {
 	const res = []
 
 	routes.forEach(route => {
-		const tmp = { ...route }
-		if (tmp.children) {
-            tmp.children = filterAsyncRoutes(tmp.children)
+        //接口数据处理
+        const tmp={
+            path: route.path,
+            component: () => import(`@/views/${route.component}`),
+            name: route.key,
+            meta: { title: route.title, icon: route.iconfont,limits:route.limits||[] }
         }
-        res.push(tmp)
+        if(route.children&&route.children.length>0){
+            tmp.redirect=route.children[0].path;
+            tmp.children=filterAsyncRoutes(route.children);
+        }
+
+        res.push(tmp);
+
+        //使用asyncRoutes数据
+		// const tmp = { ...route }
+		// if (tmp.children) {
+        //     tmp.children = filterAsyncRoutes(tmp.children)
+        // }
+        // res.push(tmp)
 	})
 
 	return res
@@ -95,6 +110,7 @@ const actions = {
                 let theAsyncRouter = filterAsyncRoutes(accessedRoutes);
                 if(theAsyncRouter){
                     newRouter.redirect=theAsyncRouter[0].path;
+                    theAsyncRouter[0].meta.affix=true //固定用
                     newRouter.children=[{
                         path: '/redirect/:path(.*)',
                         name:'redirect',
@@ -102,20 +118,29 @@ const actions = {
                         hidden: true,
                     }].concat(theAsyncRouter);
                 }
+
                 router.addRoutes([newRouter,{ path: '*', redirect: '/404', hidden: true }]);
-                commit('SET_ROUTES', accessedRoutes)
+                commit('SET_ROUTES', newRouter)
             }
 			resolve(accessedRoutes)
 		})
     },
 	getInfo({ commit },info) {
 		return new Promise(resolve => {
-            //这个地方请求角色权限信息
-            if(state.userid=='admin'||info=='admin'){
-                resolve(asyncRoutes)
-            }else{
+            //接口获取权限信息
+            Request.get('/getMenuData',{token:state.token}).then(res => {
+                console.log(res)
+                resolve(res.data||[])
+            }).catch(error => {
                 resolve([])
-            }
+            })
+
+            //使用asyncRoutes数据
+            // if(state.userid=='admin'||info=='admin'){
+            //     resolve(asyncRoutes)
+            // }else{
+            //     resolve([])
+            // }
 		})
 	}
 }

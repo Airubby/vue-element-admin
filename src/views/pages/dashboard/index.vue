@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <div @click="dialog" v-for="item in 100" :key="item">测试</div>
+        <div @click="dialog" v-for="item in 1" :key="item">测试</div>
     </div>
 </template>
 

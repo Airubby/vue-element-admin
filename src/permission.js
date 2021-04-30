@@ -16,7 +16,6 @@ router.beforeEach(async (to, from, next) => {
 
 	// set page title
 	document.title = getPageTitle(to.meta.title)
-
 	// determine whether the user has logged in
 	const hasToken = getToken()
 	if (hasToken) {
@@ -35,6 +34,8 @@ router.beforeEach(async (to, from, next) => {
                 next()
             }else{
                 try {
+                    // next({ ...to, replace: true })
+                    
                     // get user navinfo
                     const info = await store.dispatch('permission/getInfo')
                     const accessRoutes = await store.dispatch('permission/generateRoutes', info)

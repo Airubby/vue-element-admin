@@ -6,18 +6,18 @@ Vue.use(Router);
 
 // 模块路由名称(与文件夹名称相同)
 const moduleNameList = [
-  "basicService",
-  "equipment",
-  "upkeep",
-  "workOrderRouter",
-  "medicalWaste",
-  "inspection",
-  "orderResource",
-  "taskCode",
-  "warehouse",
-  "clientRelation",
-  "transport",
-  "construction"
+  'basicService',
+  'equipment',
+  'upkeep',
+  'workOrderRouter',
+  'medicalWaste',
+  'inspection',
+  'orderResource',
+  'taskCode',
+  'warehouse',
+  'clientRelation',
+  'transport',
+  'construction'
 ];
 // 动态路由
 export const asyncRoutes = [];
@@ -75,3 +75,7 @@ function disposeModules() {
     }
 }
 disposeModules();
+
+// // 根据roles权限生成可访问的路由表
+// Router.addRoutes(Store.getters.addRouters); // 动态添加可访问路由表
+// next({ ...to, replace: true }); // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record

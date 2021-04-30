@@ -1,7 +1,7 @@
 <template>
     <el-select v-model="selectValue" 
         :disabled="disabled"
-        @focus="filterMethod('')"
+        @focus="focus"
         @clear="clear"
         filterable 
         :clearable="clearable"
@@ -11,7 +11,7 @@
         <el-option :label="selectLabel" value="" style="display:none"></el-option>
         <el-option :label="selectLabel" :value="selectValue">
             <el-tree ref="treeSelect" :node-key="treeValue"
-            :data="treeData" 
+            :data="treeSelectData" 
             :filter-node-method="filterNode"
             :props="treeProps" 
             @node-click="clickTree">
@@ -66,6 +66,21 @@ export default {
                 return {}  // { type: 'T'} 禁用type为T的
             }
         },
+        url:{
+            type:String,
+            default:''
+        },
+        params:{
+            type:Object,
+            default:()=>{
+                return{}
+            }
+        },
+        //异步拉取的时候回填的信息展示
+        showName:{
+            type:String,
+            default:''
+        },
         treeData:{
             type:Array,
             default:()=>{
@@ -74,27 +89,48 @@ export default {
         }
     },
     created() {
-        
+        if(this.url==''){
+            this.treeSelectData=this.treeData;
+        }
     },
     mounted(){
-        this.$nextTick(()=>{
-            if(Object.prototype.toString.call(this.disabledObject) === '[object Object]'&&JSON.stringify(this.filterObject)!='{}'){
-                this.$refs.treeSelect.filter();
-            }
-        })
+        this.filterTree();
     },
     data() {
         return {
             selectValue:'',
             selectLabel:'',
+            treeSelectData:[]
         }
     },
     methods:{
+        filterTree:function() {
+            this.$nextTick(()=>{
+                if(Object.prototype.toString.call(this.disabledObject) === '[object Object]'&&JSON.stringify(this.filterObject)!='{}'){
+                    this.$refs.treeSelect.filter();
+                }
+            })
+        },
+        getTree:function(){
+            if(this.url){
+                this.$api.post(this.url,this.initParams,{isLoading:false}).then(res=>{
+                    this.treeSelectData=res.data?res.data:[];
+                    this.filterTree();
+                })
+            }
+        },
         clear:function(){
             this.selectLabel='';
             this.selectValue='';
             this.$emit('input','');
             this.$emit('change',null);
+        },
+        focus:function(){
+            if(this.url){
+                this.getTree();
+            }
+            this.filterMethod('');
+            this.$emit('focus');
         },
         getNode:function(key){
             if(key){
@@ -159,6 +195,17 @@ export default {
                 this.$nextTick(()=>{
                     this.getNode(val);
                 })
+            },
+            immediate:true
+        },
+        showName:{
+            handler:function(val){
+                if(this.url&&this.value){
+                    this.$nextTick(()=>{
+                        this.selectLabel=val;
+                        this.selectValue=this.value;
+                    })
+                }
             },
             immediate:true
         }

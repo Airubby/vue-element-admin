@@ -21,7 +21,7 @@
         <div class="right-menu-box">
             <item icon="message" title="" />
         </div>
-        <div class="right-menu-box">
+        <div class="right-menu-box" @click="logout">
             <item icon="user" title="admin" />
         </div>
     </div>
@@ -42,7 +42,10 @@ export default {
         ])
     },
     methods: {
-        
+        async logout() {
+            await this.$store.dispatch('permission/logout')
+            this.$router.push('/login?redirect=/')
+        }
     }
 }
 </script>

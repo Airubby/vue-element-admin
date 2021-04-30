@@ -64,6 +64,7 @@
 				type="primary"
 				style="width:100%;margin-bottom:30px;"
 				@click.native.prevent="handleLogin"
+                @keydown="keyLogin($event)"
 				>Login</el-button
 			>
 		</el-form>
@@ -96,7 +97,7 @@ export default {
 		return {
             title:'',
 			loginForm: {
-				username: 'admin',
+				username: 'test',
 				password: '111111'
 			},
 			loginRules: {
@@ -126,9 +127,9 @@ export default {
 	watch: {
 		$route: {
 			handler: function(route) {
-				const query = route.query
+                const query = route.query
 				if (query) {
-					this.redirect = query.redirect
+					this.redirect = query.redirect,
 					this.otherQuery = this.getOtherQuery(query)
 				}
 			},
@@ -163,6 +164,11 @@ export default {
 			this.$nextTick(() => {
 				this.$refs.password.focus()
 			})
+        },
+        keyLogin:function(ev){
+			if(ev.keyCode == 13){
+				this.handleLogin();
+			}
 		},
 		handleLogin() {
 			this.$refs.loginForm.validate(valid => {
@@ -172,7 +178,7 @@ export default {
                     //     console.log(res)
                     // })
                     this.$store.dispatch('permission/setToken','token');
-                    console.log(this.redirect)
+                    this.$store.dispatch('permission/setUserid',this.loginForm.username);
                     this.$router.push({
                         path: this.redirect || '/',
                         query: this.otherQuery

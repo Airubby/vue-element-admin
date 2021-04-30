@@ -17,14 +17,12 @@ export default {
         }
     },
     watch:{
-        '$route.path'(newValue, oldValue) {
-            const scrollbar = this.$refs.appScrollbar
-            // scrollbar 的实例对象相当于在 el-scrollbar 组件里面的 this
-            console.log(scrollbar)
-            scrollbar.sizeHeight=''
-            const wrap = scrollbar.$refs.wrap
-            console.log(wrap)
-        }
+        // '$route.path'(newValue, oldValue) {
+        //     const scrollbar = this.$refs.appScrollbar
+        //     // scrollbar 的实例对象相当于在 el-scrollbar 组件里面的 this
+        //     scrollbar.sizeHeight=''
+        //     const wrap = scrollbar.$refs.wrap
+        // }
 
     }
 }

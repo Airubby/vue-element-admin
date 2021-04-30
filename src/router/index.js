@@ -40,38 +40,50 @@ export const syncRouter=[
         component: () => import(/* webpackChunkName: "login", webpackPrefetch: true */ '@/views/login/index'),
         hidden: true
     },
-    {
-        path: '/',
-        component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),
-        redirect: '/home',
-        meta: { title: '首页' },
-        access:true,
-        children:[
-            {
-                path: '/redirect/:path(.*)',
-                name:'redirect',
-                component: () => import(/* webpackChunkName: "redirect", webpackPrefetch: true */ '@/views/redirect/index'),
-                hidden: true,
-            },
-            {
-                path: '/home',
-                component: () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '@/views/pages/dashboard/index'),
-                name: 'Dashboard',
-                meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-            },
-            // querycount,
-            // projectconfigRouter,
-            // projectdebug,
-            // realtimecontrol,
-            // sysconfigRouter,
-            objconfig,
-        ]
-    },
-    { path: '*', redirect: '/404', hidden: true }, 
+    // {
+    //     path: '/',
+    //     component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),
+    //     redirect: '/loncom',
+    //     hidden: true
+    // },
+    // {
+    //     path: '/loncom',
+    //     component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),
+    //     redirect: '/home',
+    //     meta: { title: '首页' },
+    //     access:true,
+    //     children:[
+    //         {
+    //             path: '/redirect/:path(.*)',
+    //             name:'redirect',
+    //             component: () => import(/* webpackChunkName: "redirect", webpackPrefetch: true */ '@/views/redirect/index'),
+    //             hidden: true,
+    //         },
+    //         // {
+    //         //     path: '/home',
+    //         //     component: () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '@/views/pages/dashboard/index'),
+    //         //     name: 'Dashboard',
+    //         //     meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+    //         // },
+    //         // querycount,
+    //         // projectconfigRouter,
+    //         // projectdebug,
+    //         // realtimecontrol,
+    //         // sysconfigRouter,
+    //         // objconfig,
+    //     ]
+    // },
+    // { path: '*', redirect: '/404', hidden: true }, 
 ];
 
 export const asyncRoutes=[
-    
+    {
+        path: '/home',
+        component: () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '@/views/pages/dashboard/index'),
+        name: 'Dashboard',
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+    },
+    objconfig
 ]
 
 /**

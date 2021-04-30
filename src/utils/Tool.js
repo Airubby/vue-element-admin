@@ -169,6 +169,22 @@ export function setHalfCheckedNodes (key) {
         node.indeterminate = true
     }
 }
+// 数组排序 如果arr数组中是对象，则传入对象属性key排序
+export function sort(arr,order,key){
+    if(order=='ascending'){ //升序
+        arr.sort((a,b)=>{
+            if(key) return a.key-b.key;
+            return a-b
+        });
+    }else if(order=='descending'){
+        arr.sort((a,b)=>{
+            if(key) return b.key-a.key;
+            return b-a
+        });
+    }
+    return arr;
+}
+
 export default {
     arrayContains,
     FormatDate,

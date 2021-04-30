@@ -4,6 +4,7 @@ const getters = {
     device: state => state.app.device,
     getTheme: state => state.app.theme,
     token: state => state.permission.token,
+    userid: state => state.permission.userid,
     roles: state => state.permission.roles,
     permission_routes: state => state.permission.routes
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <div @click="dialog">测试</div>
+        <div @click="dialog" v-for="item in 100" :key="item">测试</div>
     </div>
 </template>
 
@@ -13,12 +13,12 @@ export default {
     },
     mounted(){
         
-        document.onkeydown=function(ev){
-            var event=ev ||event
-            if(event.keyCode==13){
-                alert('按了enter键')
-            }
-        }
+        // document.onkeydown=function(ev){
+        //     var event=ev ||event
+        //     if(event.keyCode==13){
+        //         alert('按了enter键')
+        //     }
+        // }
     },
     data() {
         return {

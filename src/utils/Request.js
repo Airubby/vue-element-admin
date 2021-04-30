@@ -31,16 +31,11 @@ service.interceptors.response.use(
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
-              }).then(() => {
+            }).then(() => {
                 store.dispatch('permission/resetToken').then(() => {
-                  location.reload()
+                    location.reload()
                 })
-              })
-			// if (store.getters.infoFlag) {
-			// 	store.dispatch('setInfoFlag', false)
-			// 	Notification.warning('请登录系统')
-			// 	router.push({ path: '/login' })
-			// }
+            })
 			return Promise.reject(new Error(res.message || 'Error'))
 		}
 		return response

@@ -180,7 +180,7 @@ export default {
                     } else {
                         total=res[this.pagination.total];
                     }
-                    this.total=total;
+                    this.total=Number(total);
                     
                 })
             }

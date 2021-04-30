@@ -40,10 +40,10 @@
             v-scrollBar="'table'"
             :url="baseURL+'/getTable'"
             :size="themeSize"
-            type="local"
             :data="tableData"
             @selection-change="selectionChange"
             :params="initParams"
+            method="POST"
             :columns="tableColumns" ref="tableRef">  
                 <el-table-column slot="prepend" type="selection" align="center" :selectable="checkSelectable"></el-table-column>
                 <template v-slot:preview-handle="scope">
@@ -94,7 +94,7 @@ export default {
             ],
             tableColumns:[
                 { prop: 'a', label: '参数编码',minWidth:'100px'},
-                { prop: 'name', label: '参数名称',minWidth:'100px'},
+                { prop: 'name', label: '参数名称',sortable:true,minWidth:'100px'},
                 { prop: 'c', label: '参数等级',minWidth:'100px'},
                 { prop: 'd', label: '数据类型',minWidth:'100px'},
                 { prop: 'e', label: '参数值',minWidth:'100px'},

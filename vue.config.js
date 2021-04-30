@@ -11,6 +11,10 @@ module.exports = {
     // eslint-loader 是否在保存的时候检查
     lintOnSave: false,
     chainWebpack: config => {
+        // 修复HMR热更新失效
+        config.resolve.symlinks(true);
+        //  // 配置别名
+        // config.resolve.alias.set("@", path.join(__dirname, "src"))
         //加载svg
         const svgRule = config.module.rule('svg')   
         svgRule.uses.clear()    

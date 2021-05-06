@@ -23,7 +23,7 @@ Vue.use(Router)
 // import projectdebug from './modules/projectdebug'
 // import realtimecontrol from './modules/realtimecontrol'
 // import querycount from './modules/querycount'
-import objconfig from './modules/objconfig'
+// import objconfig from './modules/objconfig'
 export const syncRouter=[
     {
         path: '/404',
@@ -41,30 +41,23 @@ export const syncRouter=[
         hidden: true
     },
     // {
-    //     path: '/',
+    //     path: '/pages',
     //     component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),
-    //     redirect: '/pages',
-    //     meta: { title: 'layout' },
-    // }
-    // {
-    //     path: '/',
-    //     component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),
-    //     redirect: '/home',
+    //     redirect: '/pages/home',
     //     meta: { title: '首页' },
-    //     access:true,
     //     children:[
     //         {
-    //             path: '/redirect/:path(.*)',
+    //             path: '/pages/redirect/:path(.*)',
     //             name:'redirect',
     //             component: () => import(/* webpackChunkName: "redirect", webpackPrefetch: true */ '@/views/redirect/index'),
     //             hidden: true,
     //         },
-    //         // {
-    //         //     path: '/home',
-    //         //     component: () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '@/views/pages/dashboard/index'),
-    //         //     name: 'Dashboard',
-    //         //     meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-    //         // },
+    //         {
+    //             path: '/pages/home',
+    //             component: () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '@/views/pages/dashboard/index'),
+    //             name: 'Dashboard',
+    //             meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+    //         },
     //         // querycount,
     //         // projectconfigRouter,
     //         // projectdebug,
@@ -77,13 +70,32 @@ export const syncRouter=[
 ];
 
 export const asyncRoutes=[
-    {
-        path: '/dashboard',
-        component: () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '@/views/pages/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-    },
-    objconfig
+    // {
+    //     path: '/',
+    //     component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),
+    //     redirect: '/home',
+    //     meta: { title: '首页' },
+    //     children:[
+    //         {
+    //             path: '/redirect/:path(.*)',
+    //             name:'redirect',
+    //             component: () => import(/* webpackChunkName: "redirect", webpackPrefetch: true */ '@/views/redirect/index'),
+    //             hidden: true,
+    //         },
+    //         {
+    //             path: '/home',
+    //             component: () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '@/views/pages/dashboard/index'),
+    //             name: 'Dashboard',
+    //             meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+    //         },
+    //         // querycount,
+    //         // projectconfigRouter,
+    //         // projectdebug,
+    //         // realtimecontrol,
+    //         // sysconfigRouter,
+    //         // objconfig,
+    //     ]
+    // },
 ]
 
 /**

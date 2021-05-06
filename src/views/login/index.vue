@@ -138,7 +138,6 @@ export default {
 	},
 	created() {
         this.title=settings.title;
-        console.log(WebSocket)
 	},
 	mounted() {
 		if (this.loginForm.username === '') {
@@ -177,13 +176,19 @@ export default {
                     // this.$api.post('',{}).then(res=>{
                     //     console.log(res)
                     // })
-                    this.$store.dispatch('permission/setToken','token');
-                    this.$store.dispatch('permission/setUserid',this.loginForm.username);
-                    this.$router.push({
-                        path: this.redirect || '/',
-                        query: this.otherQuery
-                    })
-                    this.loading = false
+                    this.$store.dispatch('permission/setToken',this.loginForm.username).then(res=>{
+                        this.$router.push({
+                            path: this.redirect || '/',
+                            query: this.otherQuery
+                        })
+                        this.loading = false
+                    });
+                    // this.$store.dispatch('permission/setUserid',this.loginForm.username);
+                    // this.$router.push({
+                    //     path: this.redirect || '/',
+                    //     query: this.otherQuery
+                    // })
+                    // this.loading = false
 				}
 			})
 		},

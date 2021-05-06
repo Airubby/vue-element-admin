@@ -64,12 +64,9 @@ export default {
 			loadingService = Loading.service(info)
 		}
 		return new Promise((resolve, reject) => {
-			service
-				.get(url, { params: params })
-				.then(response => {
+			service.get(url, { params: params }).then(response => {
 					resolve(response.data)
-				})
-				.catch(error => {
+				}).catch(error => {
 					reject(error)
 				})
 		})
@@ -80,12 +77,9 @@ export default {
 			loadingService = Loading.service(info)
 		}
 		return new Promise((resolve, reject) => {
-			service
-				.post(url, params)
-				.then(response => {
+			service.post(url, params).then(response => {
 					resolve(response.data)
-				})
-				.catch(error => {
+				}).catch(error => {
 					reject(error)
 				})
 		})

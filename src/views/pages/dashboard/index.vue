@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <div @click="dialog" v-for="item in 1" :key="item">测试</div>
+        <div @click="dialog" v-for="item in 10" :key="item">测试</div>
     </div>
 </template>
 
@@ -12,7 +12,9 @@ export default {
 
     },
     mounted(){
-        
+        this.$api.get('/getMenuData').then(res=>{
+            console.log(res)
+        })
         // document.onkeydown=function(ev){
         //     var event=ev ||event
         //     if(event.keyCode==13){

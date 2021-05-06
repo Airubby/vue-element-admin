@@ -42,9 +42,15 @@ export default {
         ])
     },
     methods: {
-        async logout() {
-            await this.$store.dispatch('permission/logout')
-            this.$router.push('/login?redirect=/')
+        logout() {
+            this.$confirm('确定退出, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(async () => {
+                await this.$store.dispatch('permission/logout')
+                this.$router.push('/login?redirect=/')
+            })
         }
     }
 }

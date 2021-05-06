@@ -38,6 +38,7 @@ function getServerConfig() {
     return new Promise ((resolve, reject) => {
         axios.get('/serverConfig.json').then((result) => {
             let config = result;
+            
             if(config.mock){
                 import(/* webpackChunkName: "utilMock", webpackPrefetch: true */ '@/utils/Mock.js')
             }

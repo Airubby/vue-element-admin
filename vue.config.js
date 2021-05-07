@@ -65,43 +65,43 @@ module.exports = {
                 // reuseExistingChunk: true，//  如果该chunk中引用了已经被抽取的chunk，直接引用该chunk，不会重复打包代码
                 // enforce: true  // 如果cacheGroup中没有设置minSize，则据此判断是否使用上层的minSize，true：则使用0，false：使用上层minSize
                     'vue-relation': {
-                        name: 'vue-relation',
+                        name: 'chunk-vue-relation',
                         enforce: true,
                         test: /[\\/]node_modules[\\/](vue|vuex|vue-router|axios|vue-i18n|js-cookie)[\\/]/,
                     },
                     'element-ui': {
-                        name: 'element-ui',
+                        name: 'chunk-element-ui',
                         enforce: true,
                         test: /[\\/]node_modules[\\/]element-ui[\\/]/,
                     },
                     echarts: {
-                        name: 'echarts',
+                        name: 'chunk-echarts',
                         enforce: true,
                         test: /[\\/]node_modules[\\/](echarts|echarts-liquidfill)[\\/]/,
                     },
                     video:{
-                        name: 'video',
+                        name: 'chunk-video',
                         enforce: true,
                         test: /[\\/]node_modules[\\/](flv.js|video.js|videojs-contrib-hls|videojs-contrib-hls.js|videojs-flash|vue-video-player)[\\/]/,
                     },
                     'el-table-pagination': {
-                        name: 'el-table-pagination',
+                        name: 'chunk-el-table-pagination',
                         enforce: true,
                         test: /[\\/]node_modules[\\/]el-table-pagination[\\/]/,
                     },
                     'mockjs':{
-                        name:'mockjs',
+                        name:'chunk-mockjs',
                         enforce: true,
                         test: /[\\/]node_modules[\\/]mockjs[\\/]/,
                     },
                     'vendors': {
-                        name: 'vendors',
+                        name: 'chunk-vendors',
                         enforce: true,
                         test: /[\\/]node_modules[\\/]/,
                         priority: -20,
                     },
                     styles: {
-                        name: 'styles',
+                        name: 'chunk-styles',
                         test: /\.(le|sa|sc|c)ss$/,
                         enforce: true,
                     }

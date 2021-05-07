@@ -40,7 +40,7 @@ function getServerConfig() {
             let config = result;
             
             if(config.mock){
-                import(/* webpackChunkName: "utilMock", webpackPrefetch: true */ '@/utils/Mock.js')
+                import(/* webpackChunkName: "public-mock", webpackPrefetch: true */ '@/utils/Mock.js')
             }
 
             let reqcon=result.request;

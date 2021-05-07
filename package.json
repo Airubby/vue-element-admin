@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:lib": "webpack --config webpack.config.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -31,9 +32,11 @@
     "crypto-js": "3.1.9-1",
     "less": "3.8.1",
     "less-loader": "4.1.0",
+    "progress-bar-webpack-plugin": "^2.1.0",
     "svg-sprite-loader": "^5.2.1",
     "terser-webpack-plugin": "^2.2.1",
     "vue-loader": "15.9.0",
-    "vue-template-compiler": "2.6.12"
+    "vue-template-compiler": "2.6.12",
+    "webpack-cli": "^4.6.0"
   }
 }

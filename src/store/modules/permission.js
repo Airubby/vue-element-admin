@@ -125,7 +125,7 @@ const actions = {
                         path: '/',
                         name:'layout',
                         meta: { title: '首页'},
-                        component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),
+                        component: () => import(/* webpackChunkName: "public-layout", webpackPrefetch: true */ '@/views/layout'),
                         // component:resolve => require(['@/views/home.vue'], resolve),
                         redirect:'',
                         children:[]
@@ -139,7 +139,7 @@ const actions = {
                         newRouter.children=[{
                             path: '/redirect/:path(.*)',
                             name:'redirect',
-                            component: () => import(/* webpackChunkName: "redirect", webpackPrefetch: true */ '@/views/redirect/index'),
+                            component: () => import(/* webpackChunkName: "public-redirect", webpackPrefetch: true */ '@/views/redirect/index'),
                             hidden: true,
                         }].concat(theAsyncRouter);
                     }

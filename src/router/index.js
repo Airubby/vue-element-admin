@@ -27,17 +27,17 @@ Vue.use(Router)
 export const syncRouter=[
     {
         path: '/404',
-        component: () => import(/* webpackChunkName: "404" */ '@/views/error/404'),
+        component: () => import(/* webpackChunkName: "public-404" */ '@/views/error/404'),
         hidden: true
     },
     {
         path: '/401',
-        component: () => import(/* webpackChunkName: "401" */ '@/views/error/401'),
+        component: () => import(/* webpackChunkName: "public-401" */ '@/views/error/401'),
         hidden: true
     },
     {
         path: '/login',
-        component: () => import(/* webpackChunkName: "login", webpackPrefetch: true */ '@/views/login/index'),
+        component: () => import(/* webpackChunkName: "public-login", webpackPrefetch: true */ '@/views/login/index'),
         hidden: true
     },
     // {

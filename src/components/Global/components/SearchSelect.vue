@@ -98,6 +98,9 @@ export default {
     },
     created() {
         console.log(this.data)
+        if(this.remoteFn&&this.url){
+            this.remoteMethod('')
+        }
     },
     mounted(){
 
@@ -106,7 +109,7 @@ export default {
         initParams:{
             get(){
                 let params=Object.assign({},this.params);
-                params[this.pagination.pageSize]=this.pageSize;
+                params[this.pagination.pageSize]=this.remote?this.pageSize:1000;
                 params[this.pagination.pageIndex]=this.pageIndex;
                 params[this.queryKey]=this.query;
                 return params;
@@ -129,7 +132,7 @@ export default {
             options: [],  //总数据
             total:0, //总条数
             pageIndex: 1,   //当前页码
-            pageSize: 3,   //每页展示的条数
+            pageSize: 5,   //每页展示的条数
             query:'',
         }
     },
@@ -146,32 +149,34 @@ export default {
             });
         },
         focus:function(){
+            if(this.remoteFn){
+                this.remoteMethod('')
+            }
             this.firstShow=false;
-            this.remoteMethod('')
+            this.$emit('focus')
         },
         clear:function(){
             
         },
         remoteMethod:function(query){
-            if(this.remote){
-                this.query=query;
-                this.pageIndex=1;
-                this.getList();
-            }
+            this.query=query;
+            this.pageIndex=1;
+            this.getList();
         },
         getList:function(){
-            if(this.remote){
-                this.$api.post(this.url,this.initParams,{isLoading:false}).then(res=>{
-                    let result=res;
-                    if (this.pagination.data && this.pagination.data.indexOf('.') !== -1) {
-                        this.pagination.data.split('.').forEach(vv => {
-                            result = result[vv]
-                        })
-                    } else {
-                        result=res[this.pagination.data];
-                    }
-                    this.options=result;
+            this.query=this.query?this.query:'';  // 关键字搜索重置判断
+            this.$api.post(this.url,this.initParams,{isLoading:false}).then(res=>{
+                let result=res;
+                if (this.pagination.data && this.pagination.data.indexOf('.') !== -1) {
+                    this.pagination.data.split('.').forEach(vv => {
+                        result = result[vv]
+                    })
+                } else {
+                    result=res[this.pagination.data];
+                }
+                this.options=result;
 
+                if(this.remoteFn){
                     let total=res;
                     if (this.pagination.total && this.pagination.total.indexOf('.') !== -1) {
                         this.pagination.total.split('.').forEach(vv => {
@@ -181,10 +186,8 @@ export default {
                         total=res[this.pagination.total];
                     }
                     this.total=total;
-                    
-                })
-            }
-            
+                }
+            })
         },
         handleCurrentChange(val) {
             this.pageIndex = val;

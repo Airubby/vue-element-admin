@@ -13,6 +13,7 @@
             <el-tree ref="treeSelect" :node-key="treeValue"
             :data="treeSelectData" 
             :filter-node-method="filterNode"
+            :default-expanded-keys="expandedKeys"
             :props="treeProps" 
             @node-click="clickTree">
                 <span class="custom-tree-node" slot-scope="{ node, data }">
@@ -100,7 +101,8 @@ export default {
         return {
             selectValue:'',
             selectLabel:'',
-            treeSelectData:[]
+            treeSelectData:[],
+            expandedKeys:[]
         }
     },
     methods:{
@@ -116,6 +118,7 @@ export default {
                 this.$api.post(this.url,this.initParams,{isLoading:false}).then(res=>{
                     this.treeSelectData=res.data?res.data:[];
                     this.filterTree();
+                    this.expandedKeys=[this.selectValue]
                 })
             }
         },
@@ -140,6 +143,7 @@ export default {
                     if(node){
                         this.selectValue=node[this.treeValue];
                         this.selectLabel=node[this.treeProps.label];
+                        this.expandedKeys=[this.selectValue]
                         this.$emit('change',node);
                     }
                 })

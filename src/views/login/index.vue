@@ -48,7 +48,7 @@
 						autocomplete="on"
 						@keyup.native="checkCapslock"
 						@blur="capsTooltip = false"
-						@keyup.enter.native="handleLogin"
+						@keydown.enter.native="handleLogin"
 					/>
 					<span class="show-pwd" @click="showPwd">
 						<svg-icon
@@ -64,7 +64,7 @@
 				type="primary"
 				style="width:100%;margin-bottom:30px;"
 				@click.native.prevent="handleLogin"
-                @keyup.enter.native="handleLogin"
+                @keydown.enter.native="handleLogin"
 				>Login</el-button
 			>
 		</el-form>
@@ -164,11 +164,6 @@ export default {
 				this.$refs.password.focus()
 			})
         },
-        keyLogin:function(ev){
-			if(ev.keyCode == 13){
-				this.handleLogin();
-			}
-		},
 		handleLogin() {
 			this.$refs.loginForm.validate(valid => {
 				if (valid) {

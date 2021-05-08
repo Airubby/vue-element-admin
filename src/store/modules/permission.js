@@ -1,18 +1,6 @@
 import route,{ asyncRoutes, resetRouter } from '@/router'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import Request from '@/utils/Request'
-/**
- * Use meta.role to determine if the current user has permission
- * @param roles
- * @param route
- */
-function hasPermission(roles, route) {
-	if (route.meta && route.meta.roles) {
-		return roles.some(role => route.meta.roles.includes(role))
-	} else {
-		return true
-	}
-}
 
 /**
  * Filter asynchronous routing tables by recursion

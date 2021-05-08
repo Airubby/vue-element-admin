@@ -5,21 +5,25 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    entry: path.resolve(__dirname, './src/views/pages/dashboard/index.vue'),
+    // entry: path.resolve(__dirname, './src/package/AirSys/Index.vue'),
+    entry: path.resolve(__dirname, './package/main.js'),
     output: {
-        path: path.resolve(__dirname, 'lib'),
-        filename: 'bundle.js',
-        library: 'views-pages-dashboard'
+        path: path.resolve(__dirname, './package/dist'),
+        filename: '[name].js',
+        // chunkFilename: '[name].js',
+        // library: 'libraryName'
+        jsonpFunction:'webpackJsonp'
     },
-    
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
             '@': path.resolve(__dirname, './src')
         },
-        // modules: ['node_modules']
+        modules: ['node_modules']
     },
     optimization: {
+        namedChunks: true,
+        moduleIds: 'named', //"natural" | "named" | "hashed" | "size" | "total-size" | false
         minimize: false,
         minimizer: [
             new TerserPlugin({ 
@@ -34,6 +38,12 @@ module.exports = {
                }
             })
         ],
+        splitChunks:{
+            chunks: 'all',
+        },
+        runtimeChunk: {
+            name: 'manifest'
+        },
     },
     module: {
         rules: [
@@ -43,12 +53,13 @@ module.exports = {
             },
             {//css 解析
                 test: /\.(le|sa|sc|c)ss$/,
-                use: ['vue-style-loader', 'css-loader']
+                use: ['vue-style-loader', 'css-loader','less-loader']
             },
-            // {//js 解析
-            //     test: /\.js$/,
-            //     use: ['vue-style-loader', 'css-loader']
-            // }
+            {
+                test: /\.(png|jpe?g|gif|svg)$/,
+                use: ['file-loader'],
+                // exclude:  [path.resolve(__dirname,'./src/icons')]
+            }
         ]
     },
     plugins: [

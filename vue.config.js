@@ -47,7 +47,7 @@ module.exports = {
         // config.output.chunkFilename = 'js/[name].js';
         config.optimization={
             namedChunks: true,
-            moduleIds: 'hashed',
+            moduleIds: 'named',  // named,natural,hashed,size,total-size,false
             minimizer: [new TerserPlugin({ terserOptions: { 
                 compress: { 
                     drop_console: true,

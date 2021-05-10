@@ -39,7 +39,7 @@ router.beforeEach(async (to, from, next) => {
                     }else{
                         await store.dispatch('permission/resetToken')
                         Message.error('此账号没有任何权限')
-                        next('/login?redirect=/')
+                        // next('/login?redirect=/')
                     }
                 } catch (error) {
                     // remove token and go to login page to re-login

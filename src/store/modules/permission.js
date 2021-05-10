@@ -5,9 +5,8 @@ import Request from '@/utils/Request'
 /**
  * Filter asynchronous routing tables by recursion
  * @param routes asyncRoutes
- * @param roles
  */
-export function filterAsyncRoutes(routes) {
+export function filterAsyncRoutes(routes,routerPath) {
     //接口数据处理
     const res = []
 
@@ -20,8 +19,9 @@ export function filterAsyncRoutes(routes) {
         }
 
         if(route.children&&route.children.length>0){
+            tmp.component=() => import(/* webpackChunkName: "[request]" */ `@/views${routerPath}/index`),
             tmp.redirect=route.children[0].path;
-            tmp.children=filterAsyncRoutes(route.children);
+            tmp.children=filterAsyncRoutes(route.children,routerPath);
         }
     
         res.push(tmp);
@@ -66,8 +66,12 @@ const mutations = {
 
 const actions = {
 	setToken({ commit }, token) {
-		setToken(token)
-		commit('SET_TOKEN', token)
+        return new Promise(resolve => {
+			setToken(token)
+		    commit('SET_TOKEN', token)
+			resolve()
+		})
+		
 	},
 	setRoutes({ commit }, routes) {
 		commit('SET_ROUTES', routes)
@@ -118,7 +122,7 @@ const actions = {
                         redirect:'',
                         children:[]
                     }
-                    let theAsyncRouter = filterAsyncRoutes(accessedRoutes);
+                    let theAsyncRouter = filterAsyncRoutes(accessedRoutes,'/router');
                     console.log(theAsyncRouter)
 
                     if(theAsyncRouter){

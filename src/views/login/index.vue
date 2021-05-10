@@ -48,7 +48,7 @@
 						autocomplete="on"
 						@keyup.native="checkCapslock"
 						@blur="capsTooltip = false"
-						@keyup.enter.native="handleLogin"
+						@keydown.enter.native="handleLogin"
 					/>
 					<span class="show-pwd" @click="showPwd">
 						<svg-icon
@@ -64,6 +64,7 @@
 				type="primary"
 				style="width:100%;margin-bottom:30px;"
 				@click.native.prevent="handleLogin"
+                @keydown.enter.native="handleLogin"
 				>Login</el-button
 			>
 		</el-form>
@@ -100,13 +101,13 @@ export default {
 				password: '111111'
 			},
 			loginRules: {
-				username: [
-					{
-						required: true,
-						trigger: 'blur',
-						validator: validateUsername
-					}
-				],
+				// username: [
+				// 	{
+				// 		required: true,
+				// 		trigger: 'blur',
+				// 		validator: validateUsername
+				// 	}
+				// ],
 				password: [
 					{
 						required: true,
@@ -171,13 +172,21 @@ export default {
                     // this.$api.post('',{}).then(res=>{
                     //     console.log(res)
                     // })
-                    this.$store.dispatch('permission/setToken','token');
-                    console.log(this.redirect)
-                    this.$router.push({
-                        path: this.redirect || '/',
-                        query: this.otherQuery
-                    })
-                    this.loading = false
+                    // this.$store.dispatch('permission/setToken','token');
+                    // console.log(this.redirect)
+                    // this.$router.push({
+                    //     path: this.redirect || '/',
+                    //     query: this.otherQuery
+                    // })
+                    // this.loading = false
+
+                    this.$store.dispatch('permission/setToken',this.loginForm.username).then(res=>{
+                        this.$router.push({
+                            path: this.redirect || '/',
+                            query: this.otherQuery
+                        })
+                        this.loading = false
+                    });
 				} else {
 					console.log('error submit!!')
 					return false

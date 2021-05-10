@@ -1,8 +1,6 @@
-
-import Layout from '@/views/layout';
 export default {
 	path: '/querycount',
-	component: Layout,
+	component: () => import('@/views/router/index'), 
 	redirect: '/querycount/alarmcount',
 	name: 'Querycount',
 	meta: {

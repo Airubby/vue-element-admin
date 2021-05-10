@@ -2,7 +2,7 @@
     <div class="app-container flex">
         <div class="container-left">
             <div class="container-left-top">
-                <el-input placeholder="关键字" v-model.trim="params.name" clearable class="container-left-input">
+                <el-input placeholder="关键字" v-model.trim="params.name" @keydown.enter.native="handleSearch" clearable class="container-left-input">
                     <i slot="suffix" class="el-input__icon el-icon-search" @click="handleSearch"></i>
                 </el-input>
                 <div class="container-left-btn">
@@ -50,6 +50,11 @@
                             <el-col :span="6">
                                 <el-form-item>
                                     <el-button type="primary" @click="searchT">提交</el-button>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="6">
+                                <el-form-item>
+                                    <el-button type="primary" @click="test">跳转</el-button>
                                 </el-form-item>
                             </el-col>
                         </el-row>
@@ -111,7 +116,7 @@ export default {
                 { prop: 'a', label: '编码',minWidth:10},
                 { prop: 'b', label: '名称',minWidth:10},
                 { prop: 'd', label: '数据类型',minWidth:10},
-                { prop: 'e', label: '备注',minWidth:10},
+                { prop: 'e', label: '备注',showOverflowTooltip:true,minWidth:10},
                 { prop: 'handle', label: '操作',slotName:'preview-handle',width:90},
             ],
             initParams:{
@@ -145,6 +150,12 @@ export default {
         }
     },
     methods:{
+        test:function(){
+            this.$router.push({name:'SysconfigBaseconfigDatadicAdd',query:{params:JSON.stringify({"id":"23234"})}});
+        },
+        handleSearch:function(){
+            console.log('enter 请求')
+        },
         searchT:function(){
             this.$refs['ValidateF'].validate((valid) => {
                 if(valid){ //验证通过

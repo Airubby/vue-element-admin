@@ -1,8 +1,6 @@
-
-import Layout from '@/views/layout';
 export default {
 	path: '/realtime',
-	component: Layout,
+	component: () => import('@/views/router/index'), 
 	redirect: '/realtime/control',
 	name: 'Realtime',
 	meta: {
@@ -12,7 +10,7 @@ export default {
 	children: [
 		{
 			path: 'control',
-			component: () => import('@/views/pages/realtimecontrol/control/index'), 
+			component: () => import('@/views/router/index'), 
 			name: 'RealtimeControl',
 			meta: { title: '实时监控' },
 			redirect: '/realtime/control/objcontrol',
@@ -45,7 +43,7 @@ export default {
         },
         {
 			path: 'event',
-			component: () => import('@/views/pages/realtimecontrol/event/index'), // Parent router-view
+			component: () => import('@/views/router/index'), 
 			name: 'RealtimeEvent',
 			meta: { title: '事件管理' },
 			redirect: '/realtime/event/query',

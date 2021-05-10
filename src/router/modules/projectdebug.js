@@ -2,7 +2,7 @@
 import Layout from '@/views/layout';
 export default {
 	path: '/projectdebug',
-	component: Layout,
+	component: () => import('@/views/router/index'), 
 	redirect: '/projectdebug/syscheck',
 	name: 'Projectdebug',
 	meta: {
@@ -12,7 +12,7 @@ export default {
 	children: [
 		{
 			path: 'syscheck',
-			component: () => import('@/views/pages/projectdebug/syscheck/index'), 
+			component: () => import('@/views/router/index'), 
 			name: 'ProjectconfigSyscheck',
 			meta: { title: '系统自检' },
 			redirect: '/projectdebug/syscheck/vendorconfig',
@@ -39,7 +39,7 @@ export default {
         },
         {
 			path: 'sysanalyse',
-			component: () => import('@/views/pages/projectdebug/sysanalyse/index'), // Parent router-view
+			component: () => import('@/views/router/index'), 
 			name: 'ProjectconfigSysanalyse',
 			meta: { title: '系统分析' },
 			redirect: '/projectdebug/sysanalyse/loadanalysegrade',

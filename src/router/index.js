@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
-import Layout from '@/views/layout'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -28,17 +27,17 @@ import projectdebug from './modules/projectdebug'
 import realtimecontrol from './modules/realtimecontrol'
 import querycount from './modules/querycount'
 export const syncRouter=[
-    {
-        path: '/redirect',
-        component: Layout,
-        hidden: true,
-        children: [
-          {
-            path: '/redirect/:path(.*)',
-            component: () => import('@/views/redirect/index')
-          }
-        ]
-    },
+    // {
+    //     path: '/redirect',
+    //     component: Layout,
+    //     hidden: true,
+    //     children: [
+    //       {
+    //         path: '/redirect/:path(.*)',
+    //         component: () => import('@/views/redirect/index')
+    //       }
+    //     ]
+    // },
     {
         path: '/404',
         component: () => import('@/views/error/404'),
@@ -54,29 +53,54 @@ export const syncRouter=[
         component: () => import('@/views/login/index'),
         hidden: true
     },
-    {
-        path: '/',
-        component: Layout,
-        redirect: '/dashboard',
-        children: [
-        {
-            path: 'dashboard',
-            component: () => import('@/views/pages/dashboard/index'),
-            name: 'Dashboard',
-            meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-        }
-        ]
-    },
-    sysconfigRouter,
-    projectconfigRouter,
-    projectdebug,
-    realtimecontrol,
-    querycount,
-    { path: '*', redirect: '/404', hidden: true }, 
+    // {
+    //     path: '/',
+    //     component: Layout,
+    //     redirect: '/dashboard',
+    //     children: [
+    //     {
+    //         path: 'dashboard',
+    //         component: () => import('@/views/pages/dashboard/index'),
+    //         name: 'Dashboard',
+    //         meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+    //     }
+    //     ]
+    // },
+    // sysconfigRouter,
+    // projectconfigRouter,
+    // projectdebug,
+    // realtimecontrol,
+    // querycount,
+    // { path: '*', redirect: '/404', hidden: true }, 
 ];
 
 export const asyncRoutes=[
-    
+    {
+        path: '/',
+        component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),
+        redirect: '/dashboard',
+        meta: { title: '首页' },
+        children:[
+            {
+                path: '/redirect/:path(.*)',
+                name:'redirect',
+                component: () => import(/* webpackChunkName: "redirect", webpackPrefetch: true */ '@/views/redirect/index'),
+                hidden: true,
+            },
+            {
+                path: '/dashboard',
+                component: () => import(/* webpackChunkName: "home", webpackPrefetch: true */ '@/views/pages/dashboard/index'),
+                name: 'Dashboard',
+                meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+            },
+            querycount,
+            projectconfigRouter,
+            projectdebug,
+            realtimecontrol,
+            sysconfigRouter,
+            // objconfig,
+        ]
+    },
 ]
 
 /**

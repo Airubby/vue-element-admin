@@ -1,8 +1,8 @@
 
-import Layout from '@/views/layout';
 export default {
 	path: '/sysconfig',
-	component: Layout,
+	// component: () => import('@/views/pages/sysconfig/index'), 
+	component: () => import('@/views/router/index'), 
 	redirect: '/sysconfig/baseconfig',
 	name: 'Sysconfig',
 	meta: {
@@ -12,7 +12,8 @@ export default {
 	children: [
 		{
 			path: 'baseconfig',
-			component: () => import('@/views/pages/sysconfig/baseconfig/index'), 
+			// component: () => import('@/views/pages/sysconfig/baseconfig/index'), 
+			component: () => import('@/views/router/index'), 
 			name: 'SysconfigBaseconfig',
 			meta: { title: '基础配置' },
 			redirect: '/sysconfig/baseconfig/sysparams',
@@ -28,6 +29,13 @@ export default {
 					component: () => import('@/views/pages/sysconfig/baseconfig/datadic'),
 					name: 'SysconfigBaseconfigDatadic',
 					meta: { title: '数据字典' }
+                },
+                {
+                    path: 'datadic/add',
+                    component: () => import('@/views/pages/sysconfig/baseconfig/datadic/add'),
+                    name: 'SysconfigBaseconfigDatadicAdd',
+                    meta: { title: 'Edit Article', activeMenu: '/sysconfig/baseconfig/datadic' },
+                    hidden: true
                 },
                 {
 					path: 'metricunits',
@@ -51,7 +59,8 @@ export default {
         },
         {
 			path: 'typeconfig',
-			component: () => import('@/views/pages/sysconfig/typeconfig/index'), // Parent router-view
+			// component: () => import('@/views/pages/sysconfig/typeconfig/index'), 
+			component: () => import('@/views/router/index'), 
 			name: 'SysconfigTypeconfig',
 			meta: { title: '类型配置' },
 			redirect: '/sysconfig/typeconfig/coreindicator',

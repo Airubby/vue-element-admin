@@ -1,8 +1,6 @@
-
-import Layout from '@/views/layout';
 export default {
 	path: '/projectconfig',
-	component: Layout,
+	component: () => import('@/views/router/index'), 
 	redirect: '/projectconfig/baseconfig',
 	name: 'Projectconfig',
 	meta: {
@@ -12,7 +10,7 @@ export default {
 	children: [
 		{
 			path: 'baseconfig',
-			component: () => import('@/views/pages/projectconfig/baseconfig/index'), 
+			component: () => import('@/views/router/index'), 
 			name: 'ProjectconfigBaseconfig',
 			meta: { title: '基础配置' },
 			redirect: '/projectconfig/baseconfig/vendorconfig',
@@ -45,7 +43,7 @@ export default {
         },
         {
 			path: 'agfirmware',
-			component: () => import('@/views/pages/projectconfig/agfirmware/index'), // Parent router-view
+			component: () => import('@/views/router/index'), 
 			name: 'ProjectconfigAgfirmware',
 			meta: { title: '协议固件' },
 			redirect: '/projectconfig/agfirmware/plantpconfig',
@@ -87,7 +85,7 @@ export default {
         },
         {
 			path: 'objectconfig',
-			component: () => import('@/views/pages/projectconfig/objectconfig/index'), // Parent router-view
+			component: () => import('@/views/router/index'), 
 			name: 'ProjectconfigObjectconfig',
 			meta: { title: '对象配置' },
 			redirect: '/projectconfig/objectconfig/objectmanager',
@@ -126,7 +124,7 @@ export default {
         },
         {
 			path: 'gangedrule',
-			component: () => import('@/views/pages/projectconfig/gangedrule/index'), // Parent router-view
+			component: () => import('@/views/router/index'), 
 			name: 'ProjectconfigGangedrule',
 			meta: { title: '联动规则' },
 			redirect: '/projectconfig/gangedrule/gangedruleconfig',

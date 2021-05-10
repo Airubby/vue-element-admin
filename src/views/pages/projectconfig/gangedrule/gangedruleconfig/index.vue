@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <div class="drag-table">
+        <!-- <div class="drag-table">
             <div class="drag-table-title">
                 <div class="border-box" v-for="(item,index) in tableColumns" :key="index">
                     {{item.label}}
@@ -15,6 +15,28 @@
                     </div>
                 </div>
             </div>
+        </div> -->
+        <div class="flex">
+            <el-table-pagination
+                v-scrollBar="'table'"
+                :data="leftData"
+                type="local"
+                :params="initParams"
+                :columns="leftColumns" ref="tableL">   
+                <template v-slot:mapPoint="scope">
+                    <div class="drop" @dragover='allowDrop($event)' @drop='dragDrop($event,list)'>{{scope.row.mapPoint}}</div>
+                </template>
+            </el-table-pagination>
+            <el-table-pagination
+                v-scrollBar="'table'"
+                :data="rightData"
+                type="local"
+                :params="initParams"
+                :columns="rightColumns" ref="tableR">   
+                <template v-slot:selectPoint="scope">
+                    <div class="drag" draggable="true" @dragstart="dragStart($event,list)">{{scope.row.selectPoint}}</div>
+                </template>
+            </el-table-pagination>
         </div>
     </div>
 </template>
@@ -30,15 +52,23 @@ export default {
     },
     data() {
         return {
-            tableColumns:[
+            initParams:{},
+            leftColumns:[
                 { prop: 'objPoint', label: '对象指标'},
-                { prop: 'mapPoint', label: '映射指标',drop:true},
+                { prop: 'mapPoint', label: '映射指标',slotName:'mapPoint'},
                 { prop: 'realMapObj', label: '实际映射对象'},
                 { prop: 'realMapPoint', label: '实际映射指标'},
-                { prop: 'selectPoint', label: '可选指标',drag:true},
+            ],
+            rightColumns:[
+                { prop: 'selectPoint', label: '可选指标',slotName:'selectPoint'},
                 { prop: 'obj', label: '所属对象'},
             ],
-            tableData:[
+            leftData:[
+                {id:'1',objPoint:'对象指标1',mapPoint:'映射指标1',realMapObj:'',realMapPoint:'',selectPoint:'可选指标1',obj:'所属对象1'},
+                {id:'2',objPoint:'对象指标2',mapPoint:'映射指标2',realMapObj:'',realMapPoint:'',selectPoint:'可选指标2',obj:'所属对象2'},
+                {id:'3',objPoint:'对象指标3',mapPoint:'映射指标3',realMapObj:'',realMapPoint:'',selectPoint:'可选指标3',obj:'所属对象3'},
+            ],
+            rightData:[
                 {id:'1',objPoint:'对象指标1',mapPoint:'映射指标1',realMapObj:'',realMapPoint:'',selectPoint:'可选指标1',obj:'所属对象1'},
                 {id:'2',objPoint:'对象指标2',mapPoint:'映射指标2',realMapObj:'',realMapPoint:'',selectPoint:'可选指标2',obj:'所属对象2'},
                 {id:'3',objPoint:'对象指标3',mapPoint:'映射指标3',realMapObj:'',realMapPoint:'',selectPoint:'可选指标3',obj:'所属对象3'},

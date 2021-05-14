@@ -28,19 +28,19 @@ export default {
     computed: {
         ...mapGetters(['permission_routes', 'sidebar']),
         activeMenu() {
-        const route = this.$route;
-        const { meta, path } = route;
-        // if set path, the sidebar will highlight the path you set
-        if (meta.activeMenu) {
-            return meta.activeMenu;
-        }
-        return path;
+            const route = this.$route;
+            const { meta, path,name } = route;
+            // if set path, the sidebar will highlight the path you set
+            if (meta.activeMenu) {
+                return meta.activeMenu;
+            }
+            return name;
         },
         showLogo() {
-        return this.$store.state.settings.sidebarLogo;
+            return this.$store.state.settings.sidebarLogo;
         },
         isCollapse() {
-        return !this.sidebar.opened;
+            return !this.sidebar.opened;
         },
     },
 };

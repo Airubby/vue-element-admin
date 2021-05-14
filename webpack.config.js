@@ -5,14 +5,14 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    // entry: path.resolve(__dirname, './src/package/AirSys/Index.vue'),
-    entry: path.resolve(__dirname, './package/main.js'),
+    entry: path.resolve(__dirname, './src/package/AirSys/Index.vue'),
+    // entry: path.resolve(__dirname, './package/main.js'),
     output: {
         path: path.resolve(__dirname, './package/dist'),
         filename: '[name].js',
         // chunkFilename: '[name].js',
-        // library: 'libraryName'
-        jsonpFunction:'webpackJsonp'
+        library: 'libraryName'
+        // jsonpFunction:'webpackJsonp'
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],

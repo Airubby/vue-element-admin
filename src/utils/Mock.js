@@ -95,6 +95,15 @@ const getMenuData = function(){
                                 'title':'数据字典'
                             },
                             {
+                                'path': 'datadic/add',
+                                'component': '/pages/sysconfig/baseconfig/datadic/add',
+                                'key': 'SysconfigBaseconfigDatadicAdd',
+                                'iconfont':'',
+                                'title':'数据字典新增',
+                                'activeMenu': 'SysconfigBaseconfigDatadic',   // 激活的active菜单用哪个 meta: { title: 'Edit Article', activeMenu: '/sysconfig/baseconfig/datadic' },
+                                'hidden': true  //导航上不展示
+                            },
+                            {
                                 'key':'SysconfigBaseconfigMetricunits',
                                 'path':'/sysconfig/baseconfig/metricunits',
                                 'component':'/pages/sysconfig/baseconfig/metricunits/index',

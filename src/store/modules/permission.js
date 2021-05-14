@@ -1,4 +1,4 @@
-import route,{ asyncRoutes, resetRouter } from '@/router'
+import router,{ asyncRoutes, resetRouter } from '@/router'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import Request from '@/utils/Request'
 
@@ -71,7 +71,6 @@ const actions = {
 		    commit('SET_TOKEN', token)
 			resolve()
 		})
-		
 	},
 	setRoutes({ commit }, routes) {
 		commit('SET_ROUTES', routes)
@@ -98,7 +97,7 @@ const actions = {
             resolve()
         })
     },
-	getInfo({ commit,state }) {
+	getLimitInfo({ commit,state }) {
 		return new Promise(resolve => {
             // if(state.token=='admin'){
             //     route.addRoutes(asyncRoutes)
@@ -136,7 +135,7 @@ const actions = {
                         }].concat(theAsyncRouter);
                     }
                     console.log('收到了')
-                    route.addRoutes([newRouter,{ path: '*', redirect: '/404', hidden: true }]);
+                    router.addRoutes([newRouter,{ path: '*', redirect: '/404', hidden: true }]);
                     commit('SET_ROUTES', theAsyncRouter)
                 }
                 resolve(res.data||[])
@@ -149,7 +148,7 @@ const actions = {
 }
 
 export default {
-	namespaced: true,
+	namespaced: true,  //namespaced: true,  commit('app/setTempData', {}, {root: true})  //{root: true} 申明这个 mutations 不是当前模块的
 	state,
 	mutations,
 	actions

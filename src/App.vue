@@ -1,11 +1,15 @@
 <template>
     <div id="app" ref="app">
+        <loading class="loading" v-if="pageLoading"></loading>
         <router-view />
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import Loading from '@/views/error/Loading.vue'
   export default {
-	name: 'app',
+    name: 'app',
+    components:{Loading},
     created () {
         //动态注入语言及API
         // const requireFile = require.context(
@@ -20,7 +24,11 @@
         // console.log(requireFile.resolve())
         // this.$store.dispatch('setLanguageApi',requireLang.keys())
     },
-    
+    computed:{
+        ...mapGetters([
+            'getTheme','languageApi','pageLoading'
+        ]),
+    },
     mounted() {
     },
     data(){
@@ -36,5 +44,12 @@
   }
 </script>
 <style lang="less">
-
+    @import "~@/assets/css/basic.less";
+    .loading{
+        width:100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 </style>

@@ -31,6 +31,15 @@ module.exports = {
             .end()        
             .use('file-loader')        
             .loader('file-loader')
+
+        /**
+         * 删除懒加载模块的prefetch，降低带宽压力
+         * https://cli.vuejs.org/zh/guide/html-and-static-assets.html#prefetch
+         * 而且预渲染时生成的prefetch标签是modern版本的，低版本浏览器是不需要的
+         */
+        config.plugins.delete('prefetch')
+        config.plugins.delete('preload');
+        
         
         // config.output.filename('js/[name].js').end()
         // config.output.chunkFilename('js/[name].js').end();

@@ -1,11 +1,15 @@
 <template>
-    <div class="loader-content">
-        <div id="loader-wrapper">
+    <div class="loader-content"
+    v-loading="loading"
+    element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)">
+        <!-- <div id="loader-wrapper">
             <div id="loader"></div>
             <div class="loader-section section-left"></div>
             <div class="loader-section section-right"></div>
             <div class="load_title" id="load-info">{{show}}<br><span>V0.4</span></div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -39,6 +43,7 @@ export default {
     },
     data() {
         return {
+            loading:true,
             show: "正在加载 小微产品,请耐心等待",
         }
     },

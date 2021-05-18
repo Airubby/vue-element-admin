@@ -1,9 +1,10 @@
 <template>
     <div :class="classObj" class="app-wrapper">
-        <sidebar />
-        <!-- <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+        <!-- <sidebar /> -->
         <sidebar class="sidebar-container" />
-        <div :class="{hasTagsView:needTagsView}" class="main-container">
+        <app-main />
+        
+        <!-- <div :class="{hasTagsView:needTagsView}" class="main-container">
             <el-scrollbar class="app-scrollbar">
                 <div :class="{'fixed-header':fixedHeader}">
                     <navbar />
@@ -12,7 +13,7 @@
                 <app-main />
             </el-scrollbar>
         </div> -->
-        <app-main />
+        <!-- <app-main /> -->
     </div>
 </template>
 

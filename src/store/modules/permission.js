@@ -110,7 +110,7 @@ const actions = {
             // }
 			Request.get('/getMenuData',{token:state.token}).then(res => {
                 console.log(res)
-                let accessedRoutes=res.data
+                let accessedRoutes=res.data?res.data:[]
                 if(accessedRoutes&&accessedRoutes.length>0){
                     let newRouter={
                         path: '/',
@@ -138,7 +138,7 @@ const actions = {
                     router.addRoutes([newRouter,{ path: '*', redirect: '/404', hidden: true }]);
                     commit('SET_ROUTES', theAsyncRouter)
                 }
-                resolve(res.data||[])
+                resolve(accessedRoutes)
             }).catch(error => {
                 console.log('异常')
                 resolve([])

@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <DynamicComponent :pathUrl="`/template/test/test.js`" :templateData="initParams" templateUrl="/template/test"></DynamicComponent>
+        <DynamicComponent :pathUrl="`/template/test/index.js`" :templateData="initParams" templateUrl="/template/test"></DynamicComponent>
     </div>
 </template>
 

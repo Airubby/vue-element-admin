@@ -2,7 +2,7 @@
 <template>
   <div class="name">
       {{ name }}----{{initParams.test}}
-        <img :src="templateUrl+'/images/me111.png'" >  
+        <img :src="templateUrl+'/images/me222.png'">  
         234234
         <test :templateUrl="templateUrl"></test>
     </div>

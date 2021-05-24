@@ -40,10 +40,10 @@ function getInfo(){  //刷新页面重新获取权限
 }
 
 async function routerGo(){
-
+    store.dispatch("app/setPageLoading",false)
     await getInfo();
 
-    const whiteList = ['/login'] // no redirect whitelist
+    const whiteList = ['/login','/lib'] // no redirect whitelist
 
     router.beforeEach(async (to, from, next) => {
         // start progress bar

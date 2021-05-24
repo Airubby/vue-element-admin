@@ -2,7 +2,7 @@
 <template>
   <div class="name">
       {{ name }}
-        <img :src="templateUrl+'/images/me111.png'">  
+        <img :src="templateUrl+'/images/me222.png'">  
     </div>
 </template>
 

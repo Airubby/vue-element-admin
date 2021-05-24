@@ -43,12 +43,12 @@ module.exports = {
         
         // config.output.filename('js/[name].js').end()
         // config.output.chunkFilename('js/[name].js').end();
-        // // 压缩代码
-        // config.optimization.minimize(true);
-        // // 分割代码
-        // config.optimization.splitChunks({
-        //     chunks: 'all'
-        // })
+        // 压缩代码
+        config.optimization.minimize(true);
+        // 分割代码
+        config.optimization.splitChunks({
+            chunks: 'all'
+        })
     },
     //公共代码抽离
     configureWebpack: config => {

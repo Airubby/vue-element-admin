@@ -23,6 +23,7 @@ function getInfo(){  //刷新页面重新获取权限
                 if(accessRoutes.length<=0){
                     await store.dispatch('permission/resetToken')
                     router.push({ path: '/login?redirect=/'})
+                    store.dispatch("app/setPageLoading",false)
                 }
             } catch (error) {
                 // remove token and go to login page to re-login
@@ -32,8 +33,8 @@ function getInfo(){  //刷新页面重新获取权限
             }
         }else{
             router.push({ path: '/login?redirect=/'})
+            store.dispatch("app/setPageLoading",false)
         }
-        
         resolve()
     })
 }

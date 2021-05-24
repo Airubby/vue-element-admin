@@ -2,15 +2,17 @@ const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CopyWebpackPlugin=require('copy-webpack-plugin');
 
+let name="rack";
+
 module.exports = {
     mode: 'production',
     entry: {
-        test:'./src/packages/rack/index.vue',
-        // test2:'./src/packages/test2/index.vue'
+        // test:'./src/packages/rack/index.vue',
+        [name]:`./src/packages/${name}/index.vue`
     },
     output: {
-        path: path.resolve(__dirname, 'lib'),
-        filename: '[name].js',
+        path: path.resolve(__dirname, `lib/${name}`),
+        filename: 'index.js',
         library: '[name]',
         libraryTarget:'commonjs-module'  //"var" | "assign" | "this" | "window" | "self" | "global" | "commonjs" | "commonjs2" | "commonjs-module" | "amd" | "amd-require" | "umd" | "umd2" | "jsonp" | "system"
         // jsonpFunction:'webpackJsonp'
@@ -26,7 +28,7 @@ module.exports = {
         new VueLoaderPlugin(),
         new CopyWebpackPlugin([
             {
-                from: path.resolve(__dirname, './src/packages/rack/img'),
+                from: path.resolve(__dirname, `./src/packages/${name}/img`),
                 to: './img',
                 ignore: ['.*']
             }

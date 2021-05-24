@@ -33,7 +33,8 @@ export default function(config) {
                 handleInfoMore:{
                     visible:false,
                     row:null
-                }
+                },
+                tableSelect:{}
             }
         },
         methods:{
@@ -50,6 +51,27 @@ export default function(config) {
                 console.log(row,index)
                 //true可勾选；false不可勾选
                 return row.check
+            },
+            //@selection-change="selectionChange"
+            selectionChange:function(selection){
+                if(selection.length>0){
+                    if(this.tableSelect&&JSON.stringify(this.tableSelect)!="{}"){
+                        for(let i=0;i<selection.length;i++){
+                            if(this.tableSelect.id!=selection[i].id){
+                                this.$refs.thisRef.clearSelect();
+                                this.$nextTick(()=>{
+                                    this.$refs.thisRef.setRowSelection(selection[i],true)
+                                    this.tableSelect=selection[i];
+                                })
+                            }
+                        }
+                    }else{
+                        this.tableSelect=selection[0];
+                    }
+                    
+                }else{
+                    this.tableSelect={};
+                }
             },
             handleSearch:function(tableRef='tableRef',ValidateForm='ValidateForm'){
                 console.log(this.$refs.tableRef.getSelect())

@@ -9,11 +9,11 @@ import Request from '@/utils/Request'
 export function filterAsyncRoutes(routes,routerPath) {
     //接口数据处理
     const res = []
-
+    
     routes.forEach(route => {
         const tmp={
             path: route.path,
-            component: () => import(/* webpackChunkName: "[request]" */ `@/views${route.component}`),
+            component: () => import(/* webpackChunkName: "[request]" */ `@/views/pages${route.component}`),
             name: route.key,
             meta: { title: route.title, icon: route.iconfont,limits:route.limits||[] }
         }

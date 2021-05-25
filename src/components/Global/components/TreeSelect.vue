@@ -15,6 +15,8 @@
             :filter-node-method="filterNode"
             :default-expanded-keys="expandedKeys"
             :props="treeProps" 
+            :lazy="lazy"
+            :load="loadNode"
             @node-click="clickTree">
                 <span class="custom-tree-node" slot-scope="{ node, data }">
                     <span :class="{'active':data[treeValue]==selectValue,'disabled':showDisabled(data)}">{{ data[treeProps.label] }}</span>
@@ -67,6 +69,10 @@ export default {
                 return {}  // { type: 'T'} 禁用type为T的
             }
         },
+        lazy:{
+            type:Boolean,
+            default:false
+        },
         url:{
             type:String,
             default:''
@@ -90,9 +96,7 @@ export default {
         }
     },
     created() {
-        if(this.url==''){
-            this.treeSelectData=this.treeData;
-        }
+        
     },
     mounted(){
         this.filterTree();
@@ -106,6 +110,26 @@ export default {
         }
     },
     methods:{
+        loadNode:function(node,resolve){
+            if(node.level==0){
+                return resolve(this.treeSelectData);
+            }else{
+                if(node.data.type=="M"&&node.data[this.treeProps.children].length==0){
+                    this.getNodeTree(node.data,resolve)
+                }else{
+                    return resolve(node.data[this.treeProps.children]||[])
+                }
+            }
+        },
+        getNodeTree:function(data,resolve){
+            this.$api.post(this.url,{type:data.type},{isLoading:false}).then(res=>{
+                let arr=[];
+                if(res.errCode=="0"){
+                    arr=res.data||[]
+                }
+                if(resolve) return resolve(arr);
+            })
+        },
         filterTree:function() {
             this.$nextTick(()=>{
                 if(Object.prototype.toString.call(this.disabledObject) === '[object Object]'&&JSON.stringify(this.filterObject)!='{}'){
@@ -212,7 +236,16 @@ export default {
                 }
             },
             immediate:true
-        }
+        },
+        treeData:{
+            handler:function(val){
+                if(this.url==''){
+                    this.treeSelectData=val;
+                }
+            },
+            immediate:true
+        },
+        
     }
     
 }

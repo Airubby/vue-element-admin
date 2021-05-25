@@ -2,7 +2,8 @@
 <template>
   <div class="name">
       {{ name }}----{{initParams.test}}
-        <img :src="templateUrl+'/images/me111.png'" >  
+        <img :src="templateUrl+'/images/me111.png'" v-if="templateUrl">  
+        <img src="./images/me111.png" v-else>  
         234234
         <test :templateUrl="templateUrl"></test>
     </div>

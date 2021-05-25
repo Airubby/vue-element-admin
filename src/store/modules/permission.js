@@ -13,7 +13,7 @@ export function filterAsyncRoutes(routes,routerPath) {
     routes.forEach(route => {
         const tmp={
             path: route.path,
-            component: () => import(/* webpackChunkName: "[request]" */ `@/views/pages${route.component}`),
+            component: () => import(/* webpackChunkName: "[request]" */ `@/views${route.component}`),
             name: route.key,
             meta: { title: route.title, icon: route.iconfont,limits:route.limits||[] }
         }
@@ -29,21 +29,6 @@ export function filterAsyncRoutes(routes,routerPath) {
 
     return res
     
-    
-
-	// const res = []
-
-	// routes.forEach(route => {
-	// 	const tmp = { ...route }
-	// 	if (hasPermission(roles, tmp)) {
-	// 		if (tmp.children) {
-	// 			tmp.children = filterAsyncRoutes(tmp.children, roles)
-	// 		}
-	// 		res.push(tmp)
-	// 	}
-	// })
-
-	// return res
 }
 
 const state = {
@@ -116,7 +101,7 @@ const actions = {
                         path: '/',
                         name:'layout',
                         meta: { title: '首页'},
-                        component: () => import(/* webpackChunkName: "public-layout", webpackPrefetch: true */ '@/views/layout'),
+                        component: () => import(/* webpackChunkName: "public-layout", webpackPrefetch: true */ '@/views/layout/index.vue'),
                         // component:resolve => require(['@/views/home.vue'], resolve),
                         redirect:'',
                         children:[]
@@ -130,7 +115,7 @@ const actions = {
                         newRouter.children=[{
                             path: '/redirect/:path(.*)',
                             name:'redirect',
-                            component: () => import(/* webpackChunkName: "public-redirect", webpackPrefetch: true */ '@/views/redirect/index'),
+                            component: () => import(/* webpackChunkName: "public-redirect", webpackPrefetch: true */ '@/views/redirect/index.vue'),
                             hidden: true,
                         }].concat(theAsyncRouter);
                     }

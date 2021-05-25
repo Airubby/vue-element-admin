@@ -42,6 +42,7 @@ export const syncRouter=[
     },
     {
         path: '/lib',
+        meta:{ title:"调试单组件模板路由"},
         component: () => import(/* webpackChunkName: "public-lib", webpackPrefetch: true */ '@/packages/test/index'),
         hidden: true
     },

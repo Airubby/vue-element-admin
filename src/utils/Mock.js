@@ -61,28 +61,28 @@ const getMenuData = function(){
             {
                 'key': 'dashboard',
                 'path':'/dashboard',
-                'component':'/dashboard/index',
+                'component':'/pages/dashboard/index',
                 'iconfont': 'dashboard',
                 'title': 'Dashboard'
             },
             {
                 'key': 'sysconfig',
                 'path':'/sysconfig',
-                'component':'/sysconfig/index',
+                'component':'/pages/sysconfig/index',
                 'iconfont': 'nested',
                 'title': '系统配置',
                 'children':[
                     {
                         'key': 'SysconfigBaseconfig',
                         'path':'/sysconfig/baseconfig',
-                        'component':'/sysconfig/baseconfig/index',
+                        'component':'/pages/sysconfig/baseconfig/index',
                         'iconfont': '',
                         'title': '基础配置',
                         'children':[
                             {
                                 'key':'SysconfigBaseconfigSysparams',
                                 'path':'/sysconfig/baseconfig/sysparams',
-                                'component':'/sysconfig/baseconfig/sysparams/index',
+                                'component':'/pages/sysconfig/baseconfig/sysparams/index',
                                 'iconfont':'',
                                 'title':'参数配置',
                                 'limits':[]
@@ -90,7 +90,7 @@ const getMenuData = function(){
                             {
                                 'key':'SysconfigBaseconfigDatadic',
                                 'path':'/sysconfig/baseconfig/datadic',
-                                'component':'/sysconfig/baseconfig/datadic/index',
+                                'component':'/pages/sysconfig/baseconfig/datadic/index',
                                 'iconfont':'',
                                 'title':'数据字典'
                             },
@@ -106,7 +106,7 @@ const getMenuData = function(){
                             {
                                 'key':'SysconfigBaseconfigMetricunits',
                                 'path':'/sysconfig/baseconfig/metricunits',
-                                'component':'/sysconfig/baseconfig/metricunits/index',
+                                'component':'/pages/sysconfig/baseconfig/metricunits/index',
                                 'iconfont':'',
                                 'title':'度量单位'
                             }
@@ -115,28 +115,28 @@ const getMenuData = function(){
                     {
                         'key': 'SysconfigTypeconfig',
                         'path':'/sysconfig/typeconfig',
-                        'component':'/sysconfig/typeconfig/index',
+                        'component':'/pages/sysconfig/typeconfig/index',
                         'iconfont': '',
                         'title': '类型配置',
                         'children':[
                             {
                                 'key':'SysconfigTypeconfigCoreindicator',
                                 'path':'/sysconfig/typeconfig/coreindicator',
-                                'component':'/sysconfig/typeconfig/coreindicator/index',
+                                'component':'/pages/sysconfig/typeconfig/coreindicator/index',
                                 'iconfont':'',
                                 'title':'核心指标'
                             },
                             {
                                 'key':'SysconfigTypeconfigStaticattributegroup',
                                 'path':'/sysconfig/typeconfig/staticattributegroup',
-                                'component':'/sysconfig/typeconfig/staticattributegroup/index',
+                                'component':'/pages/sysconfig/typeconfig/staticattributegroup/index',
                                 'iconfont':'',
                                 'title':'静态属性组'
                             },
                             {
                                 'key':'SysconfigTypeconfigTypemanager',
                                 'path':'/sysconfig/typeconfig/typemanager',
-                                'component':'/sysconfig/typeconfig/typemanager/index',
+                                'component':'/pages/sysconfig/typeconfig/typemanager/index',
                                 'iconfont':'',
                                 'title':'类型管理'
                             }

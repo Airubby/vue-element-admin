@@ -1,18 +1,28 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CopyWebpackPlugin=require('copy-webpack-plugin');
+const glob = require('glob');
+//glob.sync('./src/packages/**/*.vue')  /**/是packages下面所有的文件夹；/*/是packages下面一级的文件夹
+const files = glob.sync('./src/packages/*/*.vue');
+let entry={},assets=[];
 
-let name="rack",name1="test",name2="test1";
-
-let array=["rack","test","test1"],entry={},assets=[];
-array.forEach(element => {
-    entry[element]=`./src/packages/${element}/index.vue`
-    assets.push({
-        from: path.resolve(__dirname, `./src/packages/${element}/images`),
-        to: `./lib/${element}/images`,
-        ignore: ['.*']
-    })
-});
+if(files.length>0){
+    files.forEach(str => {
+        // str './src/packages/rack/index.vue',  element:rack;comname:index
+        let matchstr=str.match(/\.\/src\/packages\/(\S*)\/(\S*)\.vue/)
+        let element = matchstr[1];
+        let comname = matchstr[2];
+        entry[element+"/"+comname]=str
+        const images = glob.sync(`./src/packages/${element}/images/`);
+        if(images.length>0){
+            assets.push({
+                from: path.resolve(__dirname, `./src/packages/${element}/images`),
+                to: `./${element}/images`,
+                ignore: ['.*']
+            })
+        }
+    });
+}
 
 module.exports = {
     mode: 'production',
@@ -23,9 +33,9 @@ module.exports = {
     // },
     entry: entry,
     output: {
-        // path: path.resolve(__dirname, `lib/${name}`),
-        path: __dirname,
-        filename: `./lib/[name]/index.js`,
+        path: path.resolve(__dirname, `lib`),
+        // path: __dirname,
+        filename: `./[name].js`,  //[name]:  test/index
         library: '[name]',
         libraryTarget:'commonjs-module'  //"var" | "assign" | "this" | "window" | "self" | "global" | "commonjs" | "commonjs2" | "commonjs-module" | "amd" | "amd-require" | "umd" | "umd2" | "jsonp" | "system"
         // jsonpFunction:'webpackJsonp'
@@ -61,12 +71,19 @@ module.exports = {
             },
             {//css 解析
                 test: /\.(le|sa|sc|c)ss$/,
-                use: ['vue-style-loader', 'css-loader']
+                use: ['vue-style-loader', 'css-loader','less-loader']
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/,
-                use: ['file-loader'],
-                // exclude:  [path.resolve(__dirname,'./src/icons')]
+                use: [{
+                    loader:'file-loader',
+                    options:{
+                        limit: 1,
+                        name: `./[name][hash].[ext]`,
+                        outputPath: `./.buffercache`
+                    }
+                }],
+                // exclude:  [path.resolve(__dirname,'./src/packages')]
             },
             // {
             //     test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
@@ -74,12 +91,15 @@ module.exports = {
             //         {
             //             loader: 'url-loader',
             //             options: {
-            //                 limit: 1024 * 4,
+            //                 limit: 1,
+            //                 // name: `./[name].[ext]`,
+            //                 // publicPath:"./"
             //                 esModule: false,
             //                 fallback: {
-            //                 loader: require.resolve('file-loader'),
-            //                 options: {
-            //                         name: `img/[name].[ext]`
+            //                     loader: require.resolve('file-loader'),
+            //                     options: {
+            //                         name: `[name].[ext]`,
+            //                         outputPath: `./${__dirname}`,
             //                     }
             //                 }
             //             }

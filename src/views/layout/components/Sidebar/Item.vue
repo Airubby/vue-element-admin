@@ -12,20 +12,38 @@ export default {
       default: ''
     }
   },
-  render(h, context) {
+  render(createElement, context) {
     const { icon, title } = context.props
     const vnodes = []
-
+    
     if (icon) {
-      if (icon.includes('el-icon')) {
-        vnodes.push(<i class={[icon, 'sub-el-icon']} />)
-      } else {
-        vnodes.push(<svg-icon icon-class={icon}/>)
-      }
+        if (icon.includes('el-icon')) {
+            const elHtml = createElement('i', {
+                attrs: {
+                    'class': icon + ' sub-el-icon'
+                }
+            })
+            vnodes.push(elHtml)
+            // vnodes.push(<i class={[icon, 'sub-el-icon']} />)
+        } else {
+            const elHtml = createElement('svg-icon', {
+                attrs: {
+                    'icon-class': icon
+                }
+            })
+            vnodes.push(elHtml)
+            // vnodes.push(<svg-icon icon-class={icon}/>)
+        }
     }
 
     if (title) {
-      vnodes.push(<span slot='title'>{(title)}</span>)
+        const elHtml = createElement('span', {
+            attrs: {
+                slot: title
+            }
+        }, title)
+        vnodes.push(elHtml)
+        // vnodes.push(<span slot='title'>{(title)}</span>)
     }
     return vnodes
   }

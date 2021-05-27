@@ -110,6 +110,8 @@ div:focus {
 }
 .app-container{
     padding: 15px;
+    width: 100%;
+    height: 100%;
 }
 .scrollbar-container{
     padding: 15px 15px 0;
@@ -186,10 +188,10 @@ div:focus {
         background-color: @lineColor; 
     }
     .el-loading-mask,
-    .el-table tr.el-table__row,.el-table--enable-row-hover .el-table__body tr:hover>td,.el-table__expanded-cell,.el-table__empty-block,.showPagination{
+    .el-table tr.el-table__row,.el-table__expanded-cell,.el-table__empty-block,.showPagination{
         background-color: @contentBg;
     }
-    .el-table__body tr.hover-row.current-row>td, .el-table__body tr.hover-row.el-table__row--striped.current-row>td, .el-table__body tr.hover-row.el-table__row--striped>td, .el-table__body tr.hover-row>td{
+    .el-table__body tr.hover-row.current-row>td, .el-table__body tr:hover>td, .el-table__body tr.hover-row.el-table__row--striped.current-row>td, .el-table__body tr.hover-row.el-table__row--striped>td, .el-table__body tr.hover-row>td{
         background-color: @activeBg;
     }
     .el-table,.el-pagination__total,.el-pagination__jump,.el-table__empty-text,

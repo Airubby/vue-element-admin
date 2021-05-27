@@ -184,6 +184,14 @@ export function sort(arr,order,key){
     }
     return arr;
 }
+//输出B向数组A的index位置插入 返回新的数组
+export function ArrayInsert(arrA,arrB,index){
+    let a = JSON.parse(JSON.stringify(arrA))
+    let b = JSON.parse(JSON.stringify(arrB))
+    b.unshift(index,0);
+    Array.prototype.splice.apply(a,b)
+    return a
+}
 
 export default {
     arrayContains,

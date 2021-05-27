@@ -1,16 +1,15 @@
-import route,{ asyncRoutes, resetRouter } from '@/router'
+import router,{ asyncRoutes, resetRouter } from '@/router'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import Request from '@/utils/Request'
 
 /**
  * Filter asynchronous routing tables by recursion
  * @param routes asyncRoutes
- * @param roles
  */
-export function filterAsyncRoutes(routes) {
+export function filterAsyncRoutes(routes,routerPath) {
     //接口数据处理
     const res = []
-
+    
     routes.forEach(route => {
         const tmp={
             path: route.path,
@@ -20,8 +19,9 @@ export function filterAsyncRoutes(routes) {
         }
 
         if(route.children&&route.children.length>0){
+            tmp.component=() => import(/* webpackChunkName: "[request]" */ `@/views${routerPath}/index`),
             tmp.redirect=route.children[0].path;
-            tmp.children=filterAsyncRoutes(route.children);
+            tmp.children=filterAsyncRoutes(route.children,routerPath);
         }
     
         res.push(tmp);
@@ -29,21 +29,6 @@ export function filterAsyncRoutes(routes) {
 
     return res
     
-    
-
-	// const res = []
-
-	// routes.forEach(route => {
-	// 	const tmp = { ...route }
-	// 	if (hasPermission(roles, tmp)) {
-	// 		if (tmp.children) {
-	// 			tmp.children = filterAsyncRoutes(tmp.children, roles)
-	// 		}
-	// 		res.push(tmp)
-	// 	}
-	// })
-
-	// return res
 }
 
 const state = {
@@ -66,8 +51,11 @@ const mutations = {
 
 const actions = {
 	setToken({ commit }, token) {
-		setToken(token)
-		commit('SET_TOKEN', token)
+        return new Promise(resolve => {
+			setToken(token)
+		    commit('SET_TOKEN', token)
+			resolve()
+		})
 	},
 	setRoutes({ commit }, routes) {
 		commit('SET_ROUTES', routes)
@@ -94,7 +82,7 @@ const actions = {
             resolve()
         })
     },
-	getInfo({ commit,state }) {
+	getLimitInfo({ commit,state }) {
 		return new Promise(resolve => {
             // if(state.token=='admin'){
             //     route.addRoutes(asyncRoutes)
@@ -107,18 +95,18 @@ const actions = {
             // }
 			Request.get('/getMenuData',{token:state.token}).then(res => {
                 console.log(res)
-                let accessedRoutes=res.data
+                let accessedRoutes=res.data?res.data:[]
                 if(accessedRoutes&&accessedRoutes.length>0){
                     let newRouter={
                         path: '/',
                         name:'layout',
                         meta: { title: '首页'},
-                        component: () => import(/* webpackChunkName: "public-layout", webpackPrefetch: true */ '@/views/layout'),
+                        component: () => import(/* webpackChunkName: "public-layout", webpackPrefetch: true */ '@/views/layout/index.vue'),
                         // component:resolve => require(['@/views/home.vue'], resolve),
                         redirect:'',
                         children:[]
                     }
-                    let theAsyncRouter = filterAsyncRoutes(accessedRoutes);
+                    let theAsyncRouter = filterAsyncRoutes(accessedRoutes,'/router');
                     console.log(theAsyncRouter)
 
                     if(theAsyncRouter){
@@ -127,15 +115,15 @@ const actions = {
                         newRouter.children=[{
                             path: '/redirect/:path(.*)',
                             name:'redirect',
-                            component: () => import(/* webpackChunkName: "public-redirect", webpackPrefetch: true */ '@/views/redirect/index'),
+                            component: () => import(/* webpackChunkName: "public-redirect", webpackPrefetch: true */ '@/views/redirect/index.vue'),
                             hidden: true,
                         }].concat(theAsyncRouter);
                     }
                     console.log('收到了')
-                    route.addRoutes([newRouter,{ path: '*', redirect: '/404', hidden: true }]);
+                    router.addRoutes([newRouter,{ path: '*', redirect: '/404', hidden: true }]);
                     commit('SET_ROUTES', theAsyncRouter)
                 }
-                resolve(res.data||[])
+                resolve(accessedRoutes)
             }).catch(error => {
                 console.log('异常')
                 resolve([])
@@ -145,7 +133,7 @@ const actions = {
 }
 
 export default {
-	namespaced: true,
+	namespaced: true,  //namespaced: true,  commit('app/setTempData', {}, {root: true})  //{root: true} 申明这个 mutations 不是当前模块的
 	state,
 	mutations,
 	actions

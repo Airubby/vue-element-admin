@@ -12,7 +12,7 @@ import 'babel-polyfill' //兼容低版本浏览器
 import Cookies from 'js-cookie'
 import settings from './settings'
 import './icons' // icon
-import './permission'
+// import './permission'
 
 import VueI18n from 'vue-i18n'
 import elementEnLocale from 'element-ui/lib/locale/lang/en' // element-ui lang
@@ -21,8 +21,6 @@ import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
 //加载全局组件
 import './components/Global/index.js'
 import '@/utils/Directive'  //自定义指令
-
-import '@/assets/css/basic.less'
 
 // 将API方法绑定到全局
 Vue.prototype.$api = Request
@@ -82,6 +80,9 @@ function getServerConfig() {
                 size: Cookies.get('themSize') || settings.themeSize, // set element-ui default size
                 i18n: (key, value) => i18n.t(key, value)
             })
+
+            import(/* webpackChunkName: "public-permission", webpackPrefetch: true */ './permission.js')
+
             resolve();
         })
     })

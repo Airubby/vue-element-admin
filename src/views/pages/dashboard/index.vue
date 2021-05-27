@@ -1,24 +1,20 @@
 <template>
     <div class="app-container">
-
-        <DynamicComponent :pathUrl="`/template/air/AirSys.js`" :templateData="initParams" templateUrl="/template/air"></DynamicComponent>
-    
-        <div @click="dialog" v-for="item in 10" :key="item">测试1</div>
+        <DynamicComponent :pathUrl="`/template/test/index.js`" :templateData="initParams" templateUrl="/template/test"></DynamicComponent>
     </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import axios from 'axios'
 // import DialogFullScreen from '@/components/DialogFullScreen/index'
-import DynamicComponent from '@/components/DynamicComponent/index'
+import DynamicComponent from '@/components/DynamicComponent/DynamicCompile'
 export default {
     components: { DynamicComponent },
     created() {
 
     },
     mounted(){
-        this.$api.get('/getMenuData').then(res=>{
-            console.log(res)
-        })
         // document.onkeydown=function(ev){
         //     var event=ev ||event
         //     if(event.keyCode==13){
@@ -28,8 +24,9 @@ export default {
     },
     data() {
         return {
+            currentComponent:null,
             initParams:{
-
+                test:"我是父组件传过去展示的数据"
             },
             dialogInfo:{
                 visible:false

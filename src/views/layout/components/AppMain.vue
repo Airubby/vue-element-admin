@@ -1,11 +1,11 @@
 <template>
-    <section class="app-main">
+    <el-scrollbar class="app-scrollbar app-main">
         <transition name="fade-transform" mode="out-in">
             <el-scrollbar class="app-scrollbar" ref="appScrollbar">
                 <router-view :key="key" />
             </el-scrollbar>
         </transition>
-    </section>
+    </el-scrollbar>
 </template>
 
 <script>
@@ -31,7 +31,7 @@ export default {
 <style lang="less" scoped>
 .app-main {
     /* 50= navbar  50  */
-    min-height: calc(100% - 50px);
+    height: calc(100% - 50px);
     width: 100%;
     position: relative;
     overflow: hidden;

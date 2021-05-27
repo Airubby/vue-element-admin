@@ -40,6 +40,13 @@ export const syncRouter=[
         component: () => import(/* webpackChunkName: "public-login", webpackPrefetch: true */ '@/views/login/index'),
         hidden: true
     },
+    {
+        path: '/lib',
+        meta:{ title:"调试单组件模板路由"},
+        component: () => import(/* webpackChunkName: "public-lib", webpackPrefetch: true */ '@/packages/test/index'),
+        hidden: true
+    },
+
     // {
     //     path: '/pages',
     //     component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),

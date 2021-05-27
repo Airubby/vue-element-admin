@@ -171,7 +171,9 @@ export default {
                     // this.$api.post('',{}).then(res=>{
                     //     console.log(res)
                     // })
+                    console.log("登陆")
                     this.$store.dispatch('permission/setToken',this.loginForm.username).then(res=>{
+                        console.log("登陆成功")
                         this.$router.push({
                             path: this.redirect || '/',
                             query: this.otherQuery

@@ -2,6 +2,9 @@
 node_modules
 /dist
 /show
+/lib
+/com
+/packages
 
 # local env files
 .env.local

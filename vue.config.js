@@ -31,23 +31,50 @@ module.exports = {
             .end()        
             .use('file-loader')        
             .loader('file-loader')
+
+        /**
+         * 删除懒加载模块的prefetch，降低带宽压力
+         * https://cli.vuejs.org/zh/guide/html-and-static-assets.html#prefetch
+         * 而且预渲染时生成的prefetch标签是modern版本的，低版本浏览器是不需要的
+         */
+        config.plugins.delete('prefetch')
+        config.plugins.delete('preload');
+        
         
         // config.output.filename('js/[name].js').end()
         // config.output.chunkFilename('js/[name].js').end();
-        // // 压缩代码
-        // config.optimization.minimize(true);
-        // // 分割代码
-        // config.optimization.splitChunks({
-        //     chunks: 'all'
-        // })
+        // 压缩代码
+        config.optimization.minimize(true);
+        // 分割代码
+        config.optimization.splitChunks({
+            chunks: 'all'
+        })
     },
     //公共代码抽离
     configureWebpack: config => {
-        // config.output.filename = 'js/[name].js';
-        // config.output.chunkFilename = 'js/[name].js';
+        const plugins = config.plugins;
+        for(let i=0;i<plugins.length;i++){
+            if(plugins[i] instanceof webpack.HashedModuleIdsPlugin){
+                plugins.splice(i,1)
+            }else if(plugins[i] instanceof webpack.NamedChunksPlugin){
+                plugins.splice(i,1)
+            }
+        }
+        plugins.push(new webpack.HashedModuleIdsPlugin({//生成稳定的模块id
+            hashFunction: 'sha256',
+            hashDigest: 'hex',
+            hashDigestLength: 20
+        }));
+        plugins.push(new webpack.NamedChunksPlugin((chunk) => {//生成稳定的chunk id
+            if (chunk.name) {
+                return chunk.name;
+            }
+        }));
         config.optimization={
             namedChunks: true,
-            moduleIds: 'named',  // named,natural,hashed,size,total-size,false
+            moduleIds: 'named', //"natural" | "named" | "hashed" | "size" | "total-size" | false
+            chunkIds: 'named', //"natural" | "named" | "hashed" | "size" | "total-size" | false
+            minimize: false,
             minimizer: [new TerserPlugin({ terserOptions: { 
                 compress: { 
                     drop_console: true,

@@ -43,7 +43,6 @@ module.exports = {
     optimization: {
         namedChunks: true,
         moduleIds: 'named', //"natural" | "named" | "hashed" | "size" | "total-size" | false
-        chunkIds:"named",
         minimize: false,
         minimizer: [
             new TerserPlugin({ 

@@ -65,15 +65,9 @@ module.exports = {
             hashDigest: 'hex',
             hashDigestLength: 20
         }));
-        plugins.push(new webpack.NamedChunksPlugin((chunk) => {//生成稳定的chunk id
-            if (chunk.name) {
-                return chunk.name;
-            }
-        }));
         config.optimization={
             namedChunks: true,
             moduleIds: 'named', //"natural" | "named" | "hashed" | "size" | "total-size" | false
-            chunkIds: 'named', //"natural" | "named" | "hashed" | "size" | "total-size" | false
             minimize: false,
             minimizer: [new TerserPlugin({ terserOptions: { 
                 compress: { 

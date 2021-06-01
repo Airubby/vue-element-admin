@@ -32,6 +32,7 @@ function getInfo(){  //刷新页面重新获取权限
             }
         }else{
             router.push({ path: '/login?redirect=/'})
+
         }
         store.dispatch("app/setPageLoading",false)
         resolve()
@@ -41,7 +42,6 @@ function getInfo(){  //刷新页面重新获取权限
 async function routerGo(){
     
     await getInfo();
-
     const whiteList = ['/login','/lib'] // no redirect whitelist
 
     router.beforeEach(async (to, from, next) => {

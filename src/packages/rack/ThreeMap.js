@@ -86,7 +86,6 @@ export default class ThreeMap {
         };
 
     }
-    
     init() {
         this.initScene();
         this.initRenderer();

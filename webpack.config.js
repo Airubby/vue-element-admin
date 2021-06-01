@@ -5,7 +5,6 @@ const glob = require('glob');
 //glob.sync('./src/packages/**/*.vue')  /**/是packages下面所有的文件夹；/*/是packages下面一级的文件夹
 const files = glob.sync('./src/packages/*/*.vue');
 let entry={},assets=[];
-
 if(files.length>0){
     files.forEach(str => {
         // str './src/packages/rack/index.vue',  element:rack;comname:index

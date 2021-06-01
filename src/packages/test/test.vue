@@ -2,7 +2,7 @@
 <template>
   <div class="name">
       {{ name }}
-        <img :src="templateUrl+'/images/me111.png'">  
+        <img :src="templateUrl?templateUrl+'/images/me111.png':require('./images/me111.png')">
     </div>
 </template>
 

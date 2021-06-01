@@ -48,7 +48,7 @@ export default class ThreeMap {
 
         this.progressSuccess=0;
         this.loadtimer=null;
-        this.BASE_PATH="./rack/"
+        this.BASE_PATH=this.props.BASE_PATH;
 
         this.commonFunc={
             _this:this,
@@ -63,7 +63,7 @@ export default class ThreeMap {
             //查找对象
             findObject: function (objname) {
                 var findedobj = null;
-                this.objects.forEach(function(obj, index){
+                this._this.objects.forEach(function(obj, index){
                     if (obj.name != null && obj.name != '' && obj.name == objname) {
                         findedobj = obj;
                         return findedobj;
@@ -73,7 +73,8 @@ export default class ThreeMap {
             },
             //获取路径
             getPath: function(file){
-                return this._this.BASE_PATH+file;
+                if(this._this.BASE_PATH) return this._this.BASE_PATH+"/images/"+file;
+                return require("./images/"+file)
             },
             //生成GUID
             guid:function(){
@@ -82,9 +83,10 @@ export default class ThreeMap {
             guidRandom() { 
                 return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
             }
-        }
-    }
+        };
 
+    }
+    
     init() {
         this.initScene();
         this.initRenderer();

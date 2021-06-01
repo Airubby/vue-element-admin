@@ -23,7 +23,7 @@ if(files.length>0){
         }
     });
 }
-
+console.log("打包中...")
 module.exports = {
     mode: 'production',
     // entry: {

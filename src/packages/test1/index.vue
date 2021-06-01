@@ -2,7 +2,7 @@
 <template>
   <div class="name">
       {{ name }}----{{initParams.test}}
-        <img :src="templateUrl+'/images/me222.png'">  
+        <img :src="templateUrl?templateUrl+'/images/me222.png':require('./images/me222.png')">
         234234
         <div class="energy_top_box" id="pueCon"></div>
         <div class="energy_top_box" id="fzlCon"></div>

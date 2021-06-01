@@ -1,5 +1,6 @@
 <template>
-    <div class="three-content" id="three-dom">
+    <div class="three-content" :style="styleObj">
+        <div class="three-content" id="three-dom">
         <el-button type="primary" @click="set" style="position:absolute;top:20px;right:20px;">模拟告警设置</el-button>
         <el-dialog
             top="0vh"
@@ -40,6 +41,7 @@
                 <el-button type="primary" @click="sure">确 定</el-button>
             </span>
         </el-dialog>
+        </div>
     </div>
 </template>
 
@@ -48,6 +50,19 @@ import ThreeMap from './ThreeMap.js'
 import {ThreeData} from './ThreeData.js'
 export default {
     name: 'index',
+    props:{
+        //需要传给动态子组件的数据
+        templateData:{
+            type:Object,
+            default:function(){
+                return {}
+            }
+        },
+        templateUrl:{
+            type:String,
+            default:""
+        }
+    },
     created () {
         for (var i = 0; i <20;i++){ 
             for(let k=0;k<this.baseInfo.length;k++){
@@ -61,8 +76,16 @@ export default {
             }
         }
     },
+    computed:{
+        styleObj() {
+            let bg=this.templateUrl?'#000C3F url('+this.templateUrl+'/images/homebg.png) no-repeat center':'#000C3F url('+require("./images/homebg.png")+') no-repeat center'
+            return {
+                background: bg
+            }
+        },
+    },
     mounted() {
-        let props={domID:"three-dom"}
+        let props={domID:"three-dom",BASE_PATH:this.templateUrl}
         this.map = new ThreeMap(props,ThreeData);
         this.map.init();
     },
@@ -120,6 +143,6 @@ export default {
     .three-content{
         width: 100%;
         height:100%;
-        background: #000C3F url(/rack/homebg.png) no-repeat center;
+        overflow: hidden;
     }
 </style>

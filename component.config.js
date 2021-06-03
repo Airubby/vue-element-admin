@@ -93,7 +93,18 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/,
-                use: ['file-loader'],
+                use: [
+                    {
+                        loader:'file-loader',
+                        options: {
+                            esModule: false, // 这里设置为false
+                            name: '[name].[ext]',
+                            outputPath: './img',
+                            limit: 8192,
+                        },
+                    }
+                ],
+                
                 exclude:  [path.resolve(__dirname,'./src/icons')]
             },
             {

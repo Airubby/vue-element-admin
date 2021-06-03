@@ -24,3 +24,10 @@ export default {
     
 }
 </script>
+<style lang="less" scoped>
+.module-theme(...){
+    .app-container{
+        color: @alarmColor;
+    }
+}
+</style>

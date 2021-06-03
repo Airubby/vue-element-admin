@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const glob = require('glob');
 //glob.sync('./src/packages/**/*.vue')  /**/是packages下面所有的文件夹；/*/是packages下面一级的文件夹
 const files = glob.sync('./src/views/pages/sysconfig/baseconfig/sysparams/**/*.vue');
@@ -72,7 +73,17 @@ module.exports = {
             },
             {//css 解析
                 test: /\.(le|sa|sc|c)ss$/,
-                use: ['vue-style-loader', 'css-loader','less-loader']
+                use: [
+                    'vue-style-loader', 'css-loader',
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            globalVars: {
+                                hack: 'true; @import \'~@/assets/css/common.less\';'
+                            },
+                        }
+                    }
+                ]
             },
             {
                 test: /\.svg$/,

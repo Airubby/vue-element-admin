@@ -10,12 +10,14 @@
             <div class="img1"></div>
         </div>
         <div :style="styleObj">打包图片也可以了哦</div>
+        <add></add>
     </div>
 </template>
 
 <script>
+import add from './component/add'
 export default {
-    components: {  },
+    components: { add },
     created() {
 
     },

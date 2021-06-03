@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import {FormatDate} from '@/utils/Tool'
 export default {
     created() {
         Object.assign(this.initParams,this.dialogInfo.data);

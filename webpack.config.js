@@ -1,6 +1,7 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CopyWebpackPlugin=require('copy-webpack-plugin');
+const Webpackbar = require('webpackbar');
 const glob = require('glob');
 //glob.sync('./src/packages/**/*.vue')  /**/是packages下面所有的文件夹；/*/是packages下面一级的文件夹
 const files = glob.sync('./src/packages/*/*.vue');
@@ -22,7 +23,7 @@ if(files.length>0){
         }
     });
 }
-console.log("打包中...")
+// console.log("打包中...")
 module.exports = {
     mode: 'production',
     // entry: {
@@ -48,6 +49,7 @@ module.exports = {
     },
     plugins: [
         new VueLoaderPlugin(),
+        new Webpackbar({color: 'green'}),
         new CopyWebpackPlugin(assets)
         // new CopyWebpackPlugin([
         //     {
@@ -78,7 +80,8 @@ module.exports = {
                     loader:'file-loader',
                     options:{
                         limit: 1,
-                        name: `./[name][hash].[ext]`,
+                        esModule: false, // 这里设置为false
+                        name: `./[name].[ext]`,
                         outputPath: `./.buffercache`
                     }
                 }],

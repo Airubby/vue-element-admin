@@ -2,7 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const Webpackbar = require('webpackbar');
 const glob = require('glob');
 //glob.sync('./src/packages/**/*.vue')  /**/是packages下面所有的文件夹；/*/是packages下面一级的文件夹
 const files = glob.sync('./src/views/pages/sysconfig/baseconfig/sysparams/**/*.vue');
@@ -19,7 +20,6 @@ if(files.length>0){
         if(comname!="index"){
             element=element+"-"+comname;
         }
-        console.log(element,comname)
         entry[element]=str
     });
 }
@@ -44,7 +44,7 @@ module.exports = {
     optimization: {
         namedChunks: true,
         moduleIds: 'named', //"natural" | "named" | "hashed" | "size" | "total-size" | false
-        minimize: false,
+        minimize: true,
         minimizer: [
             new TerserPlugin({ 
                 terserOptions: { 
@@ -59,7 +59,7 @@ module.exports = {
             })
         ],
         splitChunks:{
-            chunks: 'all',
+            chunks: 'all', // chunks: 'async',//默认只作用于异步模块，为`all`时对所有模块生效,`initial`对同步模块有效
         },
         runtimeChunk: {
             name: 'manifest'
@@ -69,7 +69,7 @@ module.exports = {
         rules: [
             {//vue 解析
                 test: /\.vue$/,
-                loader: 'vue-loader',
+                loader: 'vue-loader'
             },
             {//css 解析
                 test: /\.(le|sa|sc|c)ss$/,
@@ -104,7 +104,6 @@ module.exports = {
                         },
                     }
                 ],
-                
                 exclude:  [path.resolve(__dirname,'./src/icons')]
             },
             {
@@ -115,6 +114,8 @@ module.exports = {
     },
     plugins: [
         new VueLoaderPlugin(),
+        new CleanWebpackPlugin(),
+        new Webpackbar({color: 'green'}), //打包进度条
         new webpack.HashedModuleIdsPlugin({//生成稳定的模块id
             hashFunction: 'sha256',
             hashDigest: 'hex',

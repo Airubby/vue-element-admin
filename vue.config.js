@@ -40,15 +40,6 @@ module.exports = {
         config.plugins.delete('prefetch')
         config.plugins.delete('preload');
         
-        
-        // config.output.filename('js/[name].js').end()
-        // config.output.chunkFilename('js/[name].js').end();
-        // 压缩代码
-        config.optimization.minimize(true);
-        // 分割代码
-        config.optimization.splitChunks({
-            chunks: 'all'
-        })
     },
     //公共代码抽离
     configureWebpack: config => {
@@ -68,16 +59,20 @@ module.exports = {
         config.optimization={
             namedChunks: true,
             moduleIds: 'named', //"natural" | "named" | "hashed" | "size" | "total-size" | false
-            minimize: false,
-            minimizer: [new TerserPlugin({ terserOptions: { 
-                compress: { 
-                    drop_console: true,
-                    drop_debugger: true,
-                },
-                output:{
-                    comments: false
-                } 
-            } })],
+            minimize: isProduction,
+            minimizer: [
+                new TerserPlugin({ 
+                    terserOptions: { 
+                        compress: { 
+                            drop_console: true,
+                            drop_debugger: true,
+                        },
+                        output:{
+                            comments: false
+                        } 
+                    } 
+                })
+            ],
             splitChunks: {
                 chunks: 'all', // chunks: 'async',//默认只作用于异步模块，为`all`时对所有模块生效,`initial`对同步模块有效
                 cacheGroups: {

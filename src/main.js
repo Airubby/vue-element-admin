@@ -25,6 +25,7 @@ import '@/utils/Directive'  //自定义指令
 // 将API方法绑定到全局
 Vue.prototype.$api = Request
 Vue.prototype.$store = store
+Vue.prototype.$axios = axios
 
 Vue.prototype.$baseURL=settings.baseURL
 

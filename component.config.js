@@ -59,7 +59,9 @@ module.exports = {
             })
         ],
         splitChunks:{
-            chunks: 'all', // chunks: 'async',//默认只作用于异步模块，为`all`时对所有模块生效,`initial`对同步模块有效
+            // chunks: 'async',//默认只作用于异步模块，为`all`时对所有模块生效,`initial`对同步模块有效;
+            //all和initial一个组件多个import子组件的时候会打包整合在一起
+            chunks: 'async', 
         },
         runtimeChunk: {
             name: 'manifest'

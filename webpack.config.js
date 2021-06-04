@@ -4,7 +4,8 @@ const CopyWebpackPlugin=require('copy-webpack-plugin');
 const Webpackbar = require('webpackbar');
 const glob = require('glob');
 //glob.sync('./src/packages/**/*.vue')  /**/是packages下面所有的文件夹；/*/是packages下面一级的文件夹
-const files = glob.sync('./src/packages/*/*.vue');
+const files = glob.sync('./src/packages/*/*.vue');  //打包所有
+// const files = glob.sync('./src/packages/test/*.vue'); //打包单个
 let entry={},assets=[];
 if(files.length>0){
     files.forEach(str => {
@@ -23,7 +24,7 @@ if(files.length>0){
         }
     });
 }
-// console.log("打包中...")
+
 module.exports = {
     mode: 'production',
     // entry: {
@@ -38,7 +39,6 @@ module.exports = {
         filename: `./[name].js`,  //[name]:  test/index
         library: '[name]',
         libraryTarget:'commonjs-module'  //"var" | "assign" | "this" | "window" | "self" | "global" | "commonjs" | "commonjs2" | "commonjs-module" | "amd" | "amd-require" | "umd" | "umd2" | "jsonp" | "system"
-        // jsonpFunction:'webpackJsonp'
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],

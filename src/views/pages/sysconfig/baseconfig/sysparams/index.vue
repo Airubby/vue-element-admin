@@ -11,13 +11,31 @@
         </div>
         <div :style="styleObj">打包图片也可以了哦</div>
         <add></add>
+        <el-tabs v-model="activeName">
+            <el-tab-pane label='概览' name="first">
+                <Overview></Overview>
+            </el-tab-pane>
+            <el-tab-pane label='详情' name="second">
+                <Detail></Detail>
+            </el-tab-pane>
+            <el-tab-pane label='告警' name="third">
+                <Alarm></Alarm>
+            </el-tab-pane>
+        </el-tabs>
+        <store-set v-if="storeSetInfo.visible" :dialogInfo="storeSetInfo"></store-set>
+        <store-range v-if="storeRangeInfo.visible" :dialogInfo="storeRangeInfo"></store-range>
     </div>
 </template>
 
 <script>
+import Overview from './component/Overview'
+import Detail from './component/Detail'
+import Alarm from './component/Alarm'
 import add from './component/add'
+import StoreSet from './component/StoreSet'
+import StoreRange from './component/StoreRange'
 export default {
-    components: { add },
+    components: { add,Overview,Detail,Alarm,StoreSet,StoreRange },
     created() {
 
     },
@@ -38,7 +56,13 @@ export default {
         return {
             templateUrl:"",
             logo:"logo",
-            me:"me"
+            me:"me",
+            storeSetInfo:{
+                visible:false
+            },
+            storeRangeInfo:{
+                visible:false
+            }
         }
     },
     methods:{

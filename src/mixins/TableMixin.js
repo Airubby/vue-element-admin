@@ -46,7 +46,8 @@ export default function(config) {
             sortChange:function(info){
                 console.log(info)
             },
-            // <el-table-column slot="prepend" type="selection" align="center" :selectable="checkSelectable"></el-table-column>
+            // <el-table-column slot="prepend" :reserve-selection="true" type="selection" align="center" :selectable="checkSelectable"></el-table-column>
+            //:reserve-selection="true" 与 table中row-key="id" 一起用 //:radio-check="true"
             checkSelectable:function(row,index){
                 console.log(row,index)
                 //true可勾选；false不可勾选

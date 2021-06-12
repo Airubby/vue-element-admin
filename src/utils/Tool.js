@@ -155,20 +155,6 @@ export function getSimpleCheckedNodes(store) {
     traverse(store)
     return checkedNodes;
 }
-//tree异步树时（即添加了lazy）局部刷新；
-export function refreshNodeTree(id){
-    let node = this.$refs.asyncTree.getNode(id); // 通过节点id找到对应树节点对象
-    node.loaded = false;
-    node.expand(); // 主动调用展开节点方法，重新查询该节点下的所有子节点
-}
-//tree设置半选 异步数回显绑定default-checked-keys=arr;  
-//arr默认先给一级请求的全部勾选的key；半选的单独设置半选；拉取下一级的时候判断半勾选下的勾选的key添加到arr中 this.$nextTick()中添加到arr
-export function setHalfCheckedNodes (key) {
-    const node = this.$refs.asyncTree.getNode(key)
-    if (node) { 
-        node.indeterminate = true
-    }
-}
 // 数组排序 如果arr数组中是对象，则传入对象属性key排序
 export function sort(arr,order,key){
     if(order=='ascending'){ //升序
@@ -191,6 +177,39 @@ export function ArrayInsert(arrA,arrB,index){
     b.unshift(index,0);
     Array.prototype.splice.apply(a,b)
     return a
+}
+//tree异步树时（即添加了lazy）局部刷新；
+export function refreshNodeTree(id){
+    let node = this.$refs.asyncTree.getNode(id); // 通过节点id找到对应树节点对象
+    node.loaded = false;
+    node.expand(); // 主动调用展开节点方法，重新查询该节点下的所有子节点
+}
+//tree设置半选 异步数回显绑定default-checked-keys=arr;  
+//arr默认先给一级请求的全部勾选的key；半选的单独设置半选；拉取下一级的时候判断半勾选下的勾选的key添加到arr中 this.$nextTick()中添加到arr
+export function setHalfCheckedNodes (key) {
+    const node = this.$refs.asyncTree.getNode(key)
+    if (node) { 
+        node.indeterminate = true
+    }
+}
+//@check-change="checkChange"  //最底层叶子节点为功能选项，data.fn  为true 表示 功能选项
+//功能权限勾选问题
+export function checkChange(data,checked){
+    if(data.fn){
+        let parent=this.$refs.tree.getNode(data.key).parent;
+        let checkList=this.$refs.tree.getCheckedKeys();
+        if(checked&&data.value!="view"){ //如果勾选了其它功能没有勾选浏览，则自动勾选上浏览功能
+            if(checkList.indexOf(parent.childNodes[0].data.key)==-1){ //第一项是浏览
+                checkList.push(parent.childNodes[0].data.key);
+                this.$refs.tree.setCheckedKeys(checkList);
+            }
+        }else if(!checked&&data.value=="view"){ //如果取消勾选浏览，则自动取消其它功能项
+            parent.childNodes.forEach(element=>{
+                checkList.splice(checkList.findIndex(item=>item===element.data.key),1)
+            })
+            this.$refs.tree.setCheckedKeys(checkList);
+        }
+    }
 }
 
 export default {

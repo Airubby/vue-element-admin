@@ -46,7 +46,12 @@ export const syncRouter=[
         component: () => import(/* webpackChunkName: "public-lib", webpackPrefetch: true */ '@/packages/rack/index'),
         hidden: true
     },
-
+    {
+        path: '/test',
+        meta:{ title:"测试"},
+        component: () => import(/* webpackChunkName: "public-lib", webpackPrefetch: true */ '@/views/test/index'),
+        hidden: true
+    },
     // {
     //     path: '/pages',
     //     component: () => import(/* webpackChunkName: "layout", webpackPrefetch: true */ '@/views/layout'),

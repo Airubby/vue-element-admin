@@ -94,7 +94,7 @@ module.exports = {
                 options:{  symbolId: 'icon-[name]'  }   
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/,
+                test: /\.(png|jpe?g|gif|svg|mtl|obj)$/,
                 use: [
                     {
                         loader:'file-loader',

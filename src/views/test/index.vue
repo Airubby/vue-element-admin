@@ -1,8 +1,17 @@
 <template>
   <div class="dashboard-container">
-      <div>
-        <search-select v-model="currentRole"></search-select>
-      </div>
+      <el-time-picker
+      class="showHour"
+    v-model="value1"
+    value-format="HH"
+    format="HH"
+    :picker-options="{
+        start: '00:00',
+        step: '01:00',
+        end: '23:00'
+    }"
+    placeholder="任意时间点">
+  </el-time-picker>
   </div>
 </template>
 
@@ -12,6 +21,7 @@ export default {
   components: {  },
   data() {
     return {
+        value1:"",
       currentRole: {
           id:'11',
           name:'颠鸾倒凤'

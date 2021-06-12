@@ -83,6 +83,7 @@ const actions = {
         })
     },
 	getLimitInfo({ commit,state }) {
+        resetRouter(); //重置初始路由
 		return new Promise(resolve => {
             // if(state.token=='admin'){
             //     route.addRoutes(asyncRoutes)

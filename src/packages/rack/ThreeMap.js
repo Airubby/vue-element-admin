@@ -802,10 +802,24 @@ export default class ThreeMap {
         }
         //六面纹理
         let mats=[];
-        for(let i = 0;i<geometry.faces.length;i++){
+        
+        geometry.faceVertexUvs[0] = [];
+        geometry.faces.forEach(face => {
+            const components = ['x', 'y', 'z'].sort((a, b) => {
+                return Math.abs(face.normal[a]) > Math.abs(face.normal[b]);
+            });
+            const v1 = geometry.vertices[face.a];
+            const v2 = geometry.vertices[face.b];
+            const v3 = geometry.vertices[face.c];
+            geometry.faceVertexUvs[0].push([
+                new THREE.Vector2(v1[components[0]], v1[components[1]]),
+                new THREE.Vector2(v2[components[0]], v2[components[1]]),
+                new THREE.Vector2(v3[components[0]], v3[components[1]])
+            ]);
+            //以上循环解决 THREE.DirectGeometry.fromGeometry(): Undefined vertexUv
             let material = new THREE.MeshBasicMaterial({vertexColors: THREE.FaceColors});
             mats.push(material);
-        }
+        });
         var cube = new THREE.Mesh(geometry, mats); //网格模型对象Mesh
 
         cube.castShadow = true;

@@ -23,7 +23,7 @@ export function GetBeforeDate(json,tdate){
             case 'y':
                 date=new Date(date.setFullYear(date.getFullYear()-json.value));
                 break;
-            case 'm':
+            case 'M':
                 date=new Date(date.setMonth(date.getMonth()-json.value));
                 break;
             case 'd':
@@ -31,6 +31,12 @@ export function GetBeforeDate(json,tdate){
                 break;
             case 'h':
                 date=new Date(date.setHours(date.getHours()-json.value));
+                break;
+            case 'm':
+                date=new Date(date.setMinutes(date.getMinutes()-json.value));
+                break;
+            case 's':
+                date=new Date(date.setSeconds(date.getSeconds()-json.value));
                 break;
             default:
                 break;
